@@ -64,10 +64,10 @@ a{
   align-items:center;
   justify-content:flex-start;
 
-  width:230px;
+  width:340px;
   height:82px;
 
-  flex:0 0 230px;
+  flex:0 0 340px;
 
   padding:0;
   margin:0;
@@ -78,11 +78,11 @@ a{
 .brand img{
   display:block;
 
-  width:220px;
+  width:330px;
   height:auto;
 
-  max-width:220px;
-  max-height:48px;
+  max-width:330px;
+  max-height:72px;
 
   object-fit:contain;
   object-position:left center;
