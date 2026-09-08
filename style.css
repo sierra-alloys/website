@@ -131,67 +131,125 @@ a{
 
 
 /* ========================================
-   HERO
+   HERO - SIERRA FACTORY PHOTO
 ======================================== */
 
 .hero{
-  background:var(--black);
-  color:white;
+  position:relative;
   min-height:100vh;
+
   padding-top:82px;
+
+  background:#090909;
+  color:#fff;
+
+  overflow:hidden;
 }
 
-.hero-grid{
-  max-width:var(--max);
-  margin:auto;
+/* Factory background */
 
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
+.hero-bg{
+  position:absolute;
+  top:82px;
+  left:0;
+  right:0;
+  bottom:0;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(5,5,5,.96) 0%,
+      rgba(5,5,5,.88) 22%,
+      rgba(5,5,5,.62) 40%,
+      rgba(5,5,5,.25) 62%,
+      rgba(5,5,5,.18) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(5,5,5,.48) 0%,
+      rgba(5,5,5,.05) 45%,
+      rgba(5,5,5,.18) 100%
+    ),
+    url("assets/sierra-main.jpg");
+
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+
+  filter:saturate(.55) contrast(1.08);
+}
+
+/* Main content */
+
+.hero-content{
+  position:relative;
+  z-index:2;
+
+  max-width:1440px;
+  margin:0 auto;
 
   min-height:calc(100vh - 250px);
+
+  display:flex;
+  align-items:center;
 }
 
 .hero-copy{
-  padding:9vw 5vw 6vw 4vw;
+  width:53%;
 
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  padding:
+    clamp(90px,10vh,150px)
+    5vw
+    80px
+    4vw;
 }
 
 .eyebrow{
-  font-size:10px;
-  letter-spacing:.22em;
-  color:#aaa;
   margin:0 0 28px;
+
+  font-size:10px;
+  letter-spacing:.24em;
+
+  color:#b7b7b7;
 }
 
-h1{
+.hero h1{
   margin:0;
+
+  font-size:clamp(64px,6.4vw,108px);
+  line-height:.84;
+
   font-weight:600;
-  font-size:clamp(50px,7vw,116px);
-  line-height:.88;
-  letter-spacing:-.065em;
-  max-width:900px;
+
+  letter-spacing:-.055em;
+
+  color:#fff;
 }
 
 .lead{
-  margin:40px 0 28px;
-  max-width:540px;
+  max-width:530px;
 
-  font-size:17px;
+  margin:38px 0 28px;
+
+  font-size:16px;
   line-height:1.7;
-  color:#bdbdbd;
+
+  color:#bcbcbc;
 }
 
 .text-link{
-  font-size:11px;
-  letter-spacing:.18em;
-
-  border-bottom:1px solid #555;
-  padding-bottom:9px;
+  display:inline-block;
 
   width:max-content;
+
+  padding-bottom:9px;
+
+  border-bottom:1px solid rgba(255,255,255,.28);
+
+  font-size:10px;
+  letter-spacing:.2em;
+
+  color:#fff;
 }
 
 .text-link span{
@@ -199,131 +257,34 @@ h1{
 }
 
 
-/* HERO ART */
-
-.hero-art{
-  position:relative;
-  overflow:hidden;
-
-  background:linear-gradient(145deg,#191919,#050505);
-}
-
-.hero-art:after{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0,0,0,.28),
-      transparent 38%,
-      rgba(255,255,255,.025)
-    );
-}
-
-.steel{
-  position:absolute;
-  right:-10%;
-
-  height:11%;
-
-  border:1px solid #4c4c4c;
-
-  background:
-    linear-gradient(
-      180deg,
-      #414141 0%,
-      #171717 22%,
-      #343434 43%,
-      #0c0c0c 62%,
-      #2b2b2b 100%
-    );
-
-  transform:skewY(-12deg) rotate(-13deg);
-
-  box-shadow:0 22px 50px rgba(0,0,0,.5);
-}
-
-.steel:after{
-  content:"";
-
-  position:absolute;
-  inset:16% 0;
-
-  border-top:1px solid #666;
-  border-bottom:1px solid #222;
-}
-
-.steel-1{
-  top:17%;
-  width:96%;
-  right:-20%;
-}
-
-.steel-2{
-  top:31%;
-  width:84%;
-  right:-7%;
-}
-
-.steel-3{
-  top:46%;
-  width:105%;
-  right:-28%;
-}
-
-.steel-4{
-  top:61%;
-  width:77%;
-  right:3%;
-}
-
-.steel-5{
-  top:75%;
-  width:98%;
-  right:-18%;
-}
-
-.hero-mark{
-  position:absolute;
-  bottom:-5%;
-  right:4%;
-
-  font-size:28vw;
-  line-height:.7;
-
-  font-weight:700;
-
-  color:rgba(255,255,255,.025);
-
-  letter-spacing:-.1em;
-}
-
-
 /* ========================================
-   FEATURE STRIP
+   HERO FEATURE STRIP
 ======================================== */
 
 .feature-strip{
-  max-width:var(--max);
-  margin:auto;
+  position:relative;
+  z-index:3;
 
-  border-top:1px solid var(--line);
+  max-width:1440px;
+  margin:0 auto;
 
   display:grid;
   grid-template-columns:repeat(4,1fr);
+
+  border-top:1px solid rgba(255,255,255,.16);
+
+  background:rgba(5,5,5,.35);
+  backdrop-filter:blur(4px);
 }
 
 .feature-strip>div{
-  min-height:168px;
-
-  padding:30px 28px;
-
-  border-right:1px solid var(--line);
-
   position:relative;
+
+  min-height:145px;
+
+  padding:28px 28px;
+
+  border-right:1px solid rgba(255,255,255,.14);
 }
 
 .feature-strip>div:last-child{
@@ -331,31 +292,38 @@ h1{
 }
 
 .feature-no{
-  font-size:9px;
-  color:#676767;
-
   position:absolute;
-  right:22px;
-  top:20px;
+
+  top:18px;
+  right:18px;
+
+  font-size:9px;
+
+  color:#777;
 }
 
 .feature-strip strong{
-  font-size:14px;
-  line-height:1.25;
+  display:block;
+
+  font-size:13px;
+  line-height:1.2;
+
   letter-spacing:.12em;
+
+  color:#fff;
 }
 
 .feature-strip small{
   display:block;
 
-  color:#707070;
-
-  margin-top:20px;
+  margin-top:18px;
 
   font-size:10px;
-  letter-spacing:.08em;
-}
 
+  letter-spacing:.05em;
+
+  color:#858585;
+}
 
 /* ========================================
    GENERAL SECTION
@@ -747,77 +715,109 @@ footer{
 
 @media(max-width:850px){
 
-  .site-header{
-    height:70px;
+  .hero{
+
+    padding-top:70px;
+
+    min-height:100vh;
+
   }
 
-.brand{
-  height:70px;
-  width:180px;
-  flex-basis:180px;
-}
-
-.brand img{
-  width:170px;
-  max-width:170px;
-  max-height:38px;
-}
-
-  .nav{
-    position:absolute;
+  .hero-bg{
 
     top:70px;
-    left:0;
-    right:0;
 
-    background:#0a0a0a;
+    background-image:
 
-    display:none;
+      linear-gradient(
 
-    flex-direction:column;
+        90deg,
 
-    padding:32px 28px 38px;
+        rgba(5,5,5,.92) 0%,
 
-    border-top:1px solid #292929;
+        rgba(5,5,5,.70) 55%,
+
+        rgba(5,5,5,.35) 100%
+
+      ),
+
+      linear-gradient(
+
+        0deg,
+
+        rgba(5,5,5,.65),
+
+        rgba(5,5,5,.10)
+
+      ),
+
+      url("assets/sierra-main.jpg");
+
+    background-position:58% center;
+
   }
 
-  .nav.open{
-    display:flex;
-  }
+  .hero-content{
 
-  .menu-toggle{
-    display:block;
-  }
+    min-height:calc(100vh - 270px);
 
-  .hero{
-    padding-top:70px;
-  }
-
-  .hero-grid{
-    grid-template-columns:1fr;
-    min-height:auto;
   }
 
   .hero-copy{
-    min-height:68vh;
-    padding:90px 28px 60px;
+
+    width:100%;
+
+    padding:
+
+      110px
+
+      28px
+
+      70px;
+
   }
 
-  .hero-art{
-    min-height:48vh;
+  .hero h1{
+
+    font-size:clamp(58px,17vw,82px);
+
+    line-height:.86;
+
+  }
+
+  .lead{
+
+    max-width:90%;
+
+    font-size:14px;
+
   }
 
   .feature-strip{
+
     grid-template-columns:1fr 1fr;
+
+  }
+
+  .feature-strip>div{
+
+    min-height:120px;
+
   }
 
   .feature-strip>div:nth-child(2){
+
     border-right:0;
+
   }
 
   .feature-strip>div:nth-child(-n+2){
-    border-bottom:1px solid var(--line);
+
+    border-bottom:1px solid rgba(255,255,255,.14);
+
   }
+
+}
 
   .two-col,
   .section-head,
