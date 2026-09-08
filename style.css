@@ -156,3 +156,26 @@ footer{
   .metal .section-label{top:82px}
   footer{gap:30px;flex-direction:column}
 }
+/* PRODUCTS - Category headings */
+.product-list .product-heading {
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.product-list .product-heading strong {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* PRODUCTS - Detail items */
+.product-list .product-detail {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.product-list .product-detail strong {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
