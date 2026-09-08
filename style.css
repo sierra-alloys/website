@@ -817,19 +817,19 @@ footer{
   }
 
   .brand{
-    width:190px;
+    width:220px;
 
     height:70px;
 
-    flex:0 0 190px;
+    flex:0 0 220px;
   }
 
   .brand img{
-    width:180px;
+    width:210px;
 
-    max-width:180px;
+    max-width:210px;
 
-    max-height:36px;
+    max-height:40px;
   }
 
 
