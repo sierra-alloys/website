@@ -189,7 +189,7 @@ a{
   background-repeat:no-repeat;
 
   /* 사진이 너무 확대되지 않도록 */
-  background-size:110% auto;
+  background-size:100% auto;
 
   background-position:55% center;
 
