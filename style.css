@@ -205,7 +205,7 @@ a{
 
   /* 화면 전체에 자연스럽게 */
 
-  background-size:95% cover;
+  background-size:95% auto;
 
   background-position:center 42%;
 
