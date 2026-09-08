@@ -50,14 +50,14 @@ a{
 
   background:rgba(9,9,9,.92);
   backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  color:white;
 
-  overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  color:white;
 }
 
 
-/* SIERRA LOGO */
+/* LOGO */
 
 .brand{
   display:flex;
@@ -81,7 +81,7 @@ a{
   height:auto;
 
   max-width:330px;
-  max-height:72px;
+  max-height:58px;
 
   object-fit:contain;
   object-position:left center;
@@ -95,11 +95,12 @@ a{
 }
 
 
-/* NAVIGATION */
+/* NAV */
 
 .nav{
   display:flex;
   gap:34px;
+
   font-size:11px;
   letter-spacing:.16em;
 }
@@ -115,27 +116,34 @@ a{
 
 .menu-toggle{
   display:none;
+
   background:none;
   border:0;
+
   width:34px;
   height:28px;
+
   padding:5px;
 }
 
 .menu-toggle span{
   display:block;
+
   height:1px;
+
   background:#fff;
+
   margin:6px 0;
 }
 
 
 /* ========================================
-   HERO - SIERRA FACTORY PHOTO
+   HERO
 ======================================== */
 
 .hero{
   position:relative;
+
   min-height:100vh;
 
   padding-top:82px;
@@ -146,66 +154,78 @@ a{
   overflow:hidden;
 }
 
-/* Factory background */
+
+/* FACTORY PHOTO */
 
 .hero-bg{
   position:absolute;
+
   top:82px;
   left:0;
   right:0;
   bottom:0;
 
   background-image:
+
     linear-gradient(
       90deg,
-      rgba(5,5,5,.96) 0%,
-      rgba(5,5,5,.88) 22%,
-      rgba(5,5,5,.62) 40%,
-      rgba(5,5,5,.25) 62%,
-      rgba(5,5,5,.18) 100%
+      rgba(5,5,5,.97) 0%,
+      rgba(5,5,5,.88) 18%,
+      rgba(5,5,5,.63) 34%,
+      rgba(5,5,5,.30) 52%,
+      rgba(5,5,5,.12) 78%,
+      rgba(5,5,5,.08) 100%
     ),
+
     linear-gradient(
       0deg,
       rgba(5,5,5,.48) 0%,
-      rgba(5,5,5,.05) 45%,
-      rgba(5,5,5,.18) 100%
+      rgba(5,5,5,.05) 50%,
+      rgba(5,5,5,.15) 100%
     ),
+
     url("assets/sierra-main.jpg");
 
-  background-size:cover;
-  background-position:center center;
   background-repeat:no-repeat;
 
-  filter:saturate(.55) contrast(1.08);
+  /* 사진이 너무 확대되지 않도록 */
+  background-size:110% auto;
+
+  background-position:55% center;
+
+  filter:saturate(.58) contrast(1.05);
 }
 
-/* Main content */
+
+/* HERO CONTENT */
 
 .hero-content{
   position:relative;
   z-index:2;
 
-  max-width:1440px;
+  max-width:var(--max);
   margin:0 auto;
 
-  min-height:calc(100vh - 250px);
+  min-height:calc(100vh - 245px);
 
   display:flex;
-  align-items:center;
+
+  /* 화면 정중앙보다 아래 */
+  align-items:flex-end;
 }
 
 .hero-copy{
-  width:53%;
+  width:52%;
 
   padding:
-    clamp(90px,10vh,150px)
+    0
     5vw
-    80px
+    90px
     4vw;
 }
 
 .eyebrow{
-  margin:0 0 28px;
+  margin:0 0 24px;
 
   font-size:10px;
   letter-spacing:.24em;
@@ -216,7 +236,8 @@ a{
 .hero h1{
   margin:0;
 
-  font-size:clamp(64px,6.4vw,108px);
+  font-size:clamp(60px,6vw,102px);
+
   line-height:.84;
 
   font-weight:600;
@@ -227,11 +248,11 @@ a{
 }
 
 .lead{
-  max-width:530px;
+  max-width:520px;
 
-  margin:38px 0 28px;
+  margin:32px 0 26px;
 
-  font-size:16px;
+  font-size:15px;
   line-height:1.7;
 
   color:#bcbcbc;
@@ -265,7 +286,7 @@ a{
   position:relative;
   z-index:3;
 
-  max-width:1440px;
+  max-width:var(--max);
   margin:0 auto;
 
   display:grid;
@@ -273,7 +294,8 @@ a{
 
   border-top:1px solid rgba(255,255,255,.16);
 
-  background:rgba(5,5,5,.35);
+  background:rgba(5,5,5,.42);
+
   backdrop-filter:blur(4px);
 }
 
@@ -282,7 +304,7 @@ a{
 
   min-height:145px;
 
-  padding:28px 28px;
+  padding:28px;
 
   border-right:1px solid rgba(255,255,255,.14);
 }
@@ -319,23 +341,25 @@ a{
   margin-top:18px;
 
   font-size:10px;
-
   letter-spacing:.05em;
 
   color:#858585;
 }
 
+
 /* ========================================
-   GENERAL SECTION
+   GENERAL SECTIONS
 ======================================== */
 
 .section{
   padding:110px max(28px,4vw);
+
   scroll-margin-top:80px;
 }
 
 .section>*{
   max-width:var(--max);
+
   margin-left:auto;
   margin-right:auto;
 }
@@ -343,6 +367,7 @@ a{
 .section-label{
   font-size:10px;
   letter-spacing:.18em;
+
   color:#777;
 
   margin-bottom:70px;
@@ -350,7 +375,9 @@ a{
 
 .two-col{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:10vw;
 }
 
@@ -358,6 +385,7 @@ h2{
   margin:0;
 
   font-size:clamp(44px,5.6vw,90px);
+
   line-height:.94;
 
   letter-spacing:-.055em;
@@ -367,11 +395,13 @@ h2{
 
 .body-copy{
   max-width:560px;
+
   padding-top:12px;
 }
 
 .body-copy p{
   font-size:17px;
+
   line-height:1.8;
 
   margin:0 0 24px;
@@ -386,6 +416,7 @@ h2{
 
 .dark{
   background:#101010;
+
   color:#fff;
 }
 
@@ -395,6 +426,7 @@ h2{
 
 .section-head{
   display:flex;
+
   justify-content:space-between;
   align-items:flex-end;
 
@@ -411,8 +443,12 @@ h2{
   line-height:1.7;
 }
 
+
+/* BUSINESS CARDS */
+
 .cards{
   display:grid;
+
   grid-template-columns:repeat(3,1fr);
 
   border-top:1px solid #303030;
@@ -427,17 +463,20 @@ h2{
 }
 
 .cards article:last-child{
-  border:0;
+  border-right:0;
+
   margin-right:0;
 }
 
 .cards span{
   font-size:10px;
+
   color:#666;
 }
 
 .cards h3{
   font-size:16px;
+
   letter-spacing:.12em;
 
   margin:44px 0 24px;
@@ -445,6 +484,7 @@ h2{
 
 .cards p{
   font-size:14px;
+
   line-height:1.8;
 
   color:#898989;
@@ -459,8 +499,12 @@ h2{
 
 .product-layout{
   display:grid;
+
   grid-template-columns:.8fr 1.2fr;
+
   gap:9vw;
+
+  align-items:start;
 }
 
 .muted{
@@ -474,22 +518,25 @@ h2{
 }
 
 
-/* Product list container */
+/* PRODUCT LIST */
 
 .product-list{
+  width:100%;
+
   border-top:1px solid #c9c8c3;
 }
 
 
-/* Large category heading */
+/* CATEGORY TITLE */
 
 .product-list .product-heading{
   display:grid;
+
   grid-template-columns:60px 1fr auto;
 
   align-items:center;
 
-  min-height:72px;
+  min-height:68px;
 
   padding:0;
 
@@ -498,11 +545,13 @@ h2{
 
 .product-list .product-heading span{
   font-size:10px;
+
   color:#8b8b8b;
 }
 
 .product-list .product-heading strong{
   font-size:20px;
+
   font-weight:700;
 
   letter-spacing:.04em;
@@ -510,16 +559,18 @@ h2{
 
 .product-list .product-heading em{
   font-style:normal;
+
   font-size:22px;
 }
 
 
-/* Smaller material/product details */
+/* PRODUCT DETAILS */
 
 .product-list .product-detail{
   display:block;
 
   min-height:0;
+
   height:auto;
 
   padding:7px 0 7px 60px;
@@ -530,19 +581,20 @@ h2{
 .product-list .product-detail strong{
   display:block;
 
+  margin:0;
+  padding:0;
+
   font-size:14px;
+
   font-weight:400;
 
   letter-spacing:0;
 
   line-height:1.35;
-
-  margin:0;
-  padding:0;
 }
 
 
-/* gap before Commodity Product */
+/* SECOND PRODUCT CATEGORY */
 
 .product-list .second-heading{
   margin-top:24px;
@@ -562,6 +614,7 @@ h2{
 
   display:flex;
   flex-direction:column;
+
   justify-content:flex-end;
 
   background:
@@ -586,6 +639,7 @@ h2{
   content:"";
 
   position:absolute;
+
   inset:-20%;
 
   opacity:.45;
@@ -603,6 +657,7 @@ h2{
 
 .metal>*{
   position:relative;
+
   z-index:2;
 }
 
@@ -610,6 +665,7 @@ h2{
   position:absolute;
 
   top:110px;
+
   left:max(28px,4vw);
   right:max(28px,4vw);
 
@@ -618,6 +674,7 @@ h2{
 
 .solution-copy{
   margin:0!important;
+
   max-width:800px!important;
 }
 
@@ -627,6 +684,7 @@ h2{
 
 .solution-copy>p:last-child{
   font-size:17px;
+
   line-height:1.7;
 
   color:#b2b2b2;
@@ -643,11 +701,13 @@ h2{
 
 .contact{
   background:#e7e5df;
+
   padding-bottom:80px;
 }
 
 .contact-grid{
   display:grid;
+
   grid-template-columns:1fr 1fr;
 
   gap:10vw;
@@ -657,6 +717,7 @@ h2{
 
 .contact-info{
   display:flex;
+
   flex-direction:column;
 
   align-items:flex-start;
@@ -676,6 +737,7 @@ h2{
 
 .caption{
   font-size:10px;
+
   letter-spacing:.18em;
 
   color:#777;
@@ -702,9 +764,11 @@ footer{
   padding:28px max(28px,4vw);
 
   display:flex;
+
   justify-content:space-between;
 
   font-size:9px;
+
   letter-spacing:.14em;
 }
 
@@ -715,119 +779,170 @@ footer{
 
 @media(max-width:850px){
 
-  .hero{
 
+  /* HEADER */
+
+  .site-header{
+    height:70px;
+
+    padding:0 24px;
+  }
+
+  .brand{
+    width:190px;
+
+    height:70px;
+
+    flex:0 0 190px;
+  }
+
+  .brand img{
+    width:180px;
+
+    max-width:180px;
+
+    max-height:36px;
+  }
+
+
+  /* NAV */
+
+  .nav{
+    position:absolute;
+
+    top:70px;
+
+    left:0;
+    right:0;
+
+    background:#0a0a0a;
+
+    display:none;
+
+    flex-direction:column;
+
+    padding:32px 28px 38px;
+
+    border-top:1px solid #292929;
+  }
+
+  .nav.open{
+    display:flex;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+
+  /* HERO */
+
+  .hero{
     padding-top:70px;
 
     min-height:100vh;
-
   }
 
   .hero-bg{
-
     top:70px;
 
     background-image:
 
       linear-gradient(
-
         90deg,
-
         rgba(5,5,5,.92) 0%,
-
-        rgba(5,5,5,.70) 55%,
-
-        rgba(5,5,5,.35) 100%
-
+        rgba(5,5,5,.75) 45%,
+        rgba(5,5,5,.36) 100%
       ),
 
       linear-gradient(
-
         0deg,
-
         rgba(5,5,5,.65),
-
         rgba(5,5,5,.10)
-
       ),
 
       url("assets/sierra-main.jpg");
 
-    background-position:58% center;
+    background-size:auto 100%;
 
+    background-position:55% center;
   }
 
   .hero-content{
+    min-height:calc(100vh - 250px);
 
-    min-height:calc(100vh - 270px);
-
+    align-items:flex-end;
   }
 
   .hero-copy{
-
     width:100%;
 
     padding:
-
-      110px
-
+      0
       28px
-
       70px;
+  }
 
+  .eyebrow{
+    font-size:9px;
   }
 
   .hero h1{
-
-    font-size:clamp(58px,17vw,82px);
+    font-size:clamp(54px,16vw,80px);
 
     line-height:.86;
-
   }
 
   .lead{
-
     max-width:90%;
 
     font-size:14px;
-
   }
 
+
+  /* HERO FEATURES */
+
   .feature-strip{
-
     grid-template-columns:1fr 1fr;
-
   }
 
   .feature-strip>div{
-
     min-height:120px;
-
   }
 
   .feature-strip>div:nth-child(2){
-
     border-right:0;
-
   }
 
   .feature-strip>div:nth-child(-n+2){
-
     border-bottom:1px solid rgba(255,255,255,.14);
-
   }
 
-}
+
+  /* GENERAL */
+
+  .section{
+    padding-top:82px;
+    padding-bottom:82px;
+  }
+
+  .section-label{
+    margin-bottom:50px;
+  }
 
   .two-col,
   .section-head,
   .product-layout,
   .contact-grid{
     display:grid;
+
     grid-template-columns:1fr;
 
     gap:48px;
   }
+
+
+  /* BUSINESS */
 
   .section-head{
     align-items:start;
@@ -839,6 +954,7 @@ footer{
 
   .cards article{
     border-right:0;
+
     border-bottom:1px solid #303030;
 
     margin:0;
@@ -850,17 +966,8 @@ footer{
     border-bottom:0;
   }
 
-  .section{
-    padding-top:82px;
-    padding-bottom:82px;
-  }
 
-  .section-label{
-    margin-bottom:50px;
-  }
-
-
-  /* Products Mobile */
+  /* PRODUCTS */
 
   .product-list .product-heading{
     grid-template-columns:42px 1fr auto;
@@ -885,12 +992,19 @@ footer{
   }
 
 
+  /* QUALITY */
+
   .metal .section-label{
     top:82px;
   }
 
+
+  /* FOOTER */
+
   footer{
     gap:30px;
+
     flex-direction:column;
   }
+
 }
