@@ -64,9 +64,9 @@ a{
   align-items:center;
   justify-content:flex-start;
 
-  width:330px;
+  width:390px;
   height:82px;
-  flex:0 0 330px;
+  flex:0 0 390px;
 
   padding:0;
   margin:0;
@@ -77,11 +77,11 @@ a{
 .brand img{
   display:block;
 
-  width:330px;
+  width:380px;
   height:auto;
 
-  max-width:330px;
-  max-height:58px;
+  max-width:380px;
+  max-height:68px;
 
   object-fit:contain;
   object-position:left center;
@@ -175,13 +175,13 @@ a{
 
       90deg,
 
-      rgba(5,5,5,.97) 0%,
+      rgba(5,5,5,.96) 0%,
 
-      rgba(5,5,5,.88) 18%,
+      rgba(5,5,5,.84) 20%,
 
-      rgba(5,5,5,.58) 34%,
+      rgba(5,5,5,.56) 38%,
 
-      rgba(5,5,5,.22) 55%,
+      rgba(5,5,5,.22) 60%,
 
       rgba(5,5,5,.08) 100%
 
@@ -191,7 +191,7 @@ a{
 
       0deg,
 
-      rgba(5,5,5,.45) 0%,
+      rgba(5,5,5,.42) 0%,
 
       rgba(5,5,5,.03) 50%,
 
@@ -205,11 +205,11 @@ a{
 
   /* 화면 전체에 자연스럽게 */
 
-  background-size:cover;
+  background-size:95% cover;
 
   background-position:center 42%;
 
-  filter:saturate(.58) contrast(1.05);
+  filter:saturate(.60) contrast(1.04);
 
 }
 
@@ -224,7 +224,7 @@ a{
 
   width:100%;
 
-  max-width:none;
+  max-width:1440px;
 
   margin:0;
 
@@ -232,23 +232,23 @@ a{
 
   display:flex;
 
-  align-items:flex-end;
+  align-items:center;
 
 }
 
 .hero-copy{
 
-  width:42%;
+  width:50%;
 
   padding:
 
-    0
+    40px
 
     5vw
 
-    90px
+    40px
 
-    5vw;
+    4vw;
 
 }
 
@@ -264,7 +264,7 @@ a{
 .hero h1{
   margin:0;
 
-  font-size:clamp(60px,6vw,102px);
+  font-size:clamp(64px,6.2vw,104px);
 
   line-height:.84;
 
