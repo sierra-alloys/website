@@ -179,3 +179,14 @@ footer{
   font-weight: 400;
   letter-spacing: 0;
 }
+/* SIERRA HEADER LOGO */
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand img {
+  display: block;
+  width: 130px;
+  height: auto;
+}
