@@ -5,11 +5,7 @@
   --off:#f2f1ed;
   --white:#fff;
   --muted:#9b9b9b;
-
-  /* 전체 사이트 공통 폭 */
   --max:1440px;
-
-  /* 데스크톱 좌우 공통 여백 */
   --side:4vw;
 }
 
@@ -73,6 +69,7 @@ a{
 
 /* ========================================
    LOGO
+   기존보다 약 30% 축소
 ======================================== */
 
 .brand{
@@ -80,10 +77,10 @@ a{
   align-items:center;
   justify-content:flex-start;
 
-  width:320;
+  width:340px;
   height:82px;
 
-  flex:0 0 320px;
+  flex:0 0 340px;
 
   margin:0;
   padding:0;
@@ -106,11 +103,7 @@ a{
   object-fit:contain;
   object-position:left center;
 
-  /*
-    원본 PNG 안쪽 여백 때문에
-    실제 로고가 작아 보이는 것을 확대
-  */
-  transform:scale(1.58);
+  transform:scale(1.10);
   transform-origin:left center;
 }
 
@@ -189,15 +182,11 @@ a{
 ======================================== */
 
 .hero-bg{
-
   position:absolute;
 
   top:82px;
-
   left:0;
-
   right:0;
-
   bottom:0;
 
   z-index:0;
@@ -206,48 +195,46 @@ a{
 
   background-image:
 
+    /* 왼쪽 그라데이션 조금 더 진하게 */
     linear-gradient(
-
       90deg,
-
-      rgba(5,5,5,.94) 0%,
-
-      rgba(5,5,5,.82) 18%,
-
-      rgba(5,5,5,.54) 34%,
-
-      rgba(5,5,5,.24) 52%,
-
-      rgba(5,5,5,.08) 72%,
-
-      rgba(5,5,5,.03) 100%
-
+      rgba(2,2,2,.99) 0%,
+      rgba(2,2,2,.95) 12%,
+      rgba(2,2,2,.84) 22%,
+      rgba(3,3,3,.66) 32%,
+      rgba(3,3,3,.42) 43%,
+      rgba(3,3,3,.20) 56%,
+      rgba(3,3,3,.07) 72%,
+      rgba(3,3,3,.02) 100%
     ),
 
+    /* 하단 음영 */
     linear-gradient(
-
       0deg,
-
-      rgba(5,5,5,.38) 0%,
-
-      rgba(5,5,5,.06) 48%,
-
-      rgba(5,5,5,.08) 100%
-
+      rgba(5,5,5,.42) 0%,
+      rgba(5,5,5,.07) 45%,
+      rgba(5,5,5,.07) 100%
     ),
 
     url("assets/sierra-main.jpg");
 
   background-repeat:no-repeat;
 
-  /* cover 제거 */
+  /*
+    원본 이미지 위쪽 약 25% 크롭
+  */
+  background-size:auto 133.33%;
 
-background-size:auto 133.33%;
+  /*
+    오른쪽 부분을 조금 더 보여줌.
+    72% → 더 오른쪽 영역 노출
+  */
+  background-position:72% bottom;
 
-background-position:62% bottom;
-
-  filter:saturate(.64) contrast(1.03) brightness(.90);
-
+  filter:
+    saturate(.64)
+    contrast(1.03)
+    brightness(.90);
 }
 
 
@@ -260,13 +247,14 @@ background-position:62% bottom;
 
   z-index:2;
 
-  /*
-    ABOUT 섹션과 동일한 컨테이너
-  */
   width:calc(100% - (var(--side) * 2));
   max-width:var(--max);
 
-  height:calc(100% - 145px);
+  /*
+    Feature strip이 38px 올라왔으므로
+    내용 영역도 같이 맞춤
+  */
+  height:calc(100% - 183px);
 
   margin:0 auto;
 
@@ -282,12 +270,11 @@ background-position:62% bottom;
 .hero-copy{
   width:58%;
 
-  /*
-    중요:
-    별도의 left padding 없음.
-    따라서 ABOUT과 정확히 같은 시작점.
-  */
-  padding:0 5vw 54px 0;
+  padding:
+    0
+    5vw
+    42px
+    0;
 }
 
 .eyebrow{
@@ -347,21 +334,24 @@ background-position:62% bottom;
 
 /* ========================================
    HERO FEATURE STRIP
+   약 38px 위로 이동
 ======================================== */
 
 .feature-strip{
   position:absolute;
 
   left:50%;
-  bottom:0;
+
+  /*
+    기존 0 → 38px
+    약 1cm 정도 위
+  */
+  bottom:38px;
 
   transform:translateX(-50%);
 
   z-index:3;
 
-  /*
-    HERO / ABOUT과 같은 좌우 라인
-  */
   width:calc(100% - (var(--side) * 2));
   max-width:var(--max);
 
@@ -370,7 +360,7 @@ background-position:62% bottom;
 
   border-top:1px solid rgba(255,255,255,.16);
 
-  background:rgba(5,5,5,.48);
+  background:rgba(5,5,5,.50);
 
   backdrop-filter:blur(5px);
   -webkit-backdrop-filter:blur(5px);
@@ -434,12 +424,6 @@ background-position:62% bottom;
 
   scroll-margin-top:82px;
 }
-
-
-/*
-  모든 섹션 내부 콘텐츠를
-  HERO와 같은 1440px 라인으로 통일
-*/
 
 .section>*{
   width:100%;
@@ -622,9 +606,6 @@ h2{
   border-top:1px solid #c9c8c3;
 }
 
-
-/* PRODUCT CATEGORY */
-
 .product-list .product-heading{
   display:grid;
 
@@ -659,9 +640,6 @@ h2{
   font-size:22px;
 }
 
-
-/* PRODUCT DETAILS */
-
 .product-list .product-detail{
   display:block;
 
@@ -686,9 +664,6 @@ h2{
 
   letter-spacing:0;
 }
-
-
-/* SECOND CATEGORY */
 
 .product-list .second-heading{
   margin-top:24px;
@@ -876,15 +851,15 @@ footer{
 @media(max-width:1100px){
 
   .brand{
-    width:310px;
+    width:260px;
 
-    flex-basis:310px;
+    flex-basis:260px;
   }
 
   .brand img{
-    width:300px;
+    width:245px;
 
-    transform:scale(1.45);
+    transform:scale(1.06);
   }
 
   .nav{
@@ -920,16 +895,16 @@ footer{
   }
 
   .brand{
-    width:220px;
+    width:175px;
     height:70px;
 
-    flex:0 0 220px;
+    flex:0 0 175px;
   }
 
   .brand img{
-    width:205px;
+    width:165px;
 
-    transform:scale(1.35);
+    transform:scale(1.05);
 
     transform-origin:left center;
   }
@@ -987,9 +962,9 @@ footer{
 
       linear-gradient(
         90deg,
-        rgba(5,5,5,.92) 0%,
-        rgba(5,5,5,.74) 45%,
-        rgba(5,5,5,.34) 100%
+        rgba(2,2,2,.96) 0%,
+        rgba(2,2,2,.84) 45%,
+        rgba(5,5,5,.38) 100%
       ),
 
       linear-gradient(
@@ -1002,7 +977,7 @@ footer{
 
     background-size:cover;
 
-    background-position:58% center;
+    background-position:62% center;
   }
 
 
@@ -1046,9 +1021,11 @@ footer{
   }
 
 
-  /* HERO FEATURE */
+  /* FEATURE STRIP */
 
   .feature-strip{
+    bottom:0;
+
     width:calc(100% - 56px);
 
     grid-template-columns:1fr 1fr;
