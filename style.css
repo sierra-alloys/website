@@ -48,28 +48,31 @@ a{
   align-items:center;
   justify-content:space-between;
 
-  background:rgba(9,9,9,.92);
+  background:rgba(9,9,9,.94);
   backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
 
   border-bottom:1px solid rgba(255,255,255,.08);
 
-  color:white;
+  color:#fff;
 }
 
 
-/* LOGO */
+/* ========================================
+   LOGO
+======================================== */
 
 .brand{
   display:flex;
   align-items:center;
   justify-content:flex-start;
 
-  width:390px;
+  width:460px;
   height:82px;
-  flex:0 0 390px;
+  flex:0 0 460px;
 
-  padding:0;
   margin:0;
+  padding:0;
 
   overflow:hidden;
 }
@@ -77,11 +80,10 @@ a{
 .brand img{
   display:block;
 
-  width:380px;
+  width:440px;
+  max-width:440px;
   height:auto;
-
-  max-width:380px;
-  max-height:68px;
+  max-height:72px;
 
   object-fit:contain;
   object-position:left center;
@@ -95,10 +97,13 @@ a{
 }
 
 
-/* NAV */
+/* ========================================
+   NAVIGATION
+======================================== */
 
 .nav{
   display:flex;
+  align-items:center;
   gap:34px;
 
   font-size:11px;
@@ -107,7 +112,7 @@ a{
 
 .nav a{
   opacity:.72;
-  transition:.2s;
+  transition:opacity .2s ease;
 }
 
 .nav a:hover{
@@ -124,6 +129,8 @@ a{
   height:28px;
 
   padding:5px;
+
+  cursor:pointer;
 }
 
 .menu-toggle span{
@@ -144,7 +151,8 @@ a{
 .hero{
   position:relative;
 
-  min-height:100vh;
+  height:780px;
+  min-height:780px;
 
   padding-top:82px;
 
@@ -155,122 +163,125 @@ a{
 }
 
 
-/* FACTORY PHOTO */
+/* ========================================
+   HERO FACTORY PHOTO
+======================================== */
 
 .hero-bg{
-
   position:absolute;
 
   top:82px;
-
   left:0;
-
   right:0;
-
   bottom:0;
 
   background-image:
 
     linear-gradient(
-
       90deg,
-
-      rgba(5,5,5,.96) 0%,
-
-      rgba(5,5,5,.84) 20%,
-
-      rgba(5,5,5,.56) 38%,
-
-      rgba(5,5,5,.22) 60%,
-
-      rgba(5,5,5,.08) 100%
-
+      rgba(5,5,5,.94) 0%,
+      rgba(5,5,5,.86) 15%,
+      rgba(5,5,5,.60) 30%,
+      rgba(5,5,5,.30) 48%,
+      rgba(5,5,5,.12) 72%,
+      rgba(5,5,5,.06) 100%
     ),
 
     linear-gradient(
-
       0deg,
-
-      rgba(5,5,5,.42) 0%,
-
-      rgba(5,5,5,.03) 50%,
-
+      rgba(5,5,5,.50) 0%,
+      rgba(5,5,5,.10) 38%,
+      rgba(5,5,5,.06) 70%,
       rgba(5,5,5,.12) 100%
-
     ),
 
     url("assets/sierra-main.jpg");
 
   background-repeat:no-repeat;
 
-  /* 화면 전체에 자연스럽게 */
+  /*
+     사진 확대 정도
+     100%보다 작게 잡아서 원본을 더 넓게 보여준다.
+  */
+  background-size:92% auto;
 
-  background-size:95% auto;
-
-  background-position:center 42%;
+  /*
+     사진을 오른쪽으로 이동
+  */
+  background-position:68% 47%;
 
   filter:saturate(.60) contrast(1.04);
 
+  z-index:0;
 }
 
 
-/* HERO CONTENT */
+/* 배경 빈 공간 방지 */
+
+.hero-bg::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:#090909;
+
+  z-index:-1;
+}
+
+
+/* ========================================
+   HERO CONTENT
+======================================== */
 
 .hero-content{
-
   position:relative;
-
   z-index:2;
 
-  max-width:1440px;
+  width:100%;
+  max-width:var(--max);
+
+  height:calc(100% - 145px);
 
   margin:0 auto;
 
-  height:590px;
-
-  min-height:0;
-
   display:flex;
-
   align-items:flex-end;
-
 }
 
+
+/* HERO TEXT */
+
 .hero-copy{
+  width:58%;
 
-  width:53%;
-
-  /* ABOUT 섹션과 동일한 좌측 라인 */
-
+  /*
+     ABOUT 섹션과 같은 좌측 기준
+  */
   padding-left:max(28px,4vw);
-
   padding-right:5vw;
 
-  /* 아래 4칸보다 살짝 위 */
-
-  padding-bottom:65px;
-
-  padding-top:0;
-
+  /*
+     Feature strip보다 위
+  */
+  padding-bottom:62px;
 }
 
 .eyebrow{
-
-  margin:0 0 22px;
+  margin:0 0 20px;
 
   font-size:10px;
+  line-height:1;
 
   letter-spacing:.24em;
 
   color:#b7b7b7;
-
 }
 
 .hero h1{
-
   margin:0;
 
-  font-size:clamp(64px,6.4vw,108px);
+  font-size:clamp(62px,5.8vw,94px);
 
   line-height:.84;
 
@@ -279,21 +290,18 @@ a{
   letter-spacing:-.055em;
 
   color:#fff;
-
 }
 
 .lead{
-
   max-width:530px;
 
-  margin:32px 0 24px;
+  margin:30px 0 24px;
 
-  font-size:16px;
+  font-size:15px;
 
   line-height:1.7;
 
   color:#bcbcbc;
-
 }
 
 .text-link{
@@ -306,7 +314,8 @@ a{
   border-bottom:1px solid rgba(255,255,255,.28);
 
   font-size:10px;
-  letter-spacing:.2em;
+
+  letter-spacing:.20em;
 
   color:#fff;
 }
@@ -321,20 +330,27 @@ a{
 ======================================== */
 
 .feature-strip{
-  position:relative;
+  position:absolute;
+
+  left:50%;
+  bottom:0;
+
+  transform:translateX(-50%);
+
   z-index:3;
 
+  width:calc(100% - 8vw);
   max-width:var(--max);
-  margin:0 auto;
 
   display:grid;
   grid-template-columns:repeat(4,1fr);
 
   border-top:1px solid rgba(255,255,255,.16);
 
-  background:rgba(5,5,5,.42);
+  background:rgba(5,5,5,.46);
 
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
 }
 
 .feature-strip>div{
@@ -366,6 +382,7 @@ a{
   display:block;
 
   font-size:13px;
+
   line-height:1.2;
 
   letter-spacing:.12em;
@@ -379,6 +396,7 @@ a{
   margin-top:18px;
 
   font-size:10px;
+
   letter-spacing:.05em;
 
   color:#858585;
@@ -396,6 +414,7 @@ a{
 }
 
 .section>*{
+  width:100%;
   max-width:var(--max);
 
   margin-left:auto;
@@ -403,12 +422,13 @@ a{
 }
 
 .section-label{
+  margin-bottom:70px;
+
   font-size:10px;
+
   letter-spacing:.18em;
 
   color:#777;
-
-  margin-bottom:70px;
 }
 
 .two-col{
@@ -438,11 +458,11 @@ h2{
 }
 
 .body-copy p{
+  margin:0 0 24px;
+
   font-size:17px;
 
   line-height:1.8;
-
-  margin:0 0 24px;
 
   color:#555;
 }
@@ -476,6 +496,8 @@ h2{
 .section-head p{
   max-width:420px;
 
+  margin:0;
+
   color:#929292;
 
   line-height:1.7;
@@ -495,15 +517,15 @@ h2{
 .cards article{
   padding:34px 38px 56px 0;
 
-  border-right:1px solid #303030;
-
   margin-right:38px;
+
+  border-right:1px solid #303030;
 }
 
 .cards article:last-child{
-  border-right:0;
-
   margin-right:0;
+
+  border-right:0;
 }
 
 .cards span{
@@ -513,21 +535,23 @@ h2{
 }
 
 .cards h3{
+  margin:44px 0 24px;
+
   font-size:16px;
 
   letter-spacing:.12em;
-
-  margin:44px 0 24px;
 }
 
 .cards p{
+  max-width:370px;
+
+  margin:0;
+
   font-size:14px;
 
   line-height:1.8;
 
   color:#898989;
-
-  max-width:370px;
 }
 
 
@@ -548,11 +572,11 @@ h2{
 .muted{
   max-width:420px;
 
+  margin-top:28px;
+
   color:#7d7d7d;
 
   line-height:1.7;
-
-  margin-top:28px;
 }
 
 
@@ -565,7 +589,7 @@ h2{
 }
 
 
-/* CATEGORY TITLE */
+/* PRODUCT CATEGORY */
 
 .product-list .product-heading{
   display:grid;
@@ -607,9 +631,8 @@ h2{
 .product-list .product-detail{
   display:block;
 
-  min-height:0;
-
   height:auto;
+  min-height:0;
 
   padding:7px 0 7px 60px;
 
@@ -626,9 +649,9 @@ h2{
 
   font-weight:400;
 
-  letter-spacing:0;
-
   line-height:1.35;
+
+  letter-spacing:0;
 }
 
 
@@ -646,21 +669,25 @@ h2{
 ======================================== */
 
 .metal{
-  min-height:650px;
+  position:relative;
 
-  color:white;
+  min-height:650px;
 
   display:flex;
   flex-direction:column;
 
   justify-content:flex-end;
 
+  color:#fff;
+
   background:
+
     linear-gradient(
       90deg,
       rgba(0,0,0,.8),
       rgba(0,0,0,.22)
     ),
+
     repeating-linear-gradient(
       105deg,
       #151515 0 28px,
@@ -668,12 +695,10 @@ h2{
       #0d0d0d 56px 84px
     );
 
-  position:relative;
-
   overflow:hidden;
 }
 
-.metal:after{
+.metal::after{
   content:"";
 
   position:absolute;
@@ -683,6 +708,7 @@ h2{
   opacity:.45;
 
   background:
+
     repeating-linear-gradient(
       0deg,
       transparent 0 73px,
@@ -721,15 +747,15 @@ h2{
 }
 
 .solution-copy>p:last-child{
+  max-width:630px;
+
+  margin-top:30px;
+
   font-size:17px;
 
   line-height:1.7;
 
   color:#b2b2b2;
-
-  max-width:630px;
-
-  margin-top:30px;
 }
 
 
@@ -766,11 +792,11 @@ h2{
 }
 
 .contact-info a{
+  padding-bottom:4px;
+
   font-size:20px;
 
   border-bottom:1px solid #aaa;
-
-  padding-bottom:4px;
 }
 
 .caption{
@@ -782,11 +808,11 @@ h2{
 }
 
 .small{
+  margin-top:18px;
+
   font-size:12px;
 
   color:#777;
-
-  margin-top:18px;
 }
 
 
@@ -795,15 +821,15 @@ h2{
 ======================================== */
 
 footer{
-  background:#0b0b0b;
-
-  color:#777;
-
-  padding:28px max(28px,4vw);
-
   display:flex;
 
   justify-content:space-between;
+
+  padding:28px max(28px,4vw);
+
+  background:#0b0b0b;
+
+  color:#777;
 
   font-size:9px;
 
@@ -812,11 +838,10 @@ footer{
 
 
 /* ========================================
-   MOBILE
+   TABLET / MOBILE
 ======================================== */
 
 @media(max-width:850px){
-
 
   /* HEADER */
 
@@ -827,19 +852,17 @@ footer{
   }
 
   .brand{
-    width:220px;
-
+    width:240px;
     height:70px;
 
-    flex:0 0 220px;
+    flex:0 0 240px;
   }
 
   .brand img{
-    width:210px;
+    width:230px;
 
-    max-width:210px;
-
-    max-height:40px;
+    max-width:230px;
+    max-height:46px;
   }
 
 
@@ -853,13 +876,17 @@ footer{
     left:0;
     right:0;
 
-    background:#0a0a0a;
-
     display:none;
 
     flex-direction:column;
 
+    align-items:flex-start;
+
+    gap:26px;
+
     padding:32px 28px 38px;
+
+    background:#0a0a0a;
 
     border-top:1px solid #292929;
   }
@@ -876,9 +903,12 @@ footer{
   /* HERO */
 
   .hero{
-    padding-top:70px;
+    height:auto;
 
-    min-height:100vh;
+    min-height:900px;
+
+    padding-top:70px;
+    padding-bottom:240px;
   }
 
   .hero-bg{
@@ -889,8 +919,8 @@ footer{
       linear-gradient(
         90deg,
         rgba(5,5,5,.92) 0%,
-        rgba(5,5,5,.75) 45%,
-        rgba(5,5,5,.36) 100%
+        rgba(5,5,5,.74) 45%,
+        rgba(5,5,5,.34) 100%
       ),
 
       linear-gradient(
@@ -903,11 +933,13 @@ footer{
 
     background-size:auto 100%;
 
-    background-position:55% center;
+    background-position:58% center;
   }
 
   .hero-content{
-    min-height:calc(100vh - 250px);
+    height:590px;
+
+    min-height:590px;
 
     align-items:flex-end;
   }
@@ -918,10 +950,12 @@ footer{
     padding:
       0
       28px
-      70px;
+      55px;
   }
 
   .eyebrow{
+    margin-bottom:18px;
+
     font-size:9px;
   }
 
@@ -934,13 +968,17 @@ footer{
   .lead{
     max-width:90%;
 
+    margin-top:26px;
+
     font-size:14px;
   }
 
 
-  /* HERO FEATURES */
+  /* FEATURES */
 
   .feature-strip{
+    width:100%;
+
     grid-template-columns:1fr 1fr;
   }
 
@@ -991,13 +1029,12 @@ footer{
   }
 
   .cards article{
-    border-right:0;
-
-    border-bottom:1px solid #303030;
-
     margin:0;
 
     padding-right:0;
+
+    border-right:0;
+    border-bottom:1px solid #303030;
   }
 
   .cards article:last-child{
@@ -1040,9 +1077,8 @@ footer{
   /* FOOTER */
 
   footer{
-    gap:30px;
-
     flex-direction:column;
-  }
 
+    gap:30px;
+  }
 }
