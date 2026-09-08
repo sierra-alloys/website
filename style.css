@@ -64,10 +64,10 @@ a{
   align-items:center;
   justify-content:flex-start;
 
-  width:150px;
+  width:230px;
   height:82px;
 
-  flex:0 0 150px;
+  flex:0 0 230px;
 
   padding:0;
   margin:0;
@@ -78,11 +78,11 @@ a{
 .brand img{
   display:block;
 
-  width:140px;
+  width:220px;
   height:auto;
 
-  max-width:140px;
-  max-height:28px;
+  max-width:220px;
+  max-height:48px;
 
   object-fit:contain;
   object-position:left center;
@@ -752,17 +752,17 @@ footer{
     height:70px;
   }
 
-  .brand{
-    height:70px;
-    width:132px;
-    flex-basis:132px;
-  }
+.brand{
+  height:70px;
+  width:180px;
+  flex-basis:180px;
+}
 
-  .brand img{
-    width:125px;
-    max-width:125px;
-    max-height:25px;
-  }
+.brand img{
+  width:170px;
+  max-width:170px;
+  max-height:38px;
+}
 
   .nav{
     position:absolute;
