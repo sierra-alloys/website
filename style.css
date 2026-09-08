@@ -222,49 +222,55 @@ a{
 
   z-index:2;
 
-  width:100%;
-
   max-width:1440px;
 
-  margin:0;
+  margin:0 auto;
 
-  min-height:calc(100vh - 245px);
+  height:590px;
+
+  min-height:0;
 
   display:flex;
 
-  align-items:center;
+  align-items:flex-end;
 
 }
 
 .hero-copy{
 
-  width:50%;
+  width:53%;
 
-  padding:
+  /* ABOUT 섹션과 동일한 좌측 라인 */
 
-    40px
+  padding-left:max(28px,4vw);
 
-    5vw
+  padding-right:5vw;
 
-    40px
+  /* 아래 4칸보다 살짝 위 */
 
-    4vw;
+  padding-bottom:65px;
+
+  padding-top:0;
 
 }
 
 .eyebrow{
-  margin:0 0 24px;
+
+  margin:0 0 22px;
 
   font-size:10px;
+
   letter-spacing:.24em;
 
   color:#b7b7b7;
+
 }
 
 .hero h1{
+
   margin:0;
 
-  font-size:clamp(64px,6.2vw,104px);
+  font-size:clamp(64px,6.4vw,108px);
 
   line-height:.84;
 
@@ -273,17 +279,21 @@ a{
   letter-spacing:-.055em;
 
   color:#fff;
+
 }
 
 .lead{
-  max-width:520px;
 
-  margin:32px 0 26px;
+  max-width:530px;
 
-  font-size:15px;
+  margin:32px 0 24px;
+
+  font-size:16px;
+
   line-height:1.7;
 
   color:#bcbcbc;
+
 }
 
 .text-link{
