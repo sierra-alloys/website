@@ -179,16 +179,28 @@ footer{
   font-weight: 400;
   letter-spacing: 0;
 }
-/* SIERRA HEADER LOGO */
-.brand {
+/* HEADER */
+.site-header {
+  height: 68px;
+  min-height: 68px;
   display: flex;
   align-items: center;
 }
 
+/* SIERRA LOGO */
+.brand {
+  display: flex;
+  align-items: center;
+  height: 68px;
+  overflow: hidden;
+}
+
 .brand img {
   display: block;
-  width: 130px;
-  height: auto;
+  width: auto;
+  height: 24px;
+  max-width: 180px;
+  object-fit: contain;
 }
 /* PRODUCTS - tighter spacing */
 
