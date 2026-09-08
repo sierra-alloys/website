@@ -80,10 +80,10 @@ a{
   align-items:center;
   justify-content:flex-start;
 
-  width:420px;
+  width:320;
   height:82px;
 
-  flex:0 0 420px;
+  flex:0 0 320px;
 
   margin:0;
   padding:0;
@@ -94,7 +94,7 @@ a{
 .brand img{
   display:block;
 
-  width:390px;
+  width:300px;
   height:auto;
 
   max-width:none;
@@ -110,7 +110,7 @@ a{
     원본 PNG 안쪽 여백 때문에
     실제 로고가 작아 보이는 것을 확대
   */
-  transform:scale(1.55);
+  transform:scale(1.58);
   transform-origin:left center;
 }
 
@@ -189,11 +189,15 @@ a{
 ======================================== */
 
 .hero-bg{
+
   position:absolute;
 
   top:82px;
+
   left:0;
+
   right:0;
+
   bottom:0;
 
   z-index:0;
@@ -202,45 +206,50 @@ a{
 
   background-image:
 
-    /* LEFT DARK GRADIENT */
     linear-gradient(
+
       90deg,
+
       rgba(5,5,5,.94) 0%,
-      rgba(5,5,5,.84) 16%,
-      rgba(5,5,5,.60) 31%,
-      rgba(5,5,5,.30) 47%,
-      rgba(5,5,5,.10) 68%,
-      rgba(5,5,5,.04) 100%
+
+      rgba(5,5,5,.82) 18%,
+
+      rgba(5,5,5,.54) 34%,
+
+      rgba(5,5,5,.24) 52%,
+
+      rgba(5,5,5,.08) 72%,
+
+      rgba(5,5,5,.03) 100%
+
     ),
 
-    /* BOTTOM GRADIENT */
     linear-gradient(
+
       0deg,
-      rgba(5,5,5,.48) 0%,
-      rgba(5,5,5,.12) 34%,
-      rgba(5,5,5,.04) 62%,
-      rgba(5,5,5,.10) 100%
+
+      rgba(5,5,5,.38) 0%,
+
+      rgba(5,5,5,.06) 48%,
+
+      rgba(5,5,5,.08) 100%
+
     ),
 
     url("assets/sierra-main.jpg");
 
   background-repeat:no-repeat;
 
-  /*
-    cover를 사용하되
-    원본 사진의 오른쪽 부분을 더 많이 보이게
-  */
-  background-size:cover;
+  /* cover 제거 */
 
-  /*
-    숫자가 커질수록 사진의 오른쪽 부분을 보여줌
-  */
-  background-position:62% center;
+  background-size:100% auto;
 
-  filter:
-    saturate(.64)
-    contrast(1.03)
-    brightness(.88);
+  /* 위쪽으로 너무 치우치지 않게 */
+
+  background-position:center 38%;
+
+  filter:saturate(.64) contrast(1.03) brightness(.90);
+
 }
 
 
