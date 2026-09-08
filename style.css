@@ -242,11 +242,9 @@ a{
 
   /* cover 제거 */
 
-  background-size:100% auto;
+background-size:auto 133.33%;
 
-  /* 위쪽으로 너무 치우치지 않게 */
-
-  background-position:center 38%;
+background-position:62% bottom;
 
   filter:saturate(.64) contrast(1.03) brightness(.90);
 
