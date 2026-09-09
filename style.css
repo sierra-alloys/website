@@ -567,13 +567,33 @@ h2{
 ======================================== */
 
 .product-layout{
+  position:relative;
+
   display:grid;
 
-  grid-template-columns:.8fr 1.2fr;
+  /* 제품내용 | 오른쪽 제목 */
+  grid-template-columns:1fr 1fr;
 
-  gap:9vw;
+  gap:0;
 
   align-items:start;
+}
+
+
+/* ========================================
+   오른쪽 : Materials & Products
+======================================== */
+
+.product-layout > div:first-child{
+  grid-column:2;
+  grid-row:1;
+
+  /* 오른쪽 영역 안쪽으로 배치 */
+  padding-left:7vw;
+}
+
+.product-layout > div:first-child h2{
+  max-width:520px;
 }
 
 .muted{
@@ -588,14 +608,29 @@ h2{
 
 
 /* ========================================
-   PRODUCT LIST
+   중앙 : PRODUCT CONTENT
 ======================================== */
 
 .product-list{
-  width:100%;
+  grid-column:1;
+  grid-row:1;
+
+  /*
+    화면 정중앙 쪽으로 이동
+    왼쪽 칸의 오른쪽 부분에 위치
+  */
+  width:620px;
+  max-width:100%;
+
+  justify-self:end;
+
+  margin-right:4vw;
 
   border-top:1px solid #c9c8c3;
 }
+
+
+/* PRODUCT CATEGORY */
 
 .product-list .product-heading{
   display:grid;
@@ -613,23 +648,22 @@ h2{
 
 .product-list .product-heading span{
   font-size:10px;
-
   color:#8b8b8b;
 }
 
 .product-list .product-heading strong{
   font-size:20px;
-
   font-weight:700;
-
   letter-spacing:.04em;
 }
 
 .product-list .product-heading em{
   font-style:normal;
-
   font-size:22px;
 }
+
+
+/* PRODUCT DETAILS */
 
 .product-list .product-detail{
   display:block;
@@ -655,6 +689,9 @@ h2{
 
   letter-spacing:0;
 }
+
+
+/* SECOND CATEGORY */
 
 .product-list .second-heading{
   margin-top:24px;
