@@ -9,11 +9,6 @@
   --side:4vw;
 }
 
-
-/* ========================================
-   RESET
-======================================== */
-
 *{
   box-sizing:border-box;
 }
@@ -36,9 +31,7 @@ a{
 }
 
 
-/* ========================================
-   HEADER
-======================================== */
+/* HEADER */
 
 .site-header{
   position:fixed;
@@ -66,9 +59,7 @@ a{
 }
 
 
-/* ========================================
-   LOGO
-======================================== */
+/* LOGO */
 
 .brand{
   display:flex;
@@ -110,14 +101,11 @@ a{
 }
 
 
-/* ========================================
-   NAVIGATION
-======================================== */
+/* NAVIGATION */
 
 .nav{
   display:flex;
   align-items:center;
-
   gap:34px;
 
   font-size:11px;
@@ -156,9 +144,7 @@ a{
 }
 
 
-/* ========================================
-   HERO
-======================================== */
+/* HERO */
 
 .hero{
   position:relative;
@@ -174,11 +160,6 @@ a{
   overflow:hidden;
 }
 
-
-/* ========================================
-   HERO BACKGROUND
-======================================== */
-
 .hero-bg{
   position:absolute;
 
@@ -192,7 +173,6 @@ a{
   background-color:#090909;
 
   background-image:
-
     linear-gradient(
       90deg,
       rgba(2,2,2,.99) 0%,
@@ -204,20 +184,16 @@ a{
       rgba(3,3,3,.07) 72%,
       rgba(3,3,3,.02) 100%
     ),
-
     linear-gradient(
       0deg,
       rgba(5,5,5,.42) 0%,
       rgba(5,5,5,.07) 45%,
       rgba(5,5,5,.07) 100%
     ),
-
     url("assets/sierra-main.jpg");
 
   background-repeat:no-repeat;
-
   background-size:100% auto;
-
   background-position:52% center;
 
   filter:
@@ -226,14 +202,8 @@ a{
     brightness(.90);
 }
 
-
-/* ========================================
-   HERO CONTENT
-======================================== */
-
 .hero-content{
   position:relative;
-
   z-index:2;
 
   width:calc(100% - (var(--side) * 2));
@@ -246,11 +216,6 @@ a{
   display:flex;
   align-items:flex-end;
 }
-
-
-/* ========================================
-   HERO TEXT
-======================================== */
 
 .hero-copy{
   width:58%;
@@ -313,9 +278,7 @@ a{
 }
 
 
-/* ========================================
-   HERO FEATURE STRIP
-======================================== */
+/* FEATURE STRIP */
 
 .feature-strip{
   position:absolute;
@@ -357,12 +320,10 @@ a{
 
 .feature-no{
   position:absolute;
-
   top:18px;
   right:18px;
 
   font-size:9px;
-
   color:#777;
 }
 
@@ -383,16 +344,13 @@ a{
   margin-top:18px;
 
   font-size:10px;
-
   letter-spacing:.05em;
 
   color:#858585;
 }
 
 
-/* ========================================
-   GENERAL SECTIONS
-======================================== */
+/* GENERAL */
 
 .section{
   padding:110px max(28px,var(--side));
@@ -413,22 +371,14 @@ a{
   margin-bottom:70px;
 
   font-size:10px;
-
   letter-spacing:.18em;
 
   color:#777;
 }
 
-
-/* ========================================
-   ABOUT
-======================================== */
-
 .two-col{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:10vw;
 }
 
@@ -445,7 +395,6 @@ h2{
 
 .body-copy{
   max-width:560px;
-
   padding-top:12px;
 }
 
@@ -459,13 +408,10 @@ h2{
 }
 
 
-/* ========================================
-   BUSINESS
-======================================== */
+/* BUSINESS */
 
 .dark{
   background:#101010;
-
   color:#fff;
 }
 
@@ -475,7 +421,6 @@ h2{
 
 .section-head{
   display:flex;
-
   justify-content:space-between;
   align-items:flex-end;
 
@@ -490,18 +435,11 @@ h2{
   margin:0;
 
   color:#929292;
-
   line-height:1.7;
 }
 
-
-/* ========================================
-   BUSINESS CARDS
-======================================== */
-
 .cards{
   display:grid;
-
   grid-template-columns:repeat(3,1fr);
 
   border-top:1px solid #303030;
@@ -517,13 +455,11 @@ h2{
 
 .cards article:last-child{
   margin-right:0;
-
   border-right:0;
 }
 
 .cards span{
   font-size:10px;
-
   color:#666;
 }
 
@@ -531,7 +467,6 @@ h2{
   margin:44px 0 24px;
 
   font-size:16px;
-
   letter-spacing:.12em;
 }
 
@@ -557,13 +492,13 @@ h2{
   display:grid;
 
   /*
-     LEFT  = Materials & Products
-     RIGHT = Product content
-
-     왼쪽 제목은 확실히 왼쪽,
-     제품 내용은 확실히 오른쪽
+    왼쪽 제목을 더 왼쪽,
+    오른쪽 제품정보를 더 오른쪽
   */
-  grid-template-columns:38% 62%;
+  grid-template-columns:44% 56%;
+
+  width:100%;
+  max-width:var(--max);
 
   gap:0;
 
@@ -571,9 +506,7 @@ h2{
 }
 
 
-/* ========================================
-   LEFT : Materials & Products
-======================================== */
+/* LEFT : MATERIALS & PRODUCTS */
 
 .product-layout > div:first-child{
   grid-column:1;
@@ -583,19 +516,19 @@ h2{
 
   width:100%;
 
-  padding-left:0;
-  padding-right:5vw;
-
+  padding:0;
   margin:0;
 }
 
 .product-layout > div:first-child h2{
+  width:100%;
   max-width:520px;
 
   margin:0;
 }
 
 .product-layout > div:first-child .muted{
+  width:100%;
   max-width:420px;
 
   margin-top:28px;
@@ -606,44 +539,35 @@ h2{
 }
 
 
-/* ========================================
-   RIGHT : PRODUCT CONTENT
-======================================== */
+/* RIGHT : PRODUCT INFO */
 
 .product-list{
   grid-column:2;
   grid-row:1;
 
-  width:620px;
+  width:560px;
   max-width:100%;
 
-  /*
-     오른쪽 칸의 우측 끝으로 이동
-  */
   justify-self:end;
 
   margin:0;
-
   padding:0;
 
   border:0;
 }
 
 
-/* ========================================
-   PRODUCT CATEGORY
-======================================== */
+/* PRODUCT HEADINGS */
 
 .product-list .product-heading{
-  display:grid;
+  display:block;
 
-  grid-template-columns:1fr;
+  width:100%;
 
-  align-items:center;
-
-  min-height:52px;
+  min-height:0;
 
   padding:0;
+  margin:0 0 12px;
 
   border:0;
 }
@@ -653,8 +577,12 @@ h2{
 }
 
 .product-list .product-heading strong{
-  font-size:20px;
+  display:block;
 
+  margin:0;
+  padding:0;
+
+  font-size:20px;
   line-height:1.25;
 
   font-weight:700;
@@ -663,26 +591,25 @@ h2{
 }
 
 
-/* ========================================
-   REMOVE ARROWS
-======================================== */
+/* REMOVE ARROWS */
 
 .product-list .product-heading em{
   display:none;
 }
 
 
-/* ========================================
-   PRODUCT DETAILS
-======================================== */
+/* PRODUCT DETAILS */
 
 .product-list .product-detail{
   display:block;
 
+  width:100%;
+
   height:auto;
   min-height:0;
 
-  padding:5px 0;
+  padding:4px 0;
+  margin:0;
 
   border:0;
 }
@@ -694,7 +621,6 @@ h2{
   padding:0;
 
   font-size:14px;
-
   line-height:1.4;
 
   font-weight:400;
@@ -703,20 +629,17 @@ h2{
 }
 
 
-/* ========================================
-   SECOND CATEGORY
-======================================== */
+/* SECOND GROUP */
 
 .product-list .second-heading{
   margin-top:22px;
+  margin-bottom:12px;
 
   border:0;
 }
 
 
-/* ========================================
-   QUALITY
-======================================== */
+/* QUALITY */
 
 .metal{
   position:relative;
@@ -724,9 +647,7 @@ h2{
   min-height:650px;
 
   display:flex;
-
   flex-direction:column;
-
   justify-content:flex-end;
 
   overflow:hidden;
@@ -734,13 +655,11 @@ h2{
   color:#fff;
 
   background:
-
     linear-gradient(
       90deg,
       rgba(0,0,0,.8),
       rgba(0,0,0,.22)
     ),
-
     repeating-linear-gradient(
       105deg,
       #151515 0 28px,
@@ -759,7 +678,6 @@ h2{
   opacity:.45;
 
   background:
-
     repeating-linear-gradient(
       0deg,
       transparent 0 73px,
@@ -772,7 +690,6 @@ h2{
 
 .metal > *{
   position:relative;
-
   z-index:2;
 }
 
@@ -789,7 +706,6 @@ h2{
 
 .solution-copy{
   margin:0 !important;
-
   max-width:800px !important;
 }
 
@@ -809,9 +725,7 @@ h2{
 }
 
 
-/* ========================================
-   CONTACT
-======================================== */
+/* CONTACT */
 
 .contact{
   padding-bottom:80px;
@@ -821,7 +735,6 @@ h2{
 
 .contact-grid{
   display:grid;
-
   grid-template-columns:1fr 1fr;
 
   gap:10vw;
@@ -831,9 +744,7 @@ h2{
 
 .contact-info{
   display:flex;
-
   flex-direction:column;
-
   align-items:flex-start;
 
   gap:12px;
@@ -851,7 +762,6 @@ h2{
 
 .caption{
   font-size:10px;
-
   letter-spacing:.18em;
 
   color:#777;
@@ -866,15 +776,12 @@ h2{
 }
 
 
-/* ========================================
-   FOOTER
-======================================== */
+/* FOOTER */
 
 footer{
   padding:28px max(28px,var(--side));
 
   display:flex;
-
   justify-content:space-between;
 
   background:#0b0b0b;
@@ -882,32 +789,26 @@ footer{
   color:#777;
 
   font-size:9px;
-
   letter-spacing:.14em;
 }
 
 
-/* ========================================
-   TABLET
-======================================== */
+/* TABLET */
 
 @media(max-width:1100px){
 
   .brand{
     width:260px;
-
     flex-basis:260px;
   }
 
   .brand img{
     width:245px;
-
     transform:scale(1.06);
   }
 
   .nav{
     gap:22px;
-
     font-size:10px;
   }
 
@@ -918,9 +819,7 @@ footer{
 }
 
 
-/* ========================================
-   MOBILE
-======================================== */
+/* MOBILE */
 
 @media(max-width:850px){
 
@@ -928,14 +827,8 @@ footer{
     --side:28px;
   }
 
-
-  /* ========================================
-     HEADER
-  ======================================== */
-
   .site-header{
     height:70px;
-
     padding:0 24px;
   }
 
@@ -950,27 +843,19 @@ footer{
     width:165px;
 
     transform:scale(1.05);
-
     transform-origin:left center;
   }
-
-
-  /* ========================================
-     NAV
-  ======================================== */
 
   .nav{
     position:absolute;
 
     top:70px;
-
     left:0;
     right:0;
 
     display:none;
 
     flex-direction:column;
-
     align-items:flex-start;
 
     gap:24px;
@@ -991,9 +876,7 @@ footer{
   }
 
 
-  /* ========================================
-     HERO MOBILE
-  ======================================== */
+  /* HERO */
 
   .hero{
     height:auto;
@@ -1001,7 +884,6 @@ footer{
     min-height:92svh;
 
     padding-top:70px;
-
     padding-bottom:230px;
   }
 
@@ -1009,7 +891,6 @@ footer{
     top:70px;
 
     background-image:
-
       linear-gradient(
         90deg,
         rgba(2,2,2,.62) 0%,
@@ -1018,20 +899,16 @@ footer{
         rgba(2,2,2,.10) 72%,
         rgba(2,2,2,.04) 100%
       ),
-
       linear-gradient(
         0deg,
         rgba(5,5,5,.42) 0%,
         rgba(5,5,5,.10) 42%,
         rgba(5,5,5,.04) 100%
       ),
-
       url("assets/sierra-main.jpg");
 
     background-size:cover;
-
     background-position:58% center;
-
     background-repeat:no-repeat;
 
     filter:
@@ -1040,16 +917,10 @@ footer{
       brightness(.98);
   }
 
-
-  /* ========================================
-     HERO CONTENT
-  ======================================== */
-
   .hero-content{
     width:calc(100% - 56px);
 
     min-height:540px;
-
     height:auto;
 
     align-items:flex-end;
@@ -1069,7 +940,6 @@ footer{
 
   .hero h1{
     font-size:clamp(48px,15vw,74px);
-
     line-height:.88;
   }
 
@@ -1080,9 +950,7 @@ footer{
   }
 
 
-  /* ========================================
-     FEATURE STRIP
-  ======================================== */
+  /* FEATURE STRIP */
 
   .feature-strip{
     bottom:20px;
@@ -1107,13 +975,10 @@ footer{
   }
 
 
-  /* ========================================
-     GENERAL
-  ======================================== */
+  /* GENERAL */
 
   .section{
     padding-top:82px;
-
     padding-bottom:82px;
   }
 
@@ -1125,16 +990,10 @@ footer{
   .section-head,
   .contact-grid{
     display:grid;
-
     grid-template-columns:1fr;
 
     gap:48px;
   }
-
-
-  /* ========================================
-     BUSINESS
-  ======================================== */
 
   .section-head{
     align-items:start;
@@ -1150,7 +1009,6 @@ footer{
     padding-right:0;
 
     border-right:0;
-
     border-bottom:1px solid #303030;
   }
 
@@ -1159,24 +1017,18 @@ footer{
   }
 
 
-  /* ========================================
-     PRODUCTS MOBILE
-  ======================================== */
+  /* PRODUCTS MOBILE */
 
   .product-layout{
     display:grid;
 
     grid-template-columns:1fr;
-
     grid-template-rows:auto auto;
 
     gap:42px;
 
     width:100%;
   }
-
-
-  /* TITLE */
 
   .product-layout > div:first-child{
     grid-column:1;
@@ -1185,7 +1037,6 @@ footer{
     width:100%;
 
     padding:0;
-
     margin:0;
 
     justify-self:stretch;
@@ -1193,13 +1044,11 @@ footer{
 
   .product-layout > div:first-child h2{
     width:100%;
-
     max-width:none;
 
     margin:0;
 
     font-size:clamp(42px,12vw,58px);
-
     line-height:.94;
 
     letter-spacing:-.055em;
@@ -1207,38 +1056,28 @@ footer{
 
   .product-layout > div:first-child .muted{
     width:100%;
-
     max-width:360px;
 
     margin-top:22px;
 
     font-size:14px;
-
     line-height:1.7;
   }
-
-
-  /* PRODUCT LIST */
 
   .product-list{
     grid-column:1;
     grid-row:2;
 
     width:100%;
-
     max-width:none;
 
     justify-self:stretch;
 
     margin:0;
-
     padding:0;
 
     border:0;
   }
-
-
-  /* PRODUCT CATEGORY */
 
   .product-list .product-heading{
     display:block;
@@ -1262,7 +1101,6 @@ footer{
     display:block;
 
     font-size:16px;
-
     line-height:1.25;
 
     font-weight:700;
@@ -1273,9 +1111,6 @@ footer{
   .product-list .product-heading em{
     display:none;
   }
-
-
-  /* PRODUCT DETAILS */
 
   .product-list .product-detail{
     width:100%;
@@ -1289,36 +1124,27 @@ footer{
     display:block;
 
     font-size:13px;
-
     line-height:1.45;
 
     font-weight:400;
   }
 
-
-  /* SECOND CATEGORY */
-
   .product-list .second-heading{
     margin-top:22px;
-
     margin-bottom:10px;
 
     border:0;
   }
 
 
-  /* ========================================
-     QUALITY
-  ======================================== */
+  /* QUALITY */
 
   .metal .section-label{
     top:82px;
   }
 
 
-  /* ========================================
-     FOOTER
-  ======================================== */
+  /* FOOTER */
 
   footer{
     flex-direction:column;
