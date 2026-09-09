@@ -219,17 +219,8 @@ a{
     url("assets/sierra-main.jpg");
 
   background-repeat:no-repeat;
-
-  /*
-    원본 이미지 위쪽 약 25% 크롭
-  */
-  background-size:auto 133.33%;
-
-  /*
-    오른쪽 부분을 조금 더 보여줌.
-    72% → 더 오른쪽 영역 노출
-  */
-  background-position:72% bottom;
+  background-size:auto cover;
+  background-position:52% center;
 
   filter:
     saturate(.64)
