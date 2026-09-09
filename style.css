@@ -69,7 +69,6 @@ a{
 
 /* ========================================
    LOGO
-   기존보다 약 30% 축소
 ======================================== */
 
 .brand{
@@ -195,7 +194,6 @@ a{
 
   background-image:
 
-    /* 왼쪽 그라데이션 조금 더 진하게 */
     linear-gradient(
       90deg,
       rgba(2,2,2,.99) 0%,
@@ -208,7 +206,6 @@ a{
       rgba(3,3,3,.02) 100%
     ),
 
-    /* 하단 음영 */
     linear-gradient(
       0deg,
       rgba(5,5,5,.42) 0%,
@@ -241,10 +238,6 @@ a{
   width:calc(100% - (var(--side) * 2));
   max-width:var(--max);
 
-  /*
-    Feature strip이 38px 올라왔으므로
-    내용 영역도 같이 맞춤
-  */
   height:calc(100% - 183px);
 
   margin:0 auto;
@@ -325,18 +318,12 @@ a{
 
 /* ========================================
    HERO FEATURE STRIP
-   약 38px 위로 이동
 ======================================== */
 
 .feature-strip{
   position:absolute;
 
   left:50%;
-
-  /*
-    기존 0 → 38px
-    약 1cm 정도 위
-  */
   bottom:38px;
 
   transform:translateX(-50%);
@@ -571,7 +558,6 @@ h2{
 
   display:grid;
 
-  /* 제품내용 | 오른쪽 제목 */
   grid-template-columns:1fr 1fr;
 
   gap:0;
@@ -581,14 +567,13 @@ h2{
 
 
 /* ========================================
-   오른쪽 : Materials & Products
+   RIGHT : Materials & Products
 ======================================== */
 
 .product-layout > div:first-child{
   grid-column:2;
   grid-row:1;
 
-  /* 오른쪽 영역 안쪽으로 배치 */
   padding-left:7vw;
 }
 
@@ -608,17 +593,13 @@ h2{
 
 
 /* ========================================
-   중앙 : PRODUCT CONTENT
+   LEFT : PRODUCT CONTENT
 ======================================== */
 
 .product-list{
   grid-column:1;
   grid-row:1;
 
-  /*
-    화면 정중앙 쪽으로 이동
-    왼쪽 칸의 오른쪽 부분에 위치
-  */
   width:620px;
   max-width:100%;
 
@@ -648,17 +629,21 @@ h2{
 
 .product-list .product-heading span{
   font-size:10px;
+
   color:#8b8b8b;
 }
 
 .product-list .product-heading strong{
   font-size:20px;
+
   font-weight:700;
+
   letter-spacing:.04em;
 }
 
 .product-list .product-heading em{
   font-style:normal;
+
   font-size:22px;
 }
 
@@ -1087,7 +1072,6 @@ footer{
 
   .two-col,
   .section-head,
-  .product-layout,
   .contact-grid{
     display:grid;
 
@@ -1122,28 +1106,143 @@ footer{
   }
 
 
-  /* PRODUCTS */
+  /* ========================================
+     PRODUCTS - MOBILE FIX
+  ======================================== */
+
+  .product-layout{
+    display:grid;
+
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+
+    gap:42px;
+
+    width:100%;
+  }
+
+
+  /* Materials & Products 위쪽 */
+
+  .product-layout > div:first-child{
+    grid-column:1;
+    grid-row:1;
+
+    width:100%;
+
+    padding-left:0;
+    margin:0;
+  }
+
+  .product-layout > div:first-child h2{
+    width:100%;
+    max-width:none;
+
+    margin:0;
+
+    font-size:clamp(42px,12vw,58px);
+    line-height:.94;
+
+    letter-spacing:-.055em;
+  }
+
+  .product-layout > div:first-child .muted{
+    width:100%;
+    max-width:360px;
+
+    margin-top:22px;
+
+    font-size:14px;
+    line-height:1.7;
+  }
+
+
+  /* 제품 리스트 전체 폭 */
+
+  .product-list{
+    grid-column:1;
+    grid-row:2;
+
+    width:100%;
+    max-width:none;
+
+    justify-self:stretch;
+
+    margin:0;
+
+    border-top:1px solid #c9c8c3;
+  }
+
+
+  /* PRODUCT CATEGORY */
 
   .product-list .product-heading{
-    grid-template-columns:42px 1fr auto;
+    display:grid;
 
-    min-height:64px;
+    grid-template-columns:32px minmax(0,1fr) 20px;
+
+    align-items:center;
+
+    width:100%;
+
+    min-height:60px;
+
+    padding:0;
+
+    border-bottom:1px solid #c9c8c3;
+  }
+
+  .product-list .product-heading span{
+    font-size:9px;
+
+    color:#8b8b8b;
   }
 
   .product-list .product-heading strong{
-    font-size:17px;
+    min-width:0;
+
+    font-size:16px;
+    line-height:1.2;
+
+    font-weight:700;
+
+    letter-spacing:.025em;
   }
 
   .product-list .product-heading em{
-    font-size:18px;
+    justify-self:end;
+
+    font-size:17px;
+    line-height:1;
+
+    font-style:normal;
   }
 
+
+  /* PRODUCT DETAILS */
+
   .product-list .product-detail{
-    padding:7px 0 7px 42px;
+    width:100%;
+
+    padding:7px 0 7px 32px;
   }
 
   .product-list .product-detail strong{
+    display:block;
+
     font-size:13px;
+    line-height:1.45;
+
+    font-weight:400;
+  }
+
+
+  /* SECOND CATEGORY */
+
+  .product-list .second-heading{
+    margin-top:22px;
+
+    border-top:1px solid #c9c8c3;
   }
 
 
