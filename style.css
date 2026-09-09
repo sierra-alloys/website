@@ -219,7 +219,7 @@ a{
     url("assets/sierra-main.jpg");
 
   background-repeat:no-repeat;
-  background-size:auto cover;
+  background-size:100% auto;
   background-position:52% center;
 
   filter:
