@@ -24,9 +24,12 @@ html{
 
 body{
   margin:0;
+
   font-family:Arial, Helvetica, sans-serif;
+
   color:var(--black);
   background:var(--off);
+
   -webkit-font-smoothing:antialiased;
 }
 
@@ -42,6 +45,7 @@ a{
 
 .site-header{
   position:fixed;
+
   top:0;
   left:0;
   right:0;
@@ -73,6 +77,7 @@ a{
 
 .brand{
   display:flex;
+
   align-items:center;
   justify-content:flex-start;
 
@@ -117,16 +122,19 @@ a{
 
 .nav{
   display:flex;
+
   align-items:center;
 
   gap:34px;
 
   font-size:11px;
+
   letter-spacing:.16em;
 }
 
 .nav a{
   opacity:.72;
+
   transition:opacity .2s ease;
 }
 
@@ -143,6 +151,7 @@ a{
   padding:5px;
 
   border:0;
+
   background:none;
 }
 
@@ -165,11 +174,13 @@ a{
   position:relative;
 
   height:100vh;
+
   min-height:760px;
 
   padding-top:82px;
 
   background:#090909;
+
   color:#fff;
 
   overflow:hidden;
@@ -216,7 +227,9 @@ a{
     url("assets/sierra-main.jpg");
 
   background-repeat:no-repeat;
+
   background-size:100% auto;
+
   background-position:52% center;
 
   filter:
@@ -236,6 +249,7 @@ a{
   z-index:2;
 
   width:calc(100% - (var(--side) * 2));
+
   max-width:var(--max);
 
   height:calc(100% - 183px);
@@ -243,6 +257,7 @@ a{
   margin:0 auto;
 
   display:flex;
+
   align-items:flex-end;
 }
 
@@ -254,17 +269,14 @@ a{
 .hero-copy{
   width:58%;
 
-  padding:
-    0
-    5vw
-    42px
-    0;
+  padding:0 5vw 42px 0;
 }
 
 .eyebrow{
   margin:0 0 22px;
 
   font-size:10px;
+
   line-height:1;
 
   letter-spacing:.24em;
@@ -276,6 +288,7 @@ a{
   margin:0;
 
   font-size:clamp(64px,6.2vw,104px);
+
   line-height:.84;
 
   font-weight:600;
@@ -291,6 +304,7 @@ a{
   margin:32px 0 24px;
 
   font-size:16px;
+
   line-height:1.7;
 
   color:#bcbcbc;
@@ -306,6 +320,7 @@ a{
   border-bottom:1px solid rgba(255,255,255,.28);
 
   font-size:10px;
+
   letter-spacing:.2em;
 
   color:#fff;
@@ -324,6 +339,7 @@ a{
   position:absolute;
 
   left:50%;
+
   bottom:38px;
 
   transform:translateX(-50%);
@@ -331,9 +347,11 @@ a{
   z-index:3;
 
   width:calc(100% - (var(--side) * 2));
+
   max-width:var(--max);
 
   display:grid;
+
   grid-template-columns:repeat(4,1fr);
 
   border-top:1px solid rgba(255,255,255,.16);
@@ -344,7 +362,7 @@ a{
   -webkit-backdrop-filter:blur(5px);
 }
 
-.feature-strip>div{
+.feature-strip > div{
   position:relative;
 
   min-height:145px;
@@ -354,7 +372,7 @@ a{
   border-right:1px solid rgba(255,255,255,.14);
 }
 
-.feature-strip>div:last-child{
+.feature-strip > div:last-child{
   border-right:0;
 }
 
@@ -373,6 +391,7 @@ a{
   display:block;
 
   font-size:13px;
+
   line-height:1.2;
 
   letter-spacing:.12em;
@@ -403,8 +422,9 @@ a{
   scroll-margin-top:82px;
 }
 
-.section>*{
+.section > *{
   width:100%;
+
   max-width:var(--max);
 
   margin-left:auto;
@@ -413,9 +433,11 @@ a{
 
 .section-label{
   margin-top:0;
+
   margin-bottom:70px;
 
   font-size:10px;
+
   letter-spacing:.18em;
 
   color:#777;
@@ -438,6 +460,7 @@ h2{
   margin:0;
 
   font-size:clamp(44px,5.6vw,90px);
+
   line-height:.94;
 
   letter-spacing:-.055em;
@@ -455,6 +478,7 @@ h2{
   margin:0 0 24px;
 
   font-size:17px;
+
   line-height:1.8;
 
   color:#555;
@@ -479,6 +503,7 @@ h2{
   display:flex;
 
   justify-content:space-between;
+
   align-items:flex-end;
 
   gap:50px;
@@ -543,6 +568,7 @@ h2{
   margin:0;
 
   font-size:14px;
+
   line-height:1.8;
 
   color:#898989;
@@ -558,7 +584,7 @@ h2{
 
   display:grid;
 
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:42% 58%;
 
   gap:0;
 
@@ -567,14 +593,19 @@ h2{
 
 
 /* ========================================
-   RIGHT : Materials & Products
+   LEFT : Materials & Products
 ======================================== */
 
 .product-layout > div:first-child{
-  grid-column:2;
+  grid-column:1;
+
   grid-row:1;
 
-  padding-left:7vw;
+  justify-self:start;
+
+  padding-left:0;
+
+  padding-right:6vw;
 }
 
 .product-layout > div:first-child h2{
@@ -593,38 +624,44 @@ h2{
 
 
 /* ========================================
-   LEFT : PRODUCT CONTENT
+   RIGHT : PRODUCT CONTENT
 ======================================== */
 
 .product-list{
-  grid-column:1;
+  grid-column:2;
+
   grid-row:1;
 
   width:620px;
+
   max-width:100%;
 
-  justify-self:end;
+  justify-self:center;
 
-  margin-right:4vw;
+  margin-left:3vw;
 
-  border-top:1px solid #c9c8c3;
+  margin-right:0;
+
+  border:0;
 }
 
 
-/* PRODUCT CATEGORY */
+/* ========================================
+   PRODUCT CATEGORY
+======================================== */
 
 .product-list .product-heading{
   display:grid;
 
-  grid-template-columns:60px 1fr auto;
+  grid-template-columns:60px 1fr;
 
   align-items:center;
 
-  min-height:68px;
+  min-height:58px;
 
   padding:0;
 
-  border-bottom:1px solid #c9c8c3;
+  border:0;
 }
 
 .product-list .product-heading span{
@@ -641,22 +678,26 @@ h2{
   letter-spacing:.04em;
 }
 
-.product-list .product-heading em{
-  font-style:normal;
 
-  font-size:22px;
+/* HIDE ARROWS */
+
+.product-list .product-heading em{
+  display:none;
 }
 
 
-/* PRODUCT DETAILS */
+/* ========================================
+   PRODUCT DETAILS
+======================================== */
 
 .product-list .product-detail{
   display:block;
 
   height:auto;
+
   min-height:0;
 
-  padding:7px 0 7px 60px;
+  padding:6px 0 6px 60px;
 
   border:0;
 }
@@ -665,9 +706,11 @@ h2{
   display:block;
 
   margin:0;
+
   padding:0;
 
   font-size:14px;
+
   line-height:1.35;
 
   font-weight:400;
@@ -676,12 +719,14 @@ h2{
 }
 
 
-/* SECOND CATEGORY */
+/* ========================================
+   SECOND CATEGORY
+======================================== */
 
 .product-list .second-heading{
   margin-top:24px;
 
-  border-top:1px solid #c9c8c3;
+  border:0;
 }
 
 
@@ -695,6 +740,7 @@ h2{
   min-height:650px;
 
   display:flex;
+
   flex-direction:column;
 
   justify-content:flex-end;
@@ -740,7 +786,7 @@ h2{
   transform:rotate(-8deg);
 }
 
-.metal>*{
+.metal > *{
   position:relative;
 
   z-index:2;
@@ -752,27 +798,29 @@ h2{
   top:110px;
 
   left:max(28px,var(--side));
+
   right:max(28px,var(--side));
 
   color:#7c7c7c;
 }
 
 .solution-copy{
-  margin:0!important;
+  margin:0 !important;
 
-  max-width:800px!important;
+  max-width:800px !important;
 }
 
 .solution-copy h2{
   font-size:clamp(54px,7vw,105px);
 }
 
-.solution-copy>p:last-child{
+.solution-copy > p:last-child{
   max-width:630px;
 
   margin-top:30px;
 
   font-size:17px;
+
   line-height:1.7;
 
   color:#b2b2b2;
@@ -909,6 +957,7 @@ footer{
 
   .brand{
     width:175px;
+
     height:70px;
 
     flex:0 0 175px;
@@ -931,11 +980,13 @@ footer{
     top:70px;
 
     left:0;
+
     right:0;
 
     display:none;
 
     flex-direction:column;
+
     align-items:flex-start;
 
     gap:24px;
@@ -956,16 +1007,18 @@ footer{
   }
 
 
-  /* HERO */
+  /* ========================================
+     HERO MOBILE
+  ======================================== */
 
   .hero{
     height:auto;
 
-    min-height:100vh;
+    min-height:92svh;
 
     padding-top:70px;
 
-    padding-bottom:240px;
+    padding-bottom:230px;
   }
 
   .hero-bg{
@@ -975,22 +1028,32 @@ footer{
 
       linear-gradient(
         90deg,
-        rgba(2,2,2,.96) 0%,
-        rgba(2,2,2,.84) 45%,
-        rgba(5,5,5,.38) 100%
+        rgba(2,2,2,.62) 0%,
+        rgba(2,2,2,.42) 24%,
+        rgba(2,2,2,.22) 48%,
+        rgba(2,2,2,.10) 72%,
+        rgba(2,2,2,.04) 100%
       ),
 
       linear-gradient(
         0deg,
-        rgba(5,5,5,.68),
-        rgba(5,5,5,.08)
+        rgba(5,5,5,.42) 0%,
+        rgba(5,5,5,.10) 42%,
+        rgba(5,5,5,.04) 100%
       ),
 
       url("assets/sierra-main.jpg");
 
     background-size:cover;
 
-    background-position:62% center;
+    background-position:58% center;
+
+    background-repeat:no-repeat;
+
+    filter:
+      saturate(.74)
+      contrast(1.01)
+      brightness(.98);
   }
 
 
@@ -999,7 +1062,8 @@ footer{
   .hero-content{
     width:calc(100% - 56px);
 
-    min-height:600px;
+    min-height:540px;
+
     height:auto;
 
     align-items:flex-end;
@@ -1008,11 +1072,7 @@ footer{
   .hero-copy{
     width:100%;
 
-    padding:
-      0
-      0
-      55px
-      0;
+    padding:0 0 48px 0;
   }
 
   .eyebrow{
@@ -1022,13 +1082,13 @@ footer{
   }
 
   .hero h1{
-    font-size:clamp(54px,16vw,80px);
+    font-size:clamp(48px,15vw,74px);
 
-    line-height:.86;
+    line-height:.88;
   }
 
   .lead{
-    max-width:90%;
+    max-width:92%;
 
     font-size:14px;
   }
@@ -1037,32 +1097,35 @@ footer{
   /* FEATURE STRIP */
 
   .feature-strip{
-    bottom:0;
+    bottom:20px;
 
     width:calc(100% - 56px);
 
     grid-template-columns:1fr 1fr;
   }
 
-  .feature-strip>div{
+  .feature-strip > div{
     min-height:110px;
 
     padding:22px;
   }
 
-  .feature-strip>div:nth-child(2){
+  .feature-strip > div:nth-child(2){
     border-right:0;
   }
 
-  .feature-strip>div:nth-child(-n+2){
+  .feature-strip > div:nth-child(-n+2){
     border-bottom:1px solid rgba(255,255,255,.14);
   }
 
 
-  /* GENERAL */
+  /* ========================================
+     GENERAL
+  ======================================== */
 
   .section{
     padding-top:82px;
+
     padding-bottom:82px;
   }
 
@@ -1081,7 +1144,9 @@ footer{
   }
 
 
-  /* BUSINESS */
+  /* ========================================
+     BUSINESS
+  ======================================== */
 
   .section-head{
     align-items:start;
@@ -1107,13 +1172,14 @@ footer{
 
 
   /* ========================================
-     PRODUCTS - MOBILE FIX
+     PRODUCTS MOBILE
   ======================================== */
 
   .product-layout{
     display:grid;
 
     grid-template-columns:1fr;
+
     grid-template-rows:auto auto;
 
     gap:42px;
@@ -1122,25 +1188,31 @@ footer{
   }
 
 
-  /* Materials & Products 위쪽 */
+  /* Materials & Products */
 
   .product-layout > div:first-child{
     grid-column:1;
+
     grid-row:1;
 
     width:100%;
 
     padding-left:0;
+
+    padding-right:0;
+
     margin:0;
   }
 
   .product-layout > div:first-child h2{
     width:100%;
+
     max-width:none;
 
     margin:0;
 
     font-size:clamp(42px,12vw,58px);
+
     line-height:.94;
 
     letter-spacing:-.055em;
@@ -1148,29 +1220,33 @@ footer{
 
   .product-layout > div:first-child .muted{
     width:100%;
+
     max-width:360px;
 
     margin-top:22px;
 
     font-size:14px;
+
     line-height:1.7;
   }
 
 
-  /* 제품 리스트 전체 폭 */
+  /* PRODUCT LIST */
 
   .product-list{
     grid-column:1;
+
     grid-row:2;
 
     width:100%;
+
     max-width:none;
 
     justify-self:stretch;
 
     margin:0;
 
-    border-top:1px solid #c9c8c3;
+    border:0;
   }
 
 
@@ -1179,17 +1255,17 @@ footer{
   .product-list .product-heading{
     display:grid;
 
-    grid-template-columns:32px minmax(0,1fr) 20px;
+    grid-template-columns:32px minmax(0,1fr);
 
     align-items:center;
 
     width:100%;
 
-    min-height:60px;
+    min-height:54px;
 
     padding:0;
 
-    border-bottom:1px solid #c9c8c3;
+    border:0;
   }
 
   .product-list .product-heading span{
@@ -1202,6 +1278,7 @@ footer{
     min-width:0;
 
     font-size:16px;
+
     line-height:1.2;
 
     font-weight:700;
@@ -1210,12 +1287,7 @@ footer{
   }
 
   .product-list .product-heading em{
-    justify-self:end;
-
-    font-size:17px;
-    line-height:1;
-
-    font-style:normal;
+    display:none;
   }
 
 
@@ -1224,13 +1296,16 @@ footer{
   .product-list .product-detail{
     width:100%;
 
-    padding:7px 0 7px 32px;
+    padding:6px 0 6px 32px;
+
+    border:0;
   }
 
   .product-list .product-detail strong{
     display:block;
 
     font-size:13px;
+
     line-height:1.45;
 
     font-weight:400;
@@ -1240,20 +1315,24 @@ footer{
   /* SECOND CATEGORY */
 
   .product-list .second-heading{
-    margin-top:22px;
+    margin-top:20px;
 
-    border-top:1px solid #c9c8c3;
+    border:0;
   }
 
 
-  /* QUALITY */
+  /* ========================================
+     QUALITY
+  ======================================== */
 
   .metal .section-label{
     top:82px;
   }
 
 
-  /* FOOTER */
+  /* ========================================
+     FOOTER
+  ======================================== */
 
   footer{
     flex-direction:column;
