@@ -879,12 +879,12 @@ footer{
   /* HERO */
 
   .hero{
-    height:auto;
+    height:780px;
 
-    min-height:92svh;
+    min-height:0;
 
     padding-top:70px;
-    padding-bottom:230px;
+    padding-bottom:0;
   }
 
   .hero-bg{
