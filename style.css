@@ -31,7 +31,9 @@ a{
 }
 
 
-/* HEADER */
+/* ========================================
+   HEADER
+======================================== */
 
 .site-header{
   position:fixed;
@@ -59,7 +61,9 @@ a{
 }
 
 
-/* LOGO */
+/* ========================================
+   LOGO
+======================================== */
 
 .brand{
   display:flex;
@@ -101,7 +105,9 @@ a{
 }
 
 
-/* NAVIGATION */
+/* ========================================
+   NAVIGATION
+======================================== */
 
 .nav{
   display:flex;
@@ -144,7 +150,9 @@ a{
 }
 
 
-/* HERO */
+/* ========================================
+   HERO
+======================================== */
 
 .hero{
   position:relative;
@@ -278,7 +286,9 @@ a{
 }
 
 
-/* FEATURE STRIP */
+/* ========================================
+   FEATURE STRIP
+======================================== */
 
 .feature-strip{
   position:absolute;
@@ -350,7 +360,9 @@ a{
 }
 
 
-/* GENERAL */
+/* ========================================
+   GENERAL
+======================================== */
 
 .section{
   padding:110px max(28px,var(--side));
@@ -408,7 +420,9 @@ h2{
 }
 
 
-/* BUSINESS */
+/* ========================================
+   BUSINESS
+======================================== */
 
 .dark{
   background:#101010;
@@ -491,10 +505,6 @@ h2{
 
   display:grid;
 
-  /*
-    왼쪽 제목을 더 왼쪽,
-    오른쪽 제품정보를 더 오른쪽
-  */
   grid-template-columns:44% 56%;
 
   width:100%;
@@ -639,7 +649,9 @@ h2{
 }
 
 
-/* QUALITY */
+/* ========================================
+   QUALITY
+======================================== */
 
 .metal{
   position:relative;
@@ -725,7 +737,9 @@ h2{
 }
 
 
-/* CONTACT */
+/* ========================================
+   CONTACT
+======================================== */
 
 .contact{
   padding-bottom:80px;
@@ -776,7 +790,9 @@ h2{
 }
 
 
-/* FOOTER */
+/* ========================================
+   FOOTER
+======================================== */
 
 footer{
   padding:28px max(28px,var(--side));
@@ -793,7 +809,9 @@ footer{
 }
 
 
-/* TABLET */
+/* ========================================
+   TABLET
+======================================== */
 
 @media(max-width:1100px){
 
@@ -819,7 +837,9 @@ footer{
 }
 
 
-/* MOBILE */
+/* ========================================
+   MOBILE
+======================================== */
 
 @media(max-width:850px){
 
@@ -827,10 +847,16 @@ footer{
     --side:28px;
   }
 
+
+  /* HEADER */
+
   .site-header{
     height:70px;
     padding:0 24px;
   }
+
+
+  /* LOGO */
 
   .brand{
     width:175px;
@@ -845,6 +871,9 @@ footer{
     transform:scale(1.05);
     transform-origin:left center;
   }
+
+
+  /* MOBILE NAV */
 
   .nav{
     position:absolute;
@@ -876,40 +905,77 @@ footer{
   }
 
 
-  /* HERO */
+  /* ========================================
+     MOBILE HERO
+  ======================================== */
 
   .hero{
-    height:auto;
-    min-height:92svh;
+    position:relative;
+
+    height:100svh;
+    min-height:760px;
 
     padding-top:70px;
-    padding-bottom:230px;
+    padding-bottom:0;
+
+    background:#090909;
+
+    overflow:hidden;
   }
 
+
+  /* MOBILE HERO IMAGE */
+
   .hero-bg{
+    position:absolute;
+
     top:70px;
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:0;
+
+    transform:none;
+
+    background-color:#090909;
 
     background-image:
       linear-gradient(
         90deg,
-        rgba(2,2,2,.62) 0%,
-        rgba(2,2,2,.42) 24%,
-        rgba(2,2,2,.22) 48%,
-        rgba(2,2,2,.10) 72%,
-        rgba(2,2,2,.04) 100%
+        rgba(2,2,2,.58) 0%,
+        rgba(2,2,2,.38) 24%,
+        rgba(2,2,2,.20) 48%,
+        rgba(2,2,2,.08) 72%,
+        rgba(2,2,2,.02) 100%
       ),
       linear-gradient(
         0deg,
-        rgba(5,5,5,.42) 0%,
-        rgba(5,5,5,.10) 42%,
-        rgba(5,5,5,.04) 100%
+        rgba(5,5,5,.48) 0%,
+        rgba(5,5,5,.14) 38%,
+        rgba(5,5,5,.02) 100%
       ),
       url("assets/sierra-main.jpg");
 
-    background-size:cover;
-    background-position:65% 50%;
-    transform:scale(1.08);
     background-repeat:no-repeat;
+
+    /*
+      사진 확대 정도
+
+      114% = 현재 추천값
+      더 확대 → 118~122%
+      덜 확대 → 108~112%
+    */
+    background-size:auto 114%;
+
+    /*
+      56% = 좌우 위치
+      38% = 상하 위치
+
+      위로 올리려면 두번째 숫자를 낮춤
+      아래로 내리려면 두번째 숫자를 높임
+    */
+    background-position:56% 38%;
 
     filter:
       saturate(.74)
@@ -917,45 +983,80 @@ footer{
       brightness(.98);
   }
 
+
+  /* MOBILE HERO CONTENT */
+
   .hero-content{
+    position:relative;
+
+    z-index:2;
+
     width:calc(100% - 56px);
 
-    min-height:540px;
-    height:auto;
+    height:calc(100svh - 70px);
+    min-height:690px;
 
+    margin:0 auto;
+
+    display:flex;
     align-items:flex-end;
   }
+
 
   .hero-copy{
     width:100%;
 
-    padding:0 0 48px 0;
+    /*
+      feature strip 공간 확보
+    */
+    padding:0 0 235px 0;
   }
 
+
   .eyebrow{
-    margin-bottom:18px;
+    margin:0 0 18px;
 
     font-size:9px;
   }
 
+
   .hero h1{
+    margin:0;
+
     font-size:clamp(48px,15vw,74px);
     line-height:.88;
+
+    letter-spacing:-.055em;
   }
+
 
   .lead{
     max-width:92%;
 
+    margin-top:26px;
+
     font-size:14px;
+    line-height:1.7;
   }
 
 
-  /* FEATURE STRIP */
+  /* ========================================
+     MOBILE FEATURE STRIP
+  ======================================== */
 
   .feature-strip{
+    position:absolute;
+
+    left:28px;
+    right:28px;
     bottom:20px;
 
-    width:calc(100% - 56px);
+    transform:none;
+
+    z-index:3;
+
+    width:auto;
+    max-width:none;
 
     grid-template-columns:1fr 1fr;
   }
@@ -975,7 +1076,9 @@ footer{
   }
 
 
-  /* GENERAL */
+  /* ========================================
+     MOBILE GENERAL
+  ======================================== */
 
   .section{
     padding-top:82px;
@@ -999,6 +1102,9 @@ footer{
     align-items:start;
   }
 
+
+  /* BUSINESS */
+
   .cards{
     grid-template-columns:1fr;
   }
@@ -1017,7 +1123,9 @@ footer{
   }
 
 
-  /* PRODUCTS MOBILE */
+  /* ========================================
+     PRODUCTS MOBILE
+  ======================================== */
 
   .product-layout{
     display:grid;
@@ -1064,6 +1172,7 @@ footer{
     line-height:1.7;
   }
 
+
   .product-list{
     grid-column:1;
     grid-row:2;
@@ -1079,6 +1188,7 @@ footer{
     border:0;
   }
 
+
   .product-list .product-heading{
     display:block;
 
@@ -1093,9 +1203,11 @@ footer{
     border:0;
   }
 
+
   .product-list .product-heading span{
     display:none;
   }
+
 
   .product-list .product-heading strong{
     display:block;
@@ -1108,9 +1220,11 @@ footer{
     letter-spacing:.025em;
   }
 
+
   .product-list .product-heading em{
     display:none;
   }
+
 
   .product-list .product-detail{
     width:100%;
@@ -1119,6 +1233,7 @@ footer{
 
     border:0;
   }
+
 
   .product-list .product-detail strong{
     display:block;
@@ -1129,6 +1244,7 @@ footer{
     font-weight:400;
   }
 
+
   .product-list .second-heading{
     margin-top:22px;
     margin-bottom:10px;
@@ -1137,14 +1253,18 @@ footer{
   }
 
 
-  /* QUALITY */
+  /* ========================================
+     QUALITY MOBILE
+  ======================================== */
 
   .metal .section-label{
     top:82px;
   }
 
 
-  /* FOOTER */
+  /* ========================================
+     FOOTER MOBILE
+  ======================================== */
 
   footer{
     flex-direction:column;
