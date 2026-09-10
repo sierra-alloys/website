@@ -879,12 +879,11 @@ footer{
   /* HERO */
 
   .hero{
-    height:780px;
-
-    min-height:0;
+    height:auto;
+    min-height:92svh;
 
     padding-top:70px;
-    padding-bottom:0;
+    padding-bottom:230px;
   }
 
   .hero-bg{
@@ -907,8 +906,8 @@ footer{
       ),
       url("assets/sierra-main.jpg");
 
-    background-size:cover;
-    background-position:65% 30%;
+    background-size:112%;
+    background-position:65% 50%;
     background-repeat:no-repeat;
 
     filter:
