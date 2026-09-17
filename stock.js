@@ -1,14 +1,11 @@
-/* =========================================
-   SIERRA ALLOYS
-   STOCK SEARCH
-========================================= */
+/* ========================================
+   SIERRA ALLOYS STOCK
+======================================== */
 
-
-/* =========================================
-   STOCK DATA
-========================================= */
 
 const stockData = [
+
+  /* PIPE */
 
   {
     product: "PIPE",
@@ -59,10 +56,7 @@ const stockData = [
   },
 
 
-
-  /* =====================================
-     FITTING
-  ====================================== */
+  /* FITTING */
 
   {
     product: "FITTING",
@@ -88,11 +82,20 @@ const stockData = [
     status: "AVAILABLE"
   },
 
+  {
+    product: "FITTING",
+    type: "SMLS",
+    material: "SS316",
+    description: "Concentric Reducer",
+    size: '4"',
+    rating: "",
+    schedule: "SCH 40S",
+    qty: 16,
+    status: "AVAILABLE"
+  },
 
 
-  /* =====================================
-     FLANGE
-  ====================================== */
+  /* FLANGE */
 
   {
     product: "FLANGE",
@@ -128,147 +131,93 @@ const stockData = [
     schedule: "SCH 40S",
     qty: 14,
     status: "AVAILABLE"
-  },
-
-  {
-    product: "FLANGE",
-    type: "SOCKET WELD",
-    material: "SS316",
-    description: "Socket Weld Flange",
-    size: '2"',
-    rating: "CL600",
-    schedule: "SCH 80S",
-    qty: 10,
-    status: "AVAILABLE"
   }
 
 ];
 
 
 
-/* =========================================
+/* ========================================
    TYPE OPTIONS
-========================================= */
+======================================== */
 
 const typeOptions = {
 
   PIPE: [
-
     "SMLS",
     "WELDED"
-
   ],
 
   FITTING: [
-
     "SMLS",
     "WELDED"
-
   ],
 
   FLANGE: [
-
     "WELDING NECK",
     "SLIP-ON",
     "BLIND",
     "SOCKET WELD",
     "THREADED",
     "LAP JOINT"
-
   ]
 
 };
 
 
 
-/* =========================================
+/* ========================================
    ELEMENTS
-========================================= */
+======================================== */
 
 const stockSearch =
-  document.getElementById(
-    "stockSearch"
-  );
-
+  document.getElementById("stockSearch");
 
 const materialFilter =
-  document.getElementById(
-    "materialFilter"
-  );
-
+  document.getElementById("materialFilter");
 
 const productFilter =
-  document.getElementById(
-    "productFilter"
-  );
-
+  document.getElementById("productFilter");
 
 const typeFilter =
-  document.getElementById(
-    "typeFilter"
-  );
-
+  document.getElementById("typeFilter");
 
 const sizeFilter =
-  document.getElementById(
-    "sizeFilter"
-  );
-
+  document.getElementById("sizeFilter");
 
 const ratingFilter =
-  document.getElementById(
-    "ratingFilter"
-  );
-
+  document.getElementById("ratingFilter");
 
 const scheduleFilter =
-  document.getElementById(
-    "scheduleFilter"
-  );
-
+  document.getElementById("scheduleFilter");
 
 const resetFilters =
-  document.getElementById(
-    "resetFilters"
-  );
-
+  document.getElementById("resetFilters");
 
 const stockTableBody =
-  document.getElementById(
-    "stockTableBody"
-  );
-
+  document.getElementById("stockTableBody");
 
 const stockMobile =
-  document.getElementById(
-    "stockMobile"
-  );
-
+  document.getElementById("stockMobile");
 
 const itemCount =
-  document.getElementById(
-    "itemCount"
-  );
-
+  document.getElementById("itemCount");
 
 const noResults =
-  document.getElementById(
-    "noResults"
-  );
+  document.getElementById("noResults");
 
 
 
-/* =========================================
-   UPDATE TYPE FILTER
-========================================= */
+/* ========================================
+   TYPE FILTER
+======================================== */
 
 function updateTypeFilter(){
 
   const product =
     productFilter.value;
 
-
-  const currentType =
+  const previous =
     typeFilter.value;
 
 
@@ -276,7 +225,7 @@ function updateTypeFilter(){
     '<option value="">ALL TYPES</option>';
 
 
-  let types = [];
+  let types;
 
 
   if(product){
@@ -284,18 +233,12 @@ function updateTypeFilter(){
     types =
       typeOptions[product] || [];
 
-  }
-
-  else{
+  }else{
 
     types = [
-
       ...new Set(
-        Object.values(
-          typeOptions
-        ).flat()
+        Object.values(typeOptions).flat()
       )
-
     ];
 
   }
@@ -304,9 +247,7 @@ function updateTypeFilter(){
   types.forEach(type => {
 
     const option =
-      document.createElement(
-        "option"
-      );
+      document.createElement("option");
 
     option.value =
       type;
@@ -314,28 +255,15 @@ function updateTypeFilter(){
     option.textContent =
       type;
 
-    typeFilter.appendChild(
-      option
-    );
+    typeFilter.appendChild(option);
 
   });
 
 
-  if(
-    types.includes(
-      currentType
-    )
-  ){
+  if(types.includes(previous)){
 
     typeFilter.value =
-      currentType;
-
-  }
-
-  else{
-
-    typeFilter.value =
-      "";
+      previous;
 
   }
 
@@ -343,9 +271,9 @@ function updateTypeFilter(){
 
 
 
-/* =========================================
-   DISPLAY VALUE
-========================================= */
+/* ========================================
+   DISPLAY
+======================================== */
 
 function displayValue(value){
 
@@ -354,9 +282,7 @@ function displayValue(value){
     value === null ||
     value === undefined
   ){
-
     return "—";
-
   }
 
   return value;
@@ -365,9 +291,24 @@ function displayValue(value){
 
 
 
-/* =========================================
-   RENDER DESKTOP TABLE
-========================================= */
+/* ========================================
+   NORMALIZE
+======================================== */
+
+function normalize(value){
+
+  return String(value || "")
+    .toLowerCase()
+    .replace(/\s+/g," ")
+    .trim();
+
+}
+
+
+
+/* ========================================
+   DESKTOP
+======================================== */
 
 function renderDesktop(data){
 
@@ -378,9 +319,7 @@ function renderDesktop(data){
   data.forEach(item => {
 
     const row =
-      document.createElement(
-        "tr"
-      );
+      document.createElement("tr");
 
 
     row.innerHTML = `
@@ -418,17 +357,19 @@ function renderDesktop(data){
       </td>
 
       <td>
-        <span class="status">
+
+        <span class="stock-status">
+
           ${displayValue(item.status)}
+
         </span>
+
       </td>
 
     `;
 
 
-    stockTableBody.appendChild(
-      row
-    );
+    stockTableBody.appendChild(row);
 
   });
 
@@ -436,9 +377,9 @@ function renderDesktop(data){
 
 
 
-/* =========================================
-   RENDER MOBILE
-========================================= */
+/* ========================================
+   MOBILE
+======================================== */
 
 function renderMobile(data){
 
@@ -449,9 +390,7 @@ function renderMobile(data){
   data.forEach(item => {
 
     const card =
-      document.createElement(
-        "article"
-      );
+      document.createElement("article");
 
 
     card.className =
@@ -475,7 +414,7 @@ function renderMobile(data){
         </div>
 
 
-        <span class="status">
+        <span class="stock-status">
           ${displayValue(item.status)}
         </span>
 
@@ -550,12 +489,10 @@ function renderMobile(data){
         </div>
 
 
-        <div
-          class="
-            stock-card-item
-            stock-card-description
-          "
-        >
+        <div class="
+          stock-card-item
+          stock-card-description
+        ">
 
           <span>
             DESCRIPTION
@@ -573,9 +510,7 @@ function renderMobile(data){
     `;
 
 
-    stockMobile.appendChild(
-      card
-    );
+    stockMobile.appendChild(card);
 
   });
 
@@ -583,9 +518,9 @@ function renderMobile(data){
 
 
 
-/* =========================================
-   RENDER ALL
-========================================= */
+/* ========================================
+   RENDER
+======================================== */
 
 function renderStock(data){
 
@@ -593,91 +528,46 @@ function renderStock(data){
     data.length;
 
 
-  renderDesktop(
-    data
-  );
+  renderDesktop(data);
+
+  renderMobile(data);
 
 
-  renderMobile(
-    data
-  );
-
-
-  if(
+  noResults.style.display =
     data.length === 0
-  ){
-
-    noResults.style.display =
-      "block";
-
-  }
-
-  else{
-
-    noResults.style.display =
-      "none";
-
-  }
+      ? "block"
+      : "none";
 
 }
 
 
 
-/* =========================================
-   SEARCH NORMALIZER
-========================================= */
-
-function normalize(value){
-
-  return String(
-    value || ""
-  )
-
-  .toLowerCase()
-
-  .replace(/\s+/g," ")
-
-  .trim();
-
-}
-
-
-
-/* =========================================
+/* ========================================
    FILTER
-========================================= */
+======================================== */
 
 function filterStock(){
 
   const search =
-    normalize(
-      stockSearch.value
-    );
-
+    normalize(stockSearch.value);
 
   const material =
     materialFilter.value;
 
-
   const product =
     productFilter.value;
-
 
   const type =
     typeFilter.value;
 
-
   const size =
     sizeFilter.value;
-
 
   const rating =
     ratingFilter.value;
 
-
   const schedule =
     scheduleFilter.value;
-
 
 
   const filtered =
@@ -688,106 +578,88 @@ function filterStock(){
         normalize(`
 
           ${item.product}
-
           ${item.type}
-
           ${item.material}
-
           ${item.description}
-
           ${item.size}
-
           ${item.rating}
-
           ${item.schedule}
-
-          ${item.qty}
-
-          ${item.status}
 
         `);
 
 
       const searchMatch =
         !search ||
-        searchable.includes(
-          search
-        );
+        searchable.includes(search);
 
 
       const materialMatch =
         !material ||
-        item.material ===
-        material;
+        item.material === material;
 
 
       const productMatch =
         !product ||
-        item.product ===
-        product;
+        item.product === product;
 
 
       const typeMatch =
         !type ||
-        item.type ===
-        type;
+        item.type === type;
 
 
       const sizeMatch =
         !size ||
-        item.size ===
-        size;
+        item.size === size;
 
 
       const ratingMatch =
         !rating ||
-        item.rating ===
-        rating;
+        item.rating === rating;
 
 
       const scheduleMatch =
         !schedule ||
-        item.schedule ===
-        schedule;
+        item.schedule === schedule;
 
 
       return(
-
         searchMatch &&
-
         materialMatch &&
-
         productMatch &&
-
         typeMatch &&
-
         sizeMatch &&
-
         ratingMatch &&
-
         scheduleMatch
-
       );
 
     });
 
 
-  renderStock(
-    filtered
-  );
+  renderStock(filtered);
 
 }
 
 
 
-/* =========================================
-   PRODUCT CHANGE
-========================================= */
+/* ========================================
+   EVENTS
+======================================== */
+
+stockSearch.addEventListener(
+  "input",
+  filterStock
+);
+
+
+materialFilter.addEventListener(
+  "change",
+  filterStock
+);
+
 
 productFilter.addEventListener(
-
   "change",
-
   () => {
 
     updateTypeFilter();
@@ -795,121 +667,71 @@ productFilter.addEventListener(
     filterStock();
 
   }
-
-);
-
-
-
-/* =========================================
-   FILTER EVENTS
-========================================= */
-
-stockSearch.addEventListener(
-
-  "input",
-  filterStock
-
-);
-
-
-materialFilter.addEventListener(
-
-  "change",
-  filterStock
-
 );
 
 
 typeFilter.addEventListener(
-
   "change",
   filterStock
-
 );
 
 
 sizeFilter.addEventListener(
-
   "change",
   filterStock
-
 );
 
 
 ratingFilter.addEventListener(
-
   "change",
   filterStock
-
 );
 
 
 scheduleFilter.addEventListener(
-
   "change",
   filterStock
-
 );
 
 
 
-/* =========================================
+/* ========================================
    RESET
-========================================= */
+======================================== */
 
 resetFilters.addEventListener(
-
   "click",
-
   () => {
 
-    stockSearch.value =
-      "";
+    stockSearch.value = "";
 
+    materialFilter.value = "";
 
-    materialFilter.value =
-      "";
+    productFilter.value = "";
 
+    sizeFilter.value = "";
 
-    productFilter.value =
-      "";
+    ratingFilter.value = "";
 
-
-    sizeFilter.value =
-      "";
-
-
-    ratingFilter.value =
-      "";
-
-
-    scheduleFilter.value =
-      "";
+    scheduleFilter.value = "";
 
 
     updateTypeFilter();
 
-
-    typeFilter.value =
-      "";
+    typeFilter.value = "";
 
 
-    renderStock(
-      stockData
-    );
+    renderStock(stockData);
 
   }
-
 );
 
 
 
-/* =========================================
-   INITIAL LOAD
-========================================= */
+/* ========================================
+   INITIAL
+======================================== */
 
 updateTypeFilter();
 
-renderStock(
-  stockData
-);
+renderStock(stockData);
