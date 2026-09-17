@@ -11,7 +11,7 @@
 
   <meta
     name="description"
-    content="SIERRA ALLOYS — Available Stock Search"
+    content="SIERRA ALLOYS — Available stock search."
   >
 
   <meta
@@ -21,11 +21,11 @@
 
   <title>Stock | SIERRA ALLOYS</title>
 
-  <!-- 기존 홈페이지 CSS -->
-  <link rel="stylesheet" href="./style.css">
-
-  <!-- Stock 전용 CSS -->
-  <link rel="stylesheet" href="./stock.css">
+  <!-- STOCK CSS ONLY -->
+  <link
+    rel="stylesheet"
+    href="./stock.css"
+  >
 </head>
 
 
@@ -36,82 +36,101 @@
      HEADER
 ======================================== -->
 
-<header class="header">
+<header class="stock-header">
 
   <a
-    class="brand"
+    class="stock-brand"
     href="./index.html"
-    aria-label="SIERRA ALLOYS home"
+    aria-label="SIERRA ALLOYS Home"
   >
+
     <img
       src="./assets/sierra%20logo%20web2.png"
       alt="SIERRA ALLOYS"
     >
+
   </a>
 
 
-  <button
-    class="menu-btn"
-    id="menuBtn"
-    aria-label="Open menu"
-    aria-expanded="false"
-    type="button"
+  <a
+    class="back-link"
+    href="./index.html"
   >
-    <span></span>
-    <span></span>
-  </button>
-
-
-  <nav
-    class="nav"
-    id="mainNav"
-  >
-    <a href="./index.html#about">ABOUT</a>
-    <a href="./index.html#business">BUSINESS</a>
-    <a href="./index.html#products">PRODUCTS</a>
-    <a href="./index.html#quality">QUALITY</a>
-    <a href="./index.html#contact">CONTACT</a>
-  </nav>
+    BACK TO HOME
+  </a>
 
 </header>
 
 
 
+<main>
+
+
 <!-- ========================================
-     STOCK
+     HERO
 ======================================== -->
 
-<main class="stock-page">
+<section class="stock-hero">
+
+  <div class="stock-hero-inner">
+
+    <p class="hero-eyebrow">
+      SIERRA ALLOYS / INVENTORY
+    </p>
+
+
+    <h1>
+      AVAILABLE<br>
+      STOCK.
+    </h1>
+
+
+    <p class="hero-intro">
+      Search our available piping materials by
+      material grade, product type and specification.
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- ========================================
+     STOCK SEARCH
+======================================== -->
+
+<section class="stock-section">
 
   <div class="stock-container">
 
 
-    <!-- TITLE -->
+    <!-- SEARCH HEADER -->
 
-    <div class="stock-heading">
+    <div class="search-head">
 
-      <div class="stock-heading-left">
+      <div>
 
-        <p class="stock-label">
+        <p class="section-label">
           STOCK SEARCH
         </p>
 
-        <h1>
+        <h2>
           Find materials.
-        </h1>
+        </h2>
 
       </div>
 
 
       <div class="stock-count">
 
-        <strong id="itemCount">
+        <span id="itemCount">
           0
-        </strong>
-
-        <span>
-          ITEMS FOUND
         </span>
+
+        <small>
+          ITEMS FOUND
+        </small>
 
       </div>
 
@@ -121,15 +140,16 @@
 
     <!-- SEARCH -->
 
-    <div class="stock-search">
+    <div class="search-box">
 
-      <span class="stock-search-icon">
+      <span class="search-icon">
         ⌕
       </span>
 
+
       <input
-        id="stockSearch"
         type="search"
+        id="stockSearch"
         placeholder="Search material, type, size, rating, schedule..."
         autocomplete="off"
       >
@@ -138,18 +158,21 @@
 
 
 
-    <!-- FILTERS -->
+    <!-- ========================================
+         FILTERS
+    ========================================= -->
 
-    <div class="stock-filters">
+    <div class="filters">
 
 
       <!-- MATERIAL -->
 
-      <div class="stock-filter">
+      <div class="filter-group">
 
         <label for="materialFilter">
           MATERIAL
         </label>
+
 
         <select id="materialFilter">
 
@@ -197,11 +220,12 @@
 
       <!-- PRODUCT -->
 
-      <div class="stock-filter">
+      <div class="filter-group">
 
         <label for="productFilter">
           PRODUCT
         </label>
+
 
         <select id="productFilter">
 
@@ -229,11 +253,12 @@
 
       <!-- TYPE -->
 
-      <div class="stock-filter">
+      <div class="filter-group">
 
         <label for="typeFilter">
           TYPE
         </label>
+
 
         <select id="typeFilter">
 
@@ -249,11 +274,12 @@
 
       <!-- SIZE -->
 
-      <div class="stock-filter">
+      <div class="filter-group">
 
         <label for="sizeFilter">
           SIZE
         </label>
+
 
         <select id="sizeFilter">
 
@@ -287,11 +313,12 @@
 
       <!-- RATING -->
 
-      <div class="stock-filter">
+      <div class="filter-group">
 
         <label for="ratingFilter">
           RATING
         </label>
+
 
         <select id="ratingFilter">
 
@@ -299,29 +326,12 @@
             ALL RATINGS
           </option>
 
-          <option value="CL150">
-            CL150
-          </option>
-
-          <option value="CL300">
-            CL300
-          </option>
-
-          <option value="CL600">
-            CL600
-          </option>
-
-          <option value="CL900">
-            CL900
-          </option>
-
-          <option value="CL1500">
-            CL1500
-          </option>
-
-          <option value="CL2500">
-            CL2500
-          </option>
+          <option value="CL150">CL150</option>
+          <option value="CL300">CL300</option>
+          <option value="CL600">CL600</option>
+          <option value="CL900">CL900</option>
+          <option value="CL1500">CL1500</option>
+          <option value="CL2500">CL2500</option>
 
         </select>
 
@@ -331,11 +341,12 @@
 
       <!-- SCHEDULE -->
 
-      <div class="stock-filter">
+      <div class="filter-group">
 
         <label for="scheduleFilter">
           SCHEDULE
         </label>
+
 
         <select id="scheduleFilter">
 
@@ -343,49 +354,17 @@
             ALL SCHEDULES
           </option>
 
-          <option value="SCH 5S">
-            SCH 5S
-          </option>
-
-          <option value="SCH 10S">
-            SCH 10S
-          </option>
-
-          <option value="SCH 10">
-            SCH 10
-          </option>
-
-          <option value="SCH 20">
-            SCH 20
-          </option>
-
-          <option value="SCH 40">
-            SCH 40
-          </option>
-
-          <option value="SCH 40S">
-            SCH 40S
-          </option>
-
-          <option value="SCH 80">
-            SCH 80
-          </option>
-
-          <option value="SCH 80S">
-            SCH 80S
-          </option>
-
-          <option value="SCH 120">
-            SCH 120
-          </option>
-
-          <option value="SCH 160">
-            SCH 160
-          </option>
-
-          <option value="XXS">
-            XXS
-          </option>
+          <option value="SCH 5S">SCH 5S</option>
+          <option value="SCH 10S">SCH 10S</option>
+          <option value="SCH 10">SCH 10</option>
+          <option value="SCH 20">SCH 20</option>
+          <option value="SCH 40">SCH 40</option>
+          <option value="SCH 40S">SCH 40S</option>
+          <option value="SCH 80">SCH 80</option>
+          <option value="SCH 80S">SCH 80S</option>
+          <option value="SCH 120">SCH 120</option>
+          <option value="SCH 160">SCH 160</option>
+          <option value="XXS">XXS</option>
 
         </select>
 
@@ -396,8 +375,8 @@
       <!-- RESET -->
 
       <button
+        class="reset-button"
         id="resetFilters"
-        class="stock-reset"
         type="button"
       >
         RESET
@@ -407,9 +386,11 @@
 
 
 
-    <!-- TABLE -->
+    <!-- ========================================
+         DESKTOP TABLE
+    ========================================= -->
 
-    <div class="stock-table-wrap">
+    <div class="table-wrap">
 
       <table class="stock-table">
 
@@ -439,25 +420,29 @@
 
 
 
-    <!-- MOBILE -->
+    <!-- ========================================
+         MOBILE CARDS
+    ========================================= -->
 
     <div
-      id="stockMobile"
       class="stock-mobile"
+      id="stockMobile"
     >
     </div>
 
 
 
-    <!-- NO RESULTS -->
+    <!-- ========================================
+         NO RESULTS
+    ========================================= -->
 
     <div
+      class="no-result"
       id="noResults"
-      class="stock-no-results"
     >
 
       <strong>
-        NO MATERIALS FOUND
+        NO STOCK FOUND
       </strong>
 
       <p>
@@ -468,15 +453,18 @@
 
 
 
-    <!-- INQUIRY -->
+    <!-- ========================================
+         INQUIRY
+    ========================================= -->
 
-    <section class="stock-inquiry">
+    <section class="stock-contact">
 
       <div>
 
-        <p class="stock-label">
+        <p class="section-label">
           MATERIAL INQUIRY
         </p>
+
 
         <h2>
           Need more<br>
@@ -486,7 +474,7 @@
       </div>
 
 
-      <div class="stock-inquiry-right">
+      <div class="contact-right">
 
         <p>
           Stock availability is subject to prior sale.
@@ -494,9 +482,10 @@
           documentation and commercial terms.
         </p>
 
+
         <a
-          class="stock-inquiry-button"
           href="mailto:info@sierra-alloys.com"
+          class="inquiry-button"
         >
           SEND INQUIRY
           <span>↗</span>
@@ -509,6 +498,9 @@
 
   </div>
 
+</section>
+
+
 </main>
 
 
@@ -517,7 +509,7 @@
      FOOTER
 ======================================== -->
 
-<footer class="stock-footer">
+<footer>
 
   <span>
     © 2026 SIERRA INC.
@@ -532,6 +524,7 @@
 
 
 <script src="./stock.js"></script>
+
 
 </body>
 </html>
