@@ -1,1 +1,349 @@
+<!doctype html>
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="description"
+    content="SIERRA ALLOYS — Available stock search."
+  >
+
+  <meta name="theme-color" content="#090909">
+
+  <title>Stock | SIERRA ALLOYS</title>
+
+  <link rel="stylesheet" href="stock.css">
+</head>
+
+
+<body>
+
+<header class="stock-header">
+
+  <a class="stock-brand" href="index.html">
+    <img
+      src="assets/sierra%20logo%20web2.png"
+      alt="SIERRA ALLOYS"
+    >
+  </a>
+
+  <a class="back-link" href="index.html">
+    BACK TO HOME
+  </a>
+
+</header>
+
+
+
+<main>
+
+
+  <!-- =====================================
+       HERO
+  ====================================== -->
+
+  <section class="stock-hero">
+
+    <div class="stock-hero-inner">
+
+      <p class="eyebrow">
+        SIERRA ALLOYS / INVENTORY
+      </p>
+
+      <h1>
+        AVAILABLE<br>
+        STOCK.
+      </h1>
+
+      <p class="intro">
+        Search our available piping materials by material grade,
+        product type and specification.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================
+       SEARCH
+  ====================================== -->
+
+  <section class="stock-section">
+
+    <div class="stock-container">
+
+
+      <div class="search-head">
+
+        <div>
+          <p class="section-label">
+            STOCK SEARCH
+          </p>
+
+          <h2>
+            Find materials.
+          </h2>
+        </div>
+
+
+        <div class="stock-count">
+
+          <span id="stockCount">
+            0
+          </span>
+
+          <small>
+            ITEMS FOUND
+          </small>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- SEARCH BAR -->
+
+      <div class="search-box">
+
+        <span class="search-icon">
+          ⌕
+        </span>
+
+        <input
+          type="text"
+          id="stockSearch"
+          placeholder="Search grade, size, specification..."
+          autocomplete="off"
+        >
+
+      </div>
+
+
+
+      <!-- FILTER -->
+
+      <div class="filters">
+
+
+        <div class="filter-group">
+
+          <label for="gradeFilter">
+            MATERIAL
+          </label>
+
+          <select id="gradeFilter">
+
+            <option value="">
+              ALL MATERIALS
+            </option>
+
+            <option value="SS304">
+              SS304
+            </option>
+
+            <option value="SS316">
+              SS316
+            </option>
+
+            <option value="S31803">
+              DUPLEX S31803
+            </option>
+
+            <option value="S32205">
+              DUPLEX S32205
+            </option>
+
+            <option value="S32750">
+              SUPER DUPLEX S32750
+            </option>
+
+            <option value="S32760">
+              SUPER DUPLEX S32760
+            </option>
+
+            <option value="Titanium">
+              TITANIUM
+            </option>
+
+            <option value="Nickel Alloy">
+              NICKEL ALLOY
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="filter-group">
+
+          <label for="productFilter">
+            PRODUCT
+          </label>
+
+          <select id="productFilter">
+
+            <option value="">
+              ALL PRODUCTS
+            </option>
+
+            <option value="PIPE">
+              PIPE
+            </option>
+
+            <option value="FITTING">
+              FITTING
+            </option>
+
+            <option value="FLANGE">
+              FLANGE
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <button
+          class="reset-button"
+          id="resetFilters"
+          type="button"
+        >
+          RESET
+        </button>
+
+      </div>
+
+
+
+      <!-- =====================================
+           STOCK TABLE
+      ====================================== -->
+
+      <div class="table-wrap">
+
+        <table class="stock-table">
+
+          <thead>
+
+            <tr>
+
+              <th>PRODUCT</th>
+
+              <th>MATERIAL</th>
+
+              <th>DESCRIPTION</th>
+
+              <th>SIZE</th>
+
+              <th>RATING / SCH</th>
+
+              <th>QTY</th>
+
+              <th>STATUS</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="stockBody">
+
+          </tbody>
+
+        </table>
+
+
+        <div
+          class="no-result"
+          id="noResult"
+        >
+
+          <strong>
+            NO STOCK FOUND
+          </strong>
+
+          <p>
+            Try changing the material or product filters.
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================
+           CONTACT
+      ====================================== -->
+
+      <div class="stock-contact">
+
+        <div>
+
+          <p class="section-label">
+            MATERIAL INQUIRY
+          </p>
+
+          <h2>
+            Need more<br>
+            information?
+          </h2>
+
+        </div>
+
+
+        <div class="contact-right">
+
+          <p>
+            Stock availability is subject to prior sale.
+            Please contact SIERRA ALLOYS for current availability,
+            documentation and commercial terms.
+          </p>
+
+          <a
+            href="mailto:info@sierra-alloys.com"
+            class="inquiry-button"
+          >
+            SEND INQUIRY
+            <span>↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+
+<footer>
+
+  <span>
+    © 2026 SIERRA INC.
+  </span>
+
+  <span>
+    STEEL &amp; ALLOY MATERIALS SOLUTIONS
+  </span>
+
+</footer>
+
+
+<script src="stock.js"></script>
+
+</body>
+
+</html>
