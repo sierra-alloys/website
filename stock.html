@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
 
   <meta
@@ -20,15 +19,13 @@
     content="#090909"
   >
 
-  <title>
-    Stock Search | SIERRA ALLOYS
-  </title>
+  <title>Stock | SIERRA ALLOYS</title>
 
-  <link
-    rel="stylesheet"
-    href="./stock.css"
-  >
+  <!-- 기존 홈페이지 CSS -->
+  <link rel="stylesheet" href="./style.css">
 
+  <!-- Stock 전용 CSS -->
+  <link rel="stylesheet" href="./stock.css">
 </head>
 
 
@@ -39,32 +36,29 @@
      HEADER
 ======================================== -->
 
-<header class="site-header">
+<header class="header">
 
   <a
     class="brand"
-    href="index.html"
+    href="./index.html"
     aria-label="SIERRA ALLOYS home"
   >
-
     <img
-      src="assets/sierra%20logo%20web2.png"
+      src="./assets/sierra%20logo%20web2.png"
       alt="SIERRA ALLOYS"
     >
-
   </a>
 
 
   <button
-    class="menu-toggle"
-    id="menuToggle"
+    class="menu-btn"
+    id="menuBtn"
     aria-label="Open menu"
     aria-expanded="false"
+    type="button"
   >
-
     <span></span>
     <span></span>
-
   </button>
 
 
@@ -72,27 +66,11 @@
     class="nav"
     id="mainNav"
   >
-
-    <a href="index.html#about">
-      ABOUT
-    </a>
-
-    <a href="index.html#business">
-      BUSINESS
-    </a>
-
-    <a href="index.html#products">
-      PRODUCTS
-    </a>
-
-    <a href="index.html#quality">
-      QUALITY
-    </a>
-
-    <a href="index.html#contact">
-      CONTACT
-    </a>
-
+    <a href="./index.html#about">ABOUT</a>
+    <a href="./index.html#business">BUSINESS</a>
+    <a href="./index.html#products">PRODUCTS</a>
+    <a href="./index.html#quality">QUALITY</a>
+    <a href="./index.html#contact">CONTACT</a>
   </nav>
 
 </header>
@@ -100,35 +78,29 @@
 
 
 <!-- ========================================
-     STOCK PAGE
+     STOCK
 ======================================== -->
 
 <main class="stock-page">
 
+  <div class="stock-container">
 
-  <section class="stock-container">
 
-
-    <!-- ========================================
-         PAGE HEADER
-    ========================================= -->
+    <!-- TITLE -->
 
     <div class="stock-heading">
 
+      <div class="stock-heading-left">
 
-      <div>
-
-        <p class="stock-eyebrow">
+        <p class="stock-label">
           STOCK SEARCH
         </p>
-
 
         <h1>
           Find materials.
         </h1>
 
       </div>
-
 
 
       <div class="stock-count">
@@ -143,25 +115,21 @@
 
       </div>
 
-
     </div>
 
 
 
-    <!-- ========================================
-         SEARCH BAR
-    ========================================= -->
+    <!-- SEARCH -->
 
-    <div class="search-box">
+    <div class="stock-search">
 
-      <span class="search-icon">
+      <span class="stock-search-icon">
         ⌕
       </span>
 
-
       <input
-        type="search"
         id="stockSearch"
+        type="search"
         placeholder="Search material, type, size, rating, schedule..."
         autocomplete="off"
       >
@@ -170,21 +138,18 @@
 
 
 
-    <!-- ========================================
-         FILTERS
-    ========================================= -->
+    <!-- FILTERS -->
 
-    <div class="filters">
+    <div class="stock-filters">
 
 
       <!-- MATERIAL -->
 
-      <div class="filter-group">
+      <div class="stock-filter">
 
         <label for="materialFilter">
           MATERIAL
         </label>
-
 
         <select id="materialFilter">
 
@@ -232,12 +197,11 @@
 
       <!-- PRODUCT -->
 
-      <div class="filter-group">
+      <div class="stock-filter">
 
         <label for="productFilter">
           PRODUCT
         </label>
-
 
         <select id="productFilter">
 
@@ -265,12 +229,11 @@
 
       <!-- TYPE -->
 
-      <div class="filter-group">
+      <div class="stock-filter">
 
         <label for="typeFilter">
           TYPE
         </label>
-
 
         <select id="typeFilter">
 
@@ -286,12 +249,11 @@
 
       <!-- SIZE -->
 
-      <div class="filter-group">
+      <div class="stock-filter">
 
         <label for="sizeFilter">
           SIZE
         </label>
-
 
         <select id="sizeFilter">
 
@@ -299,73 +261,23 @@
             ALL SIZES
           </option>
 
-          <option value='1/2"'>
-            1/2"
-          </option>
-
-          <option value='3/4"'>
-            3/4"
-          </option>
-
-          <option value='1"'>
-            1"
-          </option>
-
-          <option value='1-1/2"'>
-            1-1/2"
-          </option>
-
-          <option value='2"'>
-            2"
-          </option>
-
-          <option value='2-1/2"'>
-            2-1/2"
-          </option>
-
-          <option value='3"'>
-            3"
-          </option>
-
-          <option value='4"'>
-            4"
-          </option>
-
-          <option value='6"'>
-            6"
-          </option>
-
-          <option value='8"'>
-            8"
-          </option>
-
-          <option value='10"'>
-            10"
-          </option>
-
-          <option value='12"'>
-            12"
-          </option>
-
-          <option value='14"'>
-            14"
-          </option>
-
-          <option value='16"'>
-            16"
-          </option>
-
-          <option value='18"'>
-            18"
-          </option>
-
-          <option value='20"'>
-            20"
-          </option>
-
-          <option value='24"'>
-            24"
-          </option>
+          <option value='1/2"'>1/2"</option>
+          <option value='3/4"'>3/4"</option>
+          <option value='1"'>1"</option>
+          <option value='1-1/2"'>1-1/2"</option>
+          <option value='2"'>2"</option>
+          <option value='2-1/2"'>2-1/2"</option>
+          <option value='3"'>3"</option>
+          <option value='4"'>4"</option>
+          <option value='6"'>6"</option>
+          <option value='8"'>8"</option>
+          <option value='10"'>10"</option>
+          <option value='12"'>12"</option>
+          <option value='14"'>14"</option>
+          <option value='16"'>16"</option>
+          <option value='18"'>18"</option>
+          <option value='20"'>20"</option>
+          <option value='24"'>24"</option>
 
         </select>
 
@@ -375,12 +287,11 @@
 
       <!-- RATING -->
 
-      <div class="filter-group">
+      <div class="stock-filter">
 
         <label for="ratingFilter">
           RATING
         </label>
-
 
         <select id="ratingFilter">
 
@@ -420,12 +331,11 @@
 
       <!-- SCHEDULE -->
 
-      <div class="filter-group">
+      <div class="stock-filter">
 
         <label for="scheduleFilter">
           SCHEDULE
         </label>
-
 
         <select id="scheduleFilter">
 
@@ -486,106 +396,64 @@
       <!-- RESET -->
 
       <button
-        class="reset-button"
         id="resetFilters"
+        class="stock-reset"
         type="button"
       >
-
         RESET
-
       </button>
-
 
     </div>
 
 
 
-    <!-- ========================================
-         TABLE
-    ========================================= -->
+    <!-- TABLE -->
 
     <div class="stock-table-wrap">
 
-
       <table class="stock-table">
-
 
         <thead>
 
           <tr>
-
-            <th>
-              PRODUCT
-            </th>
-
-            <th>
-              TYPE
-            </th>
-
-            <th>
-              MATERIAL
-            </th>
-
-            <th>
-              DESCRIPTION
-            </th>
-
-            <th>
-              SIZE
-            </th>
-
-            <th>
-              RATING
-            </th>
-
-            <th>
-              SCHEDULE
-            </th>
-
-            <th>
-              QTY
-            </th>
-
-            <th>
-              STATUS
-            </th>
-
+            <th>PRODUCT</th>
+            <th>TYPE</th>
+            <th>MATERIAL</th>
+            <th>DESCRIPTION</th>
+            <th>SIZE</th>
+            <th>RATING</th>
+            <th>SCHEDULE</th>
+            <th>QTY</th>
+            <th>STATUS</th>
           </tr>
 
         </thead>
 
 
-
         <tbody id="stockTableBody">
         </tbody>
 
-
       </table>
-
 
     </div>
 
 
 
-    <!-- ========================================
-         MOBILE CARDS
-    ========================================= -->
+    <!-- MOBILE -->
 
     <div
-      class="stock-mobile"
       id="stockMobile"
+      class="stock-mobile"
     >
     </div>
 
 
 
-    <!-- ========================================
-         NO RESULTS
-    ========================================= -->
+    <!-- NO RESULTS -->
 
     <div
-      class="no-results"
       id="noResults"
+      class="stock-no-results"
     >
 
       <strong>
@@ -600,19 +468,15 @@
 
 
 
-    <!-- ========================================
-         MATERIAL INQUIRY
-    ========================================= -->
+    <!-- INQUIRY -->
 
-    <section class="material-inquiry">
-
+    <section class="stock-inquiry">
 
       <div>
 
-        <p class="stock-eyebrow">
+        <p class="stock-label">
           MATERIAL INQUIRY
         </p>
-
 
         <h2>
           Need more<br>
@@ -622,41 +486,28 @@
       </div>
 
 
-
-      <div class="inquiry-copy">
-
+      <div class="stock-inquiry-right">
 
         <p>
-
           Stock availability is subject to prior sale.
-          Please contact SIERRA ALLOYS for current
-          availability, documentation and commercial terms.
-
+          Please contact SIERRA ALLOYS for current availability,
+          documentation and commercial terms.
         </p>
 
-
         <a
+          class="stock-inquiry-button"
           href="mailto:info@sierra-alloys.com"
-          class="inquiry-button"
         >
-
           SEND INQUIRY
-
-          <span>
-            ↗
-          </span>
-
+          <span>↗</span>
         </a>
 
-
       </div>
-
 
     </section>
 
 
-  </section>
-
+  </div>
 
 </main>
 
@@ -666,18 +517,15 @@
      FOOTER
 ======================================== -->
 
-<footer class="site-footer">
-
+<footer class="stock-footer">
 
   <span>
     © 2026 SIERRA INC.
   </span>
 
-
   <span>
     STEEL &amp; ALLOY MATERIALS SOLUTIONS
   </span>
-
 
 </footer>
 
@@ -685,7 +533,5 @@
 
 <script src="./stock.js"></script>
 
-
 </body>
-
 </html>
