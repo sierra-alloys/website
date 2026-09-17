@@ -138,7 +138,7 @@ const stockData = [
 
 
 /* ========================================
-   TYPE OPTIONS
+   TYPES
 ======================================== */
 
 const typeOptions = {
@@ -225,7 +225,7 @@ function updateTypeFilter(){
     '<option value="">ALL TYPES</option>';
 
 
-  let types;
+  let types = [];
 
 
   if(product){
@@ -265,6 +265,11 @@ function updateTypeFilter(){
     typeFilter.value =
       previous;
 
+  }else{
+
+    typeFilter.value =
+      "";
+
   }
 
 }
@@ -282,7 +287,9 @@ function displayValue(value){
     value === null ||
     value === undefined
   ){
+
     return "—";
+
   }
 
   return value;
@@ -307,13 +314,12 @@ function normalize(value){
 
 
 /* ========================================
-   DESKTOP
+   DESKTOP TABLE
 ======================================== */
 
 function renderDesktop(data){
 
-  stockTableBody.innerHTML =
-    "";
+  stockTableBody.innerHTML = "";
 
 
   data.forEach(item => {
@@ -324,41 +330,25 @@ function renderDesktop(data){
 
     row.innerHTML = `
 
-      <td>
-        ${displayValue(item.product)}
-      </td>
+      <td>${displayValue(item.product)}</td>
 
-      <td>
-        ${displayValue(item.type)}
-      </td>
+      <td>${displayValue(item.type)}</td>
 
-      <td>
-        ${displayValue(item.material)}
-      </td>
+      <td>${displayValue(item.material)}</td>
 
-      <td>
-        ${displayValue(item.description)}
-      </td>
+      <td>${displayValue(item.description)}</td>
 
-      <td>
-        ${displayValue(item.size)}
-      </td>
+      <td>${displayValue(item.size)}</td>
 
-      <td>
-        ${displayValue(item.rating)}
-      </td>
+      <td>${displayValue(item.rating)}</td>
 
-      <td>
-        ${displayValue(item.schedule)}
-      </td>
+      <td>${displayValue(item.schedule)}</td>
 
-      <td>
-        ${displayValue(item.qty)}
-      </td>
+      <td>${displayValue(item.qty)}</td>
 
       <td>
 
-        <span class="stock-status">
+        <span class="status">
 
           ${displayValue(item.status)}
 
@@ -378,13 +368,12 @@ function renderDesktop(data){
 
 
 /* ========================================
-   MOBILE
+   MOBILE CARDS
 ======================================== */
 
 function renderMobile(data){
 
-  stockMobile.innerHTML =
-    "";
+  stockMobile.innerHTML = "";
 
 
   data.forEach(item => {
@@ -414,7 +403,7 @@ function renderMobile(data){
         </div>
 
 
-        <span class="stock-status">
+        <span class="status">
           ${displayValue(item.status)}
         </span>
 
@@ -426,9 +415,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            MATERIAL
-          </span>
+          <span>MATERIAL</span>
 
           <strong>
             ${displayValue(item.material)}
@@ -439,9 +426,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            SIZE
-          </span>
+          <span>SIZE</span>
 
           <strong>
             ${displayValue(item.size)}
@@ -452,9 +437,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            RATING
-          </span>
+          <span>RATING</span>
 
           <strong>
             ${displayValue(item.rating)}
@@ -465,9 +448,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            SCHEDULE
-          </span>
+          <span>SCHEDULE</span>
 
           <strong>
             ${displayValue(item.schedule)}
@@ -478,9 +459,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            QTY
-          </span>
+          <span>QTY</span>
 
           <strong>
             ${displayValue(item.qty)}
@@ -489,14 +468,14 @@ function renderMobile(data){
         </div>
 
 
-        <div class="
-          stock-card-item
-          stock-card-description
-        ">
+        <div
+          class="
+            stock-card-item
+            stock-card-description
+          "
+        >
 
-          <span>
-            DESCRIPTION
-          </span>
+          <span>DESCRIPTION</span>
 
           <strong>
             ${displayValue(item.description)}
@@ -588,49 +567,55 @@ function filterStock(){
         `);
 
 
-      const searchMatch =
-        !search ||
-        searchable.includes(search);
-
-
-      const materialMatch =
-        !material ||
-        item.material === material;
-
-
-      const productMatch =
-        !product ||
-        item.product === product;
-
-
-      const typeMatch =
-        !type ||
-        item.type === type;
-
-
-      const sizeMatch =
-        !size ||
-        item.size === size;
-
-
-      const ratingMatch =
-        !rating ||
-        item.rating === rating;
-
-
-      const scheduleMatch =
-        !schedule ||
-        item.schedule === schedule;
-
-
       return(
-        searchMatch &&
-        materialMatch &&
-        productMatch &&
-        typeMatch &&
-        sizeMatch &&
-        ratingMatch &&
-        scheduleMatch
+
+        (
+          !search ||
+          searchable.includes(search)
+        )
+
+        &&
+
+        (
+          !material ||
+          item.material === material
+        )
+
+        &&
+
+        (
+          !product ||
+          item.product === product
+        )
+
+        &&
+
+        (
+          !type ||
+          item.type === type
+        )
+
+        &&
+
+        (
+          !size ||
+          item.size === size
+        )
+
+        &&
+
+        (
+          !rating ||
+          item.rating === rating
+        )
+
+        &&
+
+        (
+          !schedule ||
+          item.schedule === schedule
+        )
+
       );
 
     });
