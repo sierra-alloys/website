@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8">
 
   <meta
@@ -11,12 +12,12 @@
 
   <meta
     name="description"
-    content="SIERRA ALLOYS Stock Search"
+    content="SIERRA ALLOYS — Available Stock Search"
   >
 
   <meta
     name="theme-color"
-    content="#f2f1ed"
+    content="#090909"
   >
 
   <title>
@@ -25,422 +26,665 @@
 
   <link
     rel="stylesheet"
-    href="stock.css"
+    href="./stock.css"
   >
+
 </head>
 
 
 <body>
 
-  <main class="stock-page">
+
+<!-- ========================================
+     HEADER
+======================================== -->
+
+<header class="site-header">
+
+  <a
+    class="brand"
+    href="index.html"
+    aria-label="SIERRA ALLOYS home"
+  >
+
+    <img
+      src="assets/sierra%20logo%20web2.png"
+      alt="SIERRA ALLOYS"
+    >
+
+  </a>
 
 
-    <!-- =====================================
-         TOP
-    ====================================== -->
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    aria-label="Open menu"
+    aria-expanded="false"
+  >
 
-    <section class="stock-container">
+    <span></span>
+    <span></span>
 
-      <header class="stock-header">
-
-        <div class="stock-title">
-
-          <p class="stock-eyebrow">
-            STOCK SEARCH
-          </p>
-
-          <h1>
-            Find materials.
-          </h1>
-
-        </div>
+  </button>
 
 
-        <div class="stock-count">
+  <nav
+    class="nav"
+    id="mainNav"
+  >
 
-          <strong id="itemCount">
-            0
-          </strong>
+    <a href="index.html#about">
+      ABOUT
+    </a>
 
-          <span>
-            ITEMS FOUND
-          </span>
+    <a href="index.html#business">
+      BUSINESS
+    </a>
 
-        </div>
+    <a href="index.html#products">
+      PRODUCTS
+    </a>
 
-      </header>
+    <a href="index.html#quality">
+      QUALITY
+    </a>
+
+    <a href="index.html#contact">
+      CONTACT
+    </a>
+
+  </nav>
+
+</header>
 
 
 
-      <!-- =====================================
-           SEARCH
-      ====================================== -->
+<!-- ========================================
+     STOCK PAGE
+======================================== -->
 
-      <div class="search-box">
+<main class="stock-page">
 
-        <span class="search-icon">
-          ⌕
+
+  <section class="stock-container">
+
+
+    <!-- ========================================
+         PAGE HEADER
+    ========================================= -->
+
+    <div class="stock-heading">
+
+
+      <div>
+
+        <p class="stock-eyebrow">
+          STOCK SEARCH
+        </p>
+
+
+        <h1>
+          Find materials.
+        </h1>
+
+      </div>
+
+
+
+      <div class="stock-count">
+
+        <strong id="itemCount">
+          0
+        </strong>
+
+        <span>
+          ITEMS FOUND
         </span>
 
-        <input
-          type="search"
-          id="stockSearch"
-          placeholder="Search grade, type, size, specification..."
-          autocomplete="off"
-        >
-
       </div>
 
 
+    </div>
 
-      <!-- =====================================
-           FILTERS
-      ====================================== -->
 
-      <div class="filters">
 
+    <!-- ========================================
+         SEARCH BAR
+    ========================================= -->
 
-        <!-- MATERIAL -->
+    <div class="search-box">
 
-        <div class="filter-group">
+      <span class="search-icon">
+        ⌕
+      </span>
 
-          <label for="materialFilter">
-            MATERIAL
-          </label>
 
-          <select id="materialFilter">
-
-            <option value="">
-              ALL MATERIALS
-            </option>
-
-            <option value="SS304">
-              SS304
-            </option>
-
-            <option value="SS316">
-              SS316
-            </option>
-
-            <option value="S31803">
-              DUPLEX S31803
-            </option>
-
-            <option value="S32205">
-              DUPLEX S32205
-            </option>
-
-            <option value="S32750">
-              SUPER DUPLEX S32750
-            </option>
-
-            <option value="S32760">
-              SUPER DUPLEX S32760
-            </option>
-
-            <option value="TITANIUM">
-              TITANIUM
-            </option>
-
-            <option value="NICKEL ALLOY">
-              NICKEL ALLOY
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <!-- PRODUCT -->
-
-        <div class="filter-group">
-
-          <label for="productFilter">
-            PRODUCT
-          </label>
-
-          <select id="productFilter">
-
-            <option value="">
-              ALL PRODUCTS
-            </option>
-
-            <option value="PIPE">
-              PIPE
-            </option>
-
-            <option value="FITTING">
-              FITTING
-            </option>
-
-            <option value="FLANGE">
-              FLANGE
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <!-- TYPE -->
-
-        <div class="filter-group">
-
-          <label for="typeFilter">
-            TYPE
-          </label>
-
-          <select id="typeFilter">
-
-            <option value="">
-              ALL TYPES
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <!-- SIZE -->
-
-        <div class="filter-group">
-
-          <label for="sizeFilter">
-            SIZE
-          </label>
-
-          <select id="sizeFilter">
-
-            <option value="">
-              ALL SIZES
-            </option>
-
-            <option value='1/2"'>1/2"</option>
-            <option value='3/4"'>3/4"</option>
-            <option value='1"'>1"</option>
-            <option value='1-1/2"'>1-1/2"</option>
-            <option value='2"'>2"</option>
-            <option value='3"'>3"</option>
-            <option value='4"'>4"</option>
-            <option value='6"'>6"</option>
-            <option value='8"'>8"</option>
-            <option value='10"'>10"</option>
-            <option value='12"'>12"</option>
-
-          </select>
-
-        </div>
-
-
-
-        <!-- RATING -->
-
-        <div class="filter-group">
-
-          <label for="ratingFilter">
-            RATING
-          </label>
-
-          <select id="ratingFilter">
-
-            <option value="">
-              ALL RATINGS
-            </option>
-
-            <option value="CL150">
-              CL150
-            </option>
-
-            <option value="CL300">
-              CL300
-            </option>
-
-            <option value="CL600">
-              CL600
-            </option>
-
-            <option value="CL900">
-              CL900
-            </option>
-
-            <option value="CL1500">
-              CL1500
-            </option>
-
-            <option value="CL2500">
-              CL2500
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <!-- SCHEDULE -->
-
-        <div class="filter-group">
-
-          <label for="scheduleFilter">
-            SCHEDULE
-          </label>
-
-          <select id="scheduleFilter">
-
-            <option value="">
-              ALL SCHEDULES
-            </option>
-
-            <option value="SCH 5S">
-              SCH 5S
-            </option>
-
-            <option value="SCH 10S">
-              SCH 10S
-            </option>
-
-            <option value="SCH 20">
-              SCH 20
-            </option>
-
-            <option value="SCH 40">
-              SCH 40
-            </option>
-
-            <option value="SCH 40S">
-              SCH 40S
-            </option>
-
-            <option value="SCH 80">
-              SCH 80
-            </option>
-
-            <option value="SCH 80S">
-              SCH 80S
-            </option>
-
-            <option value="SCH 160">
-              SCH 160
-            </option>
-
-            <option value="XXS">
-              XXS
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <!-- RESET -->
-
-        <button
-          class="reset-button"
-          id="resetFilters"
-          type="button"
-        >
-          RESET
-        </button>
-
-      </div>
-
-
-
-      <!-- =====================================
-           DESKTOP TABLE
-      ====================================== -->
-
-      <div class="stock-table-wrap">
-
-        <table class="stock-table">
-
-          <thead>
-
-            <tr>
-
-              <th>
-                PRODUCT
-              </th>
-
-              <th>
-                TYPE
-              </th>
-
-              <th>
-                MATERIAL
-              </th>
-
-              <th>
-                DESCRIPTION
-              </th>
-
-              <th>
-                SIZE
-              </th>
-
-              <th>
-                RATING
-              </th>
-
-              <th>
-                SCHEDULE
-              </th>
-
-              <th>
-                QTY
-              </th>
-
-              <th>
-                STATUS
-              </th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody id="stockTableBody">
-          </tbody>
-
-        </table>
-
-      </div>
-
-
-
-      <!-- =====================================
-           MOBILE RESULTS
-      ====================================== -->
-
-      <div
-        class="stock-mobile"
-        id="stockMobile"
-      >
-      </div>
-
-
-      <!-- NO RESULT -->
-
-      <div
-        class="no-results"
-        id="noResults"
+      <input
+        type="search"
+        id="stockSearch"
+        placeholder="Search material, type, size, rating, schedule..."
+        autocomplete="off"
       >
 
-        No materials found.
+    </div>
+
+
+
+    <!-- ========================================
+         FILTERS
+    ========================================= -->
+
+    <div class="filters">
+
+
+      <!-- MATERIAL -->
+
+      <div class="filter-group">
+
+        <label for="materialFilter">
+          MATERIAL
+        </label>
+
+
+        <select id="materialFilter">
+
+          <option value="">
+            ALL MATERIALS
+          </option>
+
+          <option value="SS304">
+            SS304
+          </option>
+
+          <option value="SS316">
+            SS316
+          </option>
+
+          <option value="S31803">
+            DUPLEX S31803
+          </option>
+
+          <option value="S32205">
+            DUPLEX S32205
+          </option>
+
+          <option value="S32750">
+            SUPER DUPLEX S32750
+          </option>
+
+          <option value="S32760">
+            SUPER DUPLEX S32760
+          </option>
+
+          <option value="TITANIUM">
+            TITANIUM
+          </option>
+
+          <option value="NICKEL ALLOY">
+            NICKEL ALLOY
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- PRODUCT -->
+
+      <div class="filter-group">
+
+        <label for="productFilter">
+          PRODUCT
+        </label>
+
+
+        <select id="productFilter">
+
+          <option value="">
+            ALL PRODUCTS
+          </option>
+
+          <option value="PIPE">
+            PIPE
+          </option>
+
+          <option value="FITTING">
+            FITTING
+          </option>
+
+          <option value="FLANGE">
+            FLANGE
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- TYPE -->
+
+      <div class="filter-group">
+
+        <label for="typeFilter">
+          TYPE
+        </label>
+
+
+        <select id="typeFilter">
+
+          <option value="">
+            ALL TYPES
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- SIZE -->
+
+      <div class="filter-group">
+
+        <label for="sizeFilter">
+          SIZE
+        </label>
+
+
+        <select id="sizeFilter">
+
+          <option value="">
+            ALL SIZES
+          </option>
+
+          <option value='1/2"'>
+            1/2"
+          </option>
+
+          <option value='3/4"'>
+            3/4"
+          </option>
+
+          <option value='1"'>
+            1"
+          </option>
+
+          <option value='1-1/2"'>
+            1-1/2"
+          </option>
+
+          <option value='2"'>
+            2"
+          </option>
+
+          <option value='2-1/2"'>
+            2-1/2"
+          </option>
+
+          <option value='3"'>
+            3"
+          </option>
+
+          <option value='4"'>
+            4"
+          </option>
+
+          <option value='6"'>
+            6"
+          </option>
+
+          <option value='8"'>
+            8"
+          </option>
+
+          <option value='10"'>
+            10"
+          </option>
+
+          <option value='12"'>
+            12"
+          </option>
+
+          <option value='14"'>
+            14"
+          </option>
+
+          <option value='16"'>
+            16"
+          </option>
+
+          <option value='18"'>
+            18"
+          </option>
+
+          <option value='20"'>
+            20"
+          </option>
+
+          <option value='24"'>
+            24"
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- RATING -->
+
+      <div class="filter-group">
+
+        <label for="ratingFilter">
+          RATING
+        </label>
+
+
+        <select id="ratingFilter">
+
+          <option value="">
+            ALL RATINGS
+          </option>
+
+          <option value="CL150">
+            CL150
+          </option>
+
+          <option value="CL300">
+            CL300
+          </option>
+
+          <option value="CL600">
+            CL600
+          </option>
+
+          <option value="CL900">
+            CL900
+          </option>
+
+          <option value="CL1500">
+            CL1500
+          </option>
+
+          <option value="CL2500">
+            CL2500
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- SCHEDULE -->
+
+      <div class="filter-group">
+
+        <label for="scheduleFilter">
+          SCHEDULE
+        </label>
+
+
+        <select id="scheduleFilter">
+
+          <option value="">
+            ALL SCHEDULES
+          </option>
+
+          <option value="SCH 5S">
+            SCH 5S
+          </option>
+
+          <option value="SCH 10S">
+            SCH 10S
+          </option>
+
+          <option value="SCH 10">
+            SCH 10
+          </option>
+
+          <option value="SCH 20">
+            SCH 20
+          </option>
+
+          <option value="SCH 40">
+            SCH 40
+          </option>
+
+          <option value="SCH 40S">
+            SCH 40S
+          </option>
+
+          <option value="SCH 80">
+            SCH 80
+          </option>
+
+          <option value="SCH 80S">
+            SCH 80S
+          </option>
+
+          <option value="SCH 120">
+            SCH 120
+          </option>
+
+          <option value="SCH 160">
+            SCH 160
+          </option>
+
+          <option value="XXS">
+            XXS
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- RESET -->
+
+      <button
+        class="reset-button"
+        id="resetFilters"
+        type="button"
+      >
+
+        RESET
+
+      </button>
+
+
+    </div>
+
+
+
+    <!-- ========================================
+         TABLE
+    ========================================= -->
+
+    <div class="stock-table-wrap">
+
+
+      <table class="stock-table">
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              PRODUCT
+            </th>
+
+            <th>
+              TYPE
+            </th>
+
+            <th>
+              MATERIAL
+            </th>
+
+            <th>
+              DESCRIPTION
+            </th>
+
+            <th>
+              SIZE
+            </th>
+
+            <th>
+              RATING
+            </th>
+
+            <th>
+              SCHEDULE
+            </th>
+
+            <th>
+              QTY
+            </th>
+
+            <th>
+              STATUS
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+
+        <tbody id="stockTableBody">
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+
+    <!-- ========================================
+         MOBILE CARDS
+    ========================================= -->
+
+    <div
+      class="stock-mobile"
+      id="stockMobile"
+    >
+    </div>
+
+
+
+    <!-- ========================================
+         NO RESULTS
+    ========================================= -->
+
+    <div
+      class="no-results"
+      id="noResults"
+    >
+
+      <strong>
+        NO MATERIALS FOUND
+      </strong>
+
+      <p>
+        Try changing the search term or filters.
+      </p>
+
+    </div>
+
+
+
+    <!-- ========================================
+         MATERIAL INQUIRY
+    ========================================= -->
+
+    <section class="material-inquiry">
+
+
+      <div>
+
+        <p class="stock-eyebrow">
+          MATERIAL INQUIRY
+        </p>
+
+
+        <h2>
+          Need more<br>
+          information?
+        </h2>
+
+      </div>
+
+
+
+      <div class="inquiry-copy">
+
+
+        <p>
+
+          Stock availability is subject to prior sale.
+          Please contact SIERRA ALLOYS for current
+          availability, documentation and commercial terms.
+
+        </p>
+
+
+        <a
+          href="mailto:info@sierra-alloys.com"
+          class="inquiry-button"
+        >
+
+          SEND INQUIRY
+
+          <span>
+            ↗
+          </span>
+
+        </a>
+
 
       </div>
 
 
     </section>
 
-  </main>
+
+  </section>
 
 
-  <script src="stock.js"></script>
+</main>
+
+
+
+<!-- ========================================
+     FOOTER
+======================================== -->
+
+<footer class="site-footer">
+
+
+  <span>
+    © 2026 SIERRA INC.
+  </span>
+
+
+  <span>
+    STEEL &amp; ALLOY MATERIALS SOLUTIONS
+  </span>
+
+
+</footer>
+
+
+
+<script src="./stock.js"></script>
+
 
 </body>
 
