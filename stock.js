@@ -8,8 +8,6 @@ const API_URL =
 
 let stockData = [];
 
-let inventoryLoaded = false;
-
 
 /* ========================================
    ELEMENTS
@@ -39,7 +37,6 @@ const scheduleFilter =
 const resetFilters =
   document.getElementById("resetFilters");
 
-
 const stockResults =
   document.getElementById("stockResults");
 
@@ -49,13 +46,11 @@ const stockTableBody =
 const stockMobile =
   document.getElementById("stockMobile");
 
-
 const stockCount =
   document.getElementById("stockCount");
 
 const itemCount =
   document.getElementById("itemCount");
-
 
 const noResults =
   document.getElementById("noResults");
@@ -67,12 +62,11 @@ const noResultText =
   document.getElementById("noResultText");
 
 
-
 /* ========================================
    HELPERS
 ======================================== */
 
-function normalize(value){
+function normalize(value) {
 
   return String(value || "")
     .toLowerCase()
@@ -82,16 +76,14 @@ function normalize(value){
 }
 
 
-function displayValue(value){
+function displayValue(value) {
 
-  if(
+  if (
     value === "" ||
     value === null ||
     value === undefined
-  ){
-
+  ) {
     return "—";
-
   }
 
   return value;
@@ -99,79 +91,50 @@ function displayValue(value){
 }
 
 
+function scheduleDisplay(value) {
 
-/* ========================================
-   SCHEDULE DISPLAY
-======================================== */
-
-function scheduleDisplay(value){
-
-  if(!value){
+  if (!value) {
     return "—";
   }
-
 
   const text =
     String(value)
       .trim()
       .toUpperCase();
 
-
-  if(
+  if (
     text === "STD" ||
     text === "XS" ||
     text === "XXS"
-  ){
-
+  ) {
     return text;
-
   }
 
-
-  if(text.startsWith("SCH")){
-
-    return text.replace(
-      /^SCH\s*/,
-      "SCH "
-    );
-
+  if (text.startsWith("SCH")) {
+    return text.replace(/^SCH\s*/, "SCH ");
   }
-
 
   return `SCH ${text}`;
 
 }
 
 
+function wtDisplay(value) {
 
-/* ========================================
-   WT DISPLAY
-======================================== */
-
-function wtDisplay(value){
-
-  if(
+  if (
     value === "" ||
     value === null ||
     value === undefined
-  ){
-
+  ) {
     return "—";
-
   }
-
 
   return `${value} mm`;
 
 }
 
 
-
-/* ========================================
-   GRADE / UNS
-======================================== */
-
-function gradeUnsDisplay(item){
+function gradeUnsDisplay(item) {
 
   const grade =
     String(item.grade || "").trim();
@@ -180,35 +143,22 @@ function gradeUnsDisplay(item){
     String(item.uns || "").trim();
 
 
-  if(!grade && !uns){
-
+  if (!grade && !uns) {
     return "—";
-
   }
 
 
-  /*
-     Same value:
-     S32205 / S32205
-
-     → S32205
-  */
-
-  if(
+  if (
     grade &&
     uns &&
     normalize(grade) === normalize(uns)
-  ){
-
+  ) {
     return grade;
-
   }
 
 
-  if(grade && uns){
-
+  if (grade && uns) {
     return `${grade} / ${uns}`;
-
   }
 
 
@@ -217,12 +167,11 @@ function gradeUnsDisplay(item){
 }
 
 
-
 /* ========================================
    SIZE SORT
 ======================================== */
 
-function sizeToNumber(value){
+function sizeToNumber(value) {
 
   const text =
     String(value || "")
@@ -230,51 +179,40 @@ function sizeToNumber(value){
       .trim();
 
 
-  if(!text){
-
+  if (!text) {
     return 999999;
-
   }
 
 
-  /*
-     1-1/2
-     2-1/2
-  */
-
-  if(text.includes("-")){
+  if (text.includes("-")) {
 
     const parts =
       text.split("-");
 
-
     const whole =
       parseFloat(parts[0]) || 0;
-
 
     const fraction =
       parts[1] || "";
 
 
-    if(fraction.includes("/")){
+    if (fraction.includes("/")) {
 
       const f =
         fraction.split("/");
 
-
       const numerator =
         parseFloat(f[0]);
-
 
       const denominator =
         parseFloat(f[1]);
 
 
-      if(
+      if (
         !isNaN(numerator) &&
         !isNaN(denominator) &&
         denominator !== 0
-      ){
+      ) {
 
         return whole +
           numerator / denominator;
@@ -286,30 +224,23 @@ function sizeToNumber(value){
   }
 
 
-  /*
-     1/2
-     3/4
-  */
-
-  if(text.includes("/")){
+  if (text.includes("/")) {
 
     const f =
       text.split("/");
 
-
     const numerator =
       parseFloat(f[0]);
-
 
     const denominator =
       parseFloat(f[1]);
 
 
-    if(
+    if (
       !isNaN(numerator) &&
       !isNaN(denominator) &&
       denominator !== 0
-    ){
+    ) {
 
       return numerator / denominator;
 
@@ -329,68 +260,63 @@ function sizeToNumber(value){
 }
 
 
-
 /* ========================================
-   OPTION GENERATOR
+   SET SELECT OPTIONS
 ======================================== */
 
-function setOptions(
-  element,
+function fillSelect(
+  select,
   values,
-  allLabel,
-  sortFunction = null
-){
-
-  const previous =
-    element.value;
-
+  firstLabel,
+  sorter = null
+) {
 
   const unique =
-    [
-      ...new Set(
-
-        values
-
-          .filter(value =>
-
-            value !== null &&
-            value !== undefined &&
-            String(value).trim() !== ""
-
-          )
-
-          .map(value =>
-            String(value).trim()
-          )
-
-      )
-    ];
+    [...new Set(
+      values
+        .filter(value =>
+          value !== null &&
+          value !== undefined &&
+          String(value).trim() !== ""
+        )
+        .map(value =>
+          String(value).trim()
+        )
+    )];
 
 
-  if(sortFunction){
+  if (sorter) {
 
-    unique.sort(sortFunction);
+    unique.sort(sorter);
 
-  }else{
+  } else {
 
-    unique.sort((a,b) =>
-
+    unique.sort((a, b) =>
       a.localeCompare(
         b,
         undefined,
         {
-          numeric:true,
-          sensitivity:"base"
+          numeric: true,
+          sensitivity: "base"
         }
       )
-
     );
 
   }
 
 
-  element.innerHTML =
-    `<option value="">${allLabel}</option>`;
+  select.innerHTML = "";
+
+
+  const firstOption =
+    document.createElement("option");
+
+  firstOption.value = "";
+
+  firstOption.textContent =
+    firstLabel;
+
+  select.appendChild(firstOption);
 
 
   unique.forEach(value => {
@@ -398,168 +324,81 @@ function setOptions(
     const option =
       document.createElement("option");
 
-
     option.value =
       value;
-
 
     option.textContent =
       value;
 
-
-    element.appendChild(option);
+    select.appendChild(option);
 
   });
-
-
-  if(unique.includes(previous)){
-
-    element.value =
-      previous;
-
-  }
 
 }
 
 
-
 /* ========================================
-   UPDATE DROPDOWNS
+   BUILD FILTERS FROM AIRTABLE STOCK
 ======================================== */
 
-function updateFilters(){
+function buildFilters() {
 
-  /*
-     PRODUCT
-  */
-
-  setOptions(
+  fillSelect(
     productFilter,
     stockData.map(item => item.product),
     "ALL PRODUCTS"
   );
 
 
-  /*
-     TYPE
-     Product dependent
-  */
-
-  const typeData =
-    stockData.filter(item =>
-
-      !productFilter.value ||
-      item.product === productFilter.value
-
-    );
-
-
-  setOptions(
+  fillSelect(
     typeFilter,
-    typeData.map(item => item.type),
+    stockData.map(item => item.type),
     "ALL TYPES"
   );
 
 
-  /*
-     MATERIAL
-     Product + Type dependent
-  */
-
-  const materialData =
-    stockData.filter(item =>
-
-      (
-        !productFilter.value ||
-        item.product === productFilter.value
-      )
-
-      &&
-
-      (
-        !typeFilter.value ||
-        item.type === typeFilter.value
-      )
-
-    );
-
-
-  setOptions(
+  fillSelect(
     materialFilter,
-    materialData.map(item => item.material),
+    stockData.map(item => item.material),
     "ALL MATERIALS"
   );
 
 
-  /*
-     Remaining specification filters
-  */
-
-  const specificationData =
-    stockData.filter(item =>
-
-      (
-        !productFilter.value ||
-        item.product === productFilter.value
-      )
-
-      &&
-
-      (
-        !typeFilter.value ||
-        item.type === typeFilter.value
-      )
-
-      &&
-
-      (
-        !materialFilter.value ||
-        item.material === materialFilter.value
-      )
-
-    );
-
-
-  setOptions(
+  fillSelect(
     sizeFilter,
-    specificationData.map(item => item.size),
+    stockData.map(item => item.size),
     "ALL SIZES",
-    (a,b) =>
+    (a, b) =>
       sizeToNumber(a) -
       sizeToNumber(b)
   );
 
 
-  setOptions(
+  fillSelect(
     astmFilter,
-    specificationData.map(item => item.astm),
+    stockData.map(item => item.astm),
     "ALL ASTM"
   );
 
 
-  setOptions(
+  fillSelect(
     scheduleFilter,
-    specificationData.map(item => item.schedule),
+    stockData.map(item => item.schedule),
     "ALL SCHEDULES"
   );
 
 }
 
 
-
 /* ========================================
-   DOES USER HAVE A SEARCH?
+   SEARCH CONDITION
 ======================================== */
 
-function hasSearchCondition(){
+function hasSearchCondition() {
 
-  return(
+  return (
 
     normalize(stockSearch.value) !== ""
-
-    ||
-
-    materialFilter.value !== ""
 
     ||
 
@@ -568,6 +407,10 @@ function hasSearchCondition(){
     ||
 
     typeFilter.value !== ""
+
+    ||
+
+    materialFilter.value !== ""
 
     ||
 
@@ -586,40 +429,28 @@ function hasSearchCondition(){
 }
 
 
-
 /* ========================================
-   INITIAL HIDDEN STATE
+   HIDE RESULTS
 ======================================== */
 
-function hideResults(){
+function hideResults() {
 
-  stockResults.hidden =
-    true;
+  stockResults.hidden = true;
 
+  stockMobile.hidden = true;
 
-  stockMobile.hidden =
-    true;
+  stockCount.hidden = true;
 
+  stockTableBody.innerHTML = "";
 
-  stockCount.hidden =
-    true;
-
-
-  stockTableBody.innerHTML =
-    "";
-
-
-  stockMobile.innerHTML =
-    "";
+  stockMobile.innerHTML = "";
 
 
   noResultTitle.textContent =
     "SEARCH AVAILABLE STOCK";
 
-
   noResultText.textContent =
     "Select a filter or enter a search term to check our current availability.";
-
 
   noResults.style.display =
     "block";
@@ -627,15 +458,13 @@ function hideResults(){
 }
 
 
-
 /* ========================================
    DESKTOP RENDER
 ======================================== */
 
-function renderDesktop(data){
+function renderDesktop(data) {
 
-  stockTableBody.innerHTML =
-    "";
+  stockTableBody.innerHTML = "";
 
 
   data.forEach(item => {
@@ -679,15 +508,11 @@ function renderDesktop(data){
       </td>
 
       <td>
-
         <span class="status">
-
           ${displayValue(
             item.status || "AVAILABLE"
           )}
-
         </span>
-
       </td>
 
     `;
@@ -700,22 +525,19 @@ function renderDesktop(data){
 }
 
 
-
 /* ========================================
    MOBILE RENDER
 ======================================== */
 
-function renderMobile(data){
+function renderMobile(data) {
 
-  stockMobile.innerHTML =
-    "";
+  stockMobile.innerHTML = "";
 
 
   data.forEach(item => {
 
     const card =
       document.createElement("article");
-
 
     card.className =
       "stock-card";
@@ -728,27 +550,20 @@ function renderMobile(data){
         <div>
 
           <p class="stock-card-product">
-
             ${displayValue(item.product)}
-
           </p>
 
-
           <p class="stock-card-type">
-
             ${displayValue(item.type)}
-
           </p>
 
         </div>
 
 
         <span class="status">
-
           ${displayValue(
             item.status || "AVAILABLE"
           )}
-
         </span>
 
       </div>
@@ -759,9 +574,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            MATERIAL
-          </span>
+          <span>MATERIAL</span>
 
           <strong>
             ${displayValue(item.material)}
@@ -772,9 +585,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            SIZE
-          </span>
+          <span>SIZE</span>
 
           <strong>
             ${displayValue(item.size)}
@@ -785,9 +596,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            ASTM
-          </span>
+          <span>ASTM</span>
 
           <strong>
             ${displayValue(item.astm)}
@@ -798,9 +607,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            SCHEDULE
-          </span>
+          <span>SCHEDULE</span>
 
           <strong>
             ${scheduleDisplay(item.schedule)}
@@ -811,9 +618,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            GRADE / UNS
-          </span>
+          <span>GRADE / UNS</span>
 
           <strong>
             ${gradeUnsDisplay(item)}
@@ -824,9 +629,7 @@ function renderMobile(data){
 
         <div class="stock-card-item">
 
-          <span>
-            WT
-          </span>
+          <span>WT</span>
 
           <strong>
             ${wtDisplay(item.wt)}
@@ -847,63 +650,40 @@ function renderMobile(data){
 }
 
 
-
 /* ========================================
-   SHOW SEARCH RESULTS
+   SHOW RESULTS
 ======================================== */
 
-function showResults(data){
+function showResults(data) {
 
   itemCount.textContent =
     data.length;
-
 
   stockCount.hidden =
     false;
 
 
-  /*
-     Nothing matched
-  */
-
-  if(data.length === 0){
+  if (data.length === 0) {
 
     stockResults.hidden =
       true;
 
-
     stockMobile.hidden =
       true;
-
-
-    stockTableBody.innerHTML =
-      "";
-
-
-    stockMobile.innerHTML =
-      "";
-
 
     noResultTitle.textContent =
       "NO STOCK FOUND";
 
-
     noResultText.textContent =
       "Try changing the search term or filters.";
 
-
     noResults.style.display =
       "block";
-
 
     return;
 
   }
 
-
-  /*
-     Results found
-  */
 
   noResults.style.display =
     "none";
@@ -914,53 +694,34 @@ function showResults(data){
   renderMobile(data);
 
 
-  /*
-     Desktop
-  */
-
-  if(window.innerWidth > 850){
-
-    stockResults.hidden =
-      false;
-
-
-    stockMobile.hidden =
-      true;
-
-  }
-
-
-  /*
-     Mobile
-  */
-
-  else{
+  if (window.innerWidth <= 850) {
 
     stockResults.hidden =
       true;
 
-
     stockMobile.hidden =
       false;
+
+  } else {
+
+    stockResults.hidden =
+      false;
+
+    stockMobile.hidden =
+      true;
 
   }
 
 }
 
 
-
 /* ========================================
    FILTER STOCK
 ======================================== */
 
-function filterStock(){
+function filterStock() {
 
-  /*
-     No search condition:
-     NEVER show stock list.
-  */
-
-  if(!hasSearchCondition()){
+  if (!hasSearchCondition()) {
 
     hideResults();
 
@@ -981,43 +742,25 @@ function filterStock(){
         normalize(`
 
           ${item.product}
-
           ${item.type}
-
           ${item.construction}
-
           ${item.itemType}
-
           ${item.material}
-
           ${item.astm}
-
           ${item.grade}
-
           ${item.uns}
-
           ${item.size}
-
           ${item.schedule}
-
           ${item.wt}
 
         `);
 
 
-      return(
+      return (
 
         (
           !search ||
           searchable.includes(search)
-        )
-
-        &&
-
-        (
-          !materialFilter.value ||
-          item.material ===
-            materialFilter.value
         )
 
         &&
@@ -1034,6 +777,14 @@ function filterStock(){
           !typeFilter.value ||
           item.type ===
             typeFilter.value
+        )
+
+        &&
+
+        (
+          !materialFilter.value ||
+          item.material ===
+            materialFilter.value
         )
 
         &&
@@ -1070,21 +821,6 @@ function filterStock(){
 }
 
 
-
-/* ========================================
-   DEPENDENT FILTER CHANGE
-======================================== */
-
-function specificationChanged(){
-
-  updateFilters();
-
-  filterStock();
-
-}
-
-
-
 /* ========================================
    EVENTS
 ======================================== */
@@ -1097,19 +833,19 @@ stockSearch.addEventListener(
 
 productFilter.addEventListener(
   "change",
-  specificationChanged
+  filterStock
 );
 
 
 typeFilter.addEventListener(
   "change",
-  specificationChanged
+  filterStock
 );
 
 
 materialFilter.addEventListener(
   "change",
-  specificationChanged
+  filterStock
 );
 
 
@@ -1131,7 +867,6 @@ scheduleFilter.addEventListener(
 );
 
 
-
 /* ========================================
    RESET
 ======================================== */
@@ -1140,35 +875,19 @@ resetFilters.addEventListener(
   "click",
   () => {
 
-    stockSearch.value =
-      "";
+    stockSearch.value = "";
 
+    productFilter.value = "";
 
-    materialFilter.value =
-      "";
+    typeFilter.value = "";
 
+    materialFilter.value = "";
 
-    productFilter.value =
-      "";
+    sizeFilter.value = "";
 
+    astmFilter.value = "";
 
-    typeFilter.value =
-      "";
-
-
-    sizeFilter.value =
-      "";
-
-
-    astmFilter.value =
-      "";
-
-
-    scheduleFilter.value =
-      "";
-
-
-    updateFilters();
+    scheduleFilter.value = "";
 
     hideResults();
 
@@ -1176,47 +895,33 @@ resetFilters.addEventListener(
 );
 
 
-
 /* ========================================
-   WINDOW RESIZE
+   RESIZE
 ======================================== */
 
 window.addEventListener(
   "resize",
   () => {
 
-    if(
-      inventoryLoaded &&
-      hasSearchCondition()
-    ){
-
+    if (hasSearchCondition()) {
       filterStock();
-
     }
 
   }
 );
 
 
-
 /* ========================================
-   LOAD LIVE AIRTABLE STOCK
+   LOAD INVENTORY
 ======================================== */
 
-async function loadStock(){
-
-  /*
-     Results must remain hidden
-     while loading.
-  */
+async function loadStock() {
 
   stockResults.hidden =
     true;
 
-
   stockMobile.hidden =
     true;
-
 
   stockCount.hidden =
     true;
@@ -1225,27 +930,25 @@ async function loadStock(){
   noResultTitle.textContent =
     "LOADING INVENTORY";
 
-
   noResultText.textContent =
     "Retrieving current stock availability.";
-
 
   noResults.style.display =
     "block";
 
 
-  try{
+  try {
 
     const response =
       await fetch(
         API_URL,
         {
-          cache:"no-store"
+          cache: "no-store"
         }
       );
 
 
-    if(!response.ok){
+    if (!response.ok) {
 
       throw new Error(
         `API error ${response.status}`
@@ -1258,10 +961,10 @@ async function loadStock(){
       await response.json();
 
 
-    if(
-      !result.success ||
+    if (
+      result.success !== true ||
       !Array.isArray(result.stock)
-    ){
+    ) {
 
       throw new Error(
         "Invalid inventory response"
@@ -1274,27 +977,25 @@ async function loadStock(){
       result.stock;
 
 
-    inventoryLoaded =
-      true;
+    console.log(
+      "SIERRA stock loaded:",
+      stockData
+    );
 
 
     /*
-       Build dropdowns from live
-       Airtable inventory.
+       IMPORTANT
+
+       Build dropdowns
+       but DO NOT show stock.
     */
 
-    updateFilters();
-
-
-    /*
-       CRITICAL:
-       Do not render stock here.
-    */
+    buildFilters();
 
     hideResults();
 
 
-  }catch(error){
+  } catch (error) {
 
     console.error(
       "SIERRA inventory error:",
@@ -1302,33 +1003,14 @@ async function loadStock(){
     );
 
 
-    stockData =
-      [];
-
-
-    inventoryLoaded =
-      false;
-
-
-    stockResults.hidden =
-      true;
-
-
-    stockMobile.hidden =
-      true;
-
-
-    stockCount.hidden =
-      true;
+    stockData = [];
 
 
     noResultTitle.textContent =
       "INVENTORY TEMPORARILY UNAVAILABLE";
 
-
     noResultText.textContent =
       "Please contact SIERRA ALLOYS for current availability.";
-
 
     noResults.style.display =
       "block";
@@ -1338,9 +1020,8 @@ async function loadStock(){
 }
 
 
-
 /* ========================================
-   INITIAL
+   START
 ======================================== */
 
 loadStock();
