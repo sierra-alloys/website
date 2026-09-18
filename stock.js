@@ -1,6 +1,6 @@
 /* ========================================
    SIERRA ALLOYS
-   LIVE STOCK SEARCH
+   LIVE INVENTORY SEARCH
 ======================================== */
 
 const API_URL =
@@ -13,9 +13,6 @@ let stockData = [];
    ELEMENTS
 ======================================== */
 
-const stockSearch =
-  document.getElementById("stockSearch");
-
 const materialFilter =
   document.getElementById("materialFilter");
 
@@ -25,17 +22,51 @@ const productFilter =
 const typeFilter =
   document.getElementById("typeFilter");
 
-const sizeFilter =
-  document.getElementById("sizeFilter");
+const itemTypeFilter =
+  document.getElementById("itemTypeFilter");
+
+const size1Filter =
+  document.getElementById("size1Filter");
+
+const size2Filter =
+  document.getElementById("size2Filter");
 
 const astmFilter =
   document.getElementById("astmFilter");
 
-const scheduleFilter =
-  document.getElementById("scheduleFilter");
+const sch1Filter =
+  document.getElementById("sch1Filter");
+
+const sch2Filter =
+  document.getElementById("sch2Filter");
+
+const ratingFilter =
+  document.getElementById("ratingFilter");
+
+
+const itemTypeGroup =
+  document.getElementById("itemTypeGroup");
+
+const size2Group =
+  document.getElementById("size2Group");
+
+const sch2Group =
+  document.getElementById("sch2Group");
+
+const ratingGroup =
+  document.getElementById("ratingGroup");
+
+
+const size1Label =
+  document.getElementById("size1Label");
+
+const sch1Label =
+  document.getElementById("sch1Label");
+
 
 const resetFilters =
   document.getElementById("resetFilters");
+
 
 const stockResults =
   document.getElementById("stockResults");
@@ -46,11 +77,13 @@ const stockTableBody =
 const stockMobile =
   document.getElementById("stockMobile");
 
+
 const stockCount =
   document.getElementById("stockCount");
 
 const itemCount =
   document.getElementById("itemCount");
+
 
 const noResults =
   document.getElementById("noResults");
@@ -66,103 +99,112 @@ const noResultText =
    HELPERS
 ======================================== */
 
-function normalize(value) {
+function clean(value){
 
-  return String(value || "")
-    .toLowerCase()
+  return String(value ?? "")
+    .replace(/\r/g, " ")
+    .replace(/\n/g, " ")
+    .replace(/\t/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 
 }
 
 
-function displayValue(value) {
+function normalize(value){
 
-  if (
-    value === "" ||
-    value === null ||
-    value === undefined
-  ) {
-    return "—";
-  }
-
-  return value;
+  return clean(value)
+    .toLowerCase();
 
 }
 
 
-function scheduleDisplay(value) {
+function same(a,b){
 
-  if (!value) {
-    return "—";
-  }
+  return normalize(a) === normalize(b);
+
+}
+
+
+function displayValue(value){
+
+  const result =
+    clean(value);
+
+  return result || "—";
+
+}
+
+
+/* ========================================
+   PRODUCT DETECTION
+======================================== */
+
+function selectedProduct(){
+
+  return normalize(
+    productFilter.value
+  );
+
+}
+
+
+function isPipe(){
+
+  return selectedProduct() === "pipe";
+
+}
+
+
+function isFitting(){
+
+  return selectedProduct() === "fitting";
+
+}
+
+
+function isFlange(){
+
+  return selectedProduct() === "flange";
+
+}
+
+
+/* ========================================
+   SCHEDULE DISPLAY
+======================================== */
+
+function scheduleDisplay(value){
 
   const text =
-    String(value)
-      .trim()
-      .toUpperCase();
+    clean(value).toUpperCase();
 
-  if (
+
+  if(!text){
+    return "";
+  }
+
+
+  if(
     text === "STD" ||
     text === "XS" ||
     text === "XXS"
-  ) {
+  ){
     return text;
   }
 
-  if (text.startsWith("SCH")) {
-    return text.replace(/^SCH\s*/, "SCH ");
+
+  if(text.startsWith("SCH")){
+
+    return text.replace(
+      /^SCH\s*/,
+      "SCH "
+    );
+
   }
+
 
   return `SCH ${text}`;
-
-}
-
-
-function wtDisplay(value) {
-
-  if (
-    value === "" ||
-    value === null ||
-    value === undefined
-  ) {
-    return "—";
-  }
-
-  return `${value} mm`;
-
-}
-
-
-function gradeUnsDisplay(item) {
-
-  const grade =
-    String(item.grade || "").trim();
-
-  const uns =
-    String(item.uns || "").trim();
-
-
-  if (!grade && !uns) {
-    return "—";
-  }
-
-
-  if (
-    grade &&
-    uns &&
-    normalize(grade) === normalize(uns)
-  ) {
-    return grade;
-  }
-
-
-  if (grade && uns) {
-    return `${grade} / ${uns}`;
-  }
-
-
-  return grade || uns;
 
 }
 
@@ -171,20 +213,19 @@ function gradeUnsDisplay(item) {
    SIZE SORT
 ======================================== */
 
-function sizeToNumber(value) {
+function sizeToNumber(value){
 
   const text =
-    String(value || "")
-      .replace(/"/g, "")
-      .trim();
+    clean(value)
+      .replace(/"/g, "");
 
 
-  if (!text) {
+  if(!text){
     return 999999;
   }
 
 
-  if (text.includes("-")) {
+  if(text.includes("-")){
 
     const parts =
       text.split("-");
@@ -196,26 +237,26 @@ function sizeToNumber(value) {
       parts[1] || "";
 
 
-    if (fraction.includes("/")) {
+    if(fraction.includes("/")){
 
       const f =
         fraction.split("/");
 
-      const numerator =
+      const top =
         parseFloat(f[0]);
 
-      const denominator =
+      const bottom =
         parseFloat(f[1]);
 
 
-      if (
-        !isNaN(numerator) &&
-        !isNaN(denominator) &&
-        denominator !== 0
-      ) {
+      if(
+        !isNaN(top) &&
+        !isNaN(bottom) &&
+        bottom !== 0
+      ){
 
         return whole +
-          numerator / denominator;
+          top / bottom;
 
       }
 
@@ -224,25 +265,25 @@ function sizeToNumber(value) {
   }
 
 
-  if (text.includes("/")) {
+  if(text.includes("/")){
 
     const f =
       text.split("/");
 
-    const numerator =
+    const top =
       parseFloat(f[0]);
 
-    const denominator =
+    const bottom =
       parseFloat(f[1]);
 
 
-    if (
-      !isNaN(numerator) &&
-      !isNaN(denominator) &&
-      denominator !== 0
-    ) {
+    if(
+      !isNaN(top) &&
+      !isNaN(bottom) &&
+      bottom !== 0
+    ){
 
-      return numerator / denominator;
+      return top / bottom;
 
     }
 
@@ -261,7 +302,7 @@ function sizeToNumber(value) {
 
 
 /* ========================================
-   SET SELECT OPTIONS
+   SELECT OPTIONS
 ======================================== */
 
 function fillSelect(
@@ -269,37 +310,39 @@ function fillSelect(
   values,
   firstLabel,
   sorter = null
-) {
+){
+
+  const previous =
+    select.value;
+
 
   const unique =
     [...new Set(
+
       values
-        .filter(value =>
-          value !== null &&
-          value !== undefined &&
-          String(value).trim() !== ""
-        )
-        .map(value =>
-          String(value).trim()
-        )
+        .map(clean)
+        .filter(Boolean)
+
     )];
 
 
-  if (sorter) {
+  if(sorter){
 
     unique.sort(sorter);
 
-  } else {
+  }else{
 
-    unique.sort((a, b) =>
+    unique.sort((a,b) =>
+
       a.localeCompare(
         b,
         undefined,
         {
-          numeric: true,
-          sensitivity: "base"
+          numeric:true,
+          sensitivity:"base"
         }
       )
+
     );
 
   }
@@ -308,15 +351,17 @@ function fillSelect(
   select.innerHTML = "";
 
 
-  const firstOption =
+  const first =
     document.createElement("option");
 
-  firstOption.value = "";
 
-  firstOption.textContent =
+  first.value = "";
+
+  first.textContent =
     firstLabel;
 
-  select.appendChild(firstOption);
+
+  select.appendChild(first);
 
 
   unique.forEach(value => {
@@ -324,13 +369,142 @@ function fillSelect(
     const option =
       document.createElement("option");
 
+
     option.value =
       value;
+
 
     option.textContent =
       value;
 
+
     select.appendChild(option);
+
+  });
+
+
+  if(
+    unique.some(value =>
+      same(value,previous)
+    )
+  ){
+
+    const matched =
+      unique.find(value =>
+        same(value,previous)
+      );
+
+
+    select.value =
+      matched;
+
+  }
+
+}
+
+
+/* ========================================
+   FILTER DATA FOR DROPDOWNS
+======================================== */
+
+function dataMatching(
+  ignoreField = ""
+){
+
+  return stockData.filter(item => {
+
+
+    if(
+      ignoreField !== "product" &&
+      productFilter.value &&
+      !same(item.product,productFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "material" &&
+      materialFilter.value &&
+      !same(item.material,materialFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "type" &&
+      typeFilter.value &&
+      !same(item.type,typeFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "itemType" &&
+      itemTypeFilter.value &&
+      !same(item.itemType,itemTypeFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "size1" &&
+      size1Filter.value &&
+      !same(item.size1,size1Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "size2" &&
+      size2Filter.value &&
+      !same(item.size2,size2Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "astm" &&
+      astmFilter.value &&
+      !same(item.astm,astmFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "sch1" &&
+      sch1Filter.value &&
+      !same(item.sch1,sch1Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "sch2" &&
+      sch2Filter.value &&
+      !same(item.sch2,sch2Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ignoreField !== "rating" &&
+      ratingFilter.value &&
+      !same(item.rating,ratingFilter.value)
+    ){
+      return false;
+    }
+
+
+    return true;
 
   });
 
@@ -338,37 +512,176 @@ function fillSelect(
 
 
 /* ========================================
-   BUILD FILTERS FROM AIRTABLE STOCK
+   PRODUCT-SPECIFIC FILTER UI
 ======================================== */
 
-function buildFilters() {
+function updateFilterVisibility(){
+
+  /*
+     DEFAULT
+  */
+
+  itemTypeGroup.hidden =
+    true;
+
+  size2Group.hidden =
+    true;
+
+  sch2Group.hidden =
+    true;
+
+  ratingGroup.hidden =
+    true;
+
+
+  size1Label.textContent =
+    "SIZE";
+
+  sch1Label.textContent =
+    "SCHEDULE";
+
+
+  /*
+     PIPE
+  */
+
+  if(isPipe()){
+
+    return;
+
+  }
+
+
+  /*
+     FITTING
+  */
+
+  if(isFitting()){
+
+    size1Label.textContent =
+      "SIZE 1";
+
+    sch1Label.textContent =
+      "SCH 1";
+
+
+    /*
+       Item Type only if fitting stock
+       actually contains values.
+    */
+
+    const fittingData =
+      stockData.filter(item =>
+        same(item.product,"Fitting")
+      );
+
+
+    const hasItemType =
+      fittingData.some(item =>
+        clean(item.itemType)
+      );
+
+
+    const hasSize2 =
+      fittingData.some(item =>
+        clean(item.size2)
+      );
+
+
+    const hasSch2 =
+      fittingData.some(item =>
+        clean(item.sch2)
+      );
+
+
+    itemTypeGroup.hidden =
+      !hasItemType;
+
+
+    size2Group.hidden =
+      !hasSize2;
+
+
+    sch2Group.hidden =
+      !hasSch2;
+
+
+    return;
+
+  }
+
+
+  /*
+     FLANGE
+  */
+
+  if(isFlange()){
+
+    ratingGroup.hidden =
+      false;
+
+    return;
+
+  }
+
+}
+
+
+/* ========================================
+   BUILD / UPDATE DROPDOWNS
+======================================== */
+
+function updateDropdowns(){
 
   fillSelect(
     productFilter,
-    stockData.map(item => item.product),
+    dataMatching("product")
+      .map(item => item.product),
     "ALL PRODUCTS"
   );
 
 
   fillSelect(
-    typeFilter,
-    stockData.map(item => item.type),
-    "ALL TYPES"
-  );
-
-
-  fillSelect(
     materialFilter,
-    stockData.map(item => item.material),
+    dataMatching("material")
+      .map(item => item.material),
     "ALL MATERIALS"
   );
 
 
   fillSelect(
-    sizeFilter,
-    stockData.map(item => item.size),
+    typeFilter,
+    dataMatching("type")
+      .map(item => item.type),
+    "ALL TYPES"
+  );
+
+
+  fillSelect(
+    itemTypeFilter,
+    dataMatching("itemType")
+      .map(item => item.itemType),
+    "ALL ITEM TYPES"
+  );
+
+
+  fillSelect(
+    size1Filter,
+    dataMatching("size1")
+      .map(item => item.size1),
     "ALL SIZES",
-    (a, b) =>
+    (a,b) =>
+      sizeToNumber(a) -
+      sizeToNumber(b)
+  );
+
+
+  fillSelect(
+    size2Filter,
+    dataMatching("size2")
+      .map(item => item.size2),
+    "ALL SIZE 2",
+    (a,b) =>
       sizeToNumber(a) -
       sizeToNumber(b)
   );
@@ -376,16 +689,37 @@ function buildFilters() {
 
   fillSelect(
     astmFilter,
-    stockData.map(item => item.astm),
+    dataMatching("astm")
+      .map(item => item.astm),
     "ALL ASTM"
   );
 
 
   fillSelect(
-    scheduleFilter,
-    stockData.map(item => item.schedule),
+    sch1Filter,
+    dataMatching("sch1")
+      .map(item => item.sch1),
     "ALL SCHEDULES"
   );
+
+
+  fillSelect(
+    sch2Filter,
+    dataMatching("sch2")
+      .map(item => item.sch2),
+    "ALL SCH 2"
+  );
+
+
+  fillSelect(
+    ratingFilter,
+    dataMatching("rating")
+      .map(item => item.rating),
+    "ALL RATINGS"
+  );
+
+
+  updateFilterVisibility();
 
 }
 
@@ -394,37 +728,289 @@ function buildFilters() {
    SEARCH CONDITION
 ======================================== */
 
-function hasSearchCondition() {
+function hasSearchCondition(){
 
-  return (
+  return Boolean(
 
-    normalize(stockSearch.value) !== ""
+    productFilter.value ||
 
-    ||
+    materialFilter.value ||
 
-    productFilter.value !== ""
+    typeFilter.value ||
 
-    ||
+    itemTypeFilter.value ||
 
-    typeFilter.value !== ""
+    size1Filter.value ||
 
-    ||
+    size2Filter.value ||
 
-    materialFilter.value !== ""
+    astmFilter.value ||
 
-    ||
+    sch1Filter.value ||
 
-    sizeFilter.value !== ""
+    sch2Filter.value ||
 
-    ||
-
-    astmFilter.value !== ""
-
-    ||
-
-    scheduleFilter.value !== ""
+    ratingFilter.value
 
   );
+
+}
+
+
+/* ========================================
+   FILTER STOCK
+======================================== */
+
+function getFilteredStock(){
+
+  return stockData.filter(item => {
+
+
+    if(
+      productFilter.value &&
+      !same(item.product,productFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      materialFilter.value &&
+      !same(item.material,materialFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      typeFilter.value &&
+      !same(item.type,typeFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      itemTypeFilter.value &&
+      !same(item.itemType,itemTypeFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      size1Filter.value &&
+      !same(item.size1,size1Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      size2Filter.value &&
+      !same(item.size2,size2Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      astmFilter.value &&
+      !same(item.astm,astmFilter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      sch1Filter.value &&
+      !same(item.sch1,sch1Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      sch2Filter.value &&
+      !same(item.sch2,sch2Filter.value)
+    ){
+      return false;
+    }
+
+
+    if(
+      ratingFilter.value &&
+      !same(item.rating,ratingFilter.value)
+    ){
+      return false;
+    }
+
+
+    return true;
+
+  });
+
+}
+
+
+/* ========================================
+   SIZE DISPLAY
+======================================== */
+
+function sizeDisplay(item){
+
+  const size1 =
+    clean(item.size1);
+
+  const size2 =
+    clean(item.size2);
+
+
+  if(size1 && size2){
+
+    return `${size1} × ${size2}`;
+
+  }
+
+
+  return size1 || size2 || "—";
+
+}
+
+
+/* ========================================
+   SPECIFICATION DISPLAY
+======================================== */
+
+function specificationDisplay(item){
+
+  const parts = [];
+
+
+  const sch1 =
+    scheduleDisplay(item.sch1);
+
+  const sch2 =
+    scheduleDisplay(item.sch2);
+
+  const rating =
+    clean(item.rating);
+
+
+  /*
+     RATING
+  */
+
+  if(rating){
+
+    parts.push(rating);
+
+  }
+
+
+  /*
+     SCH 1 + SCH 2
+  */
+
+  if(sch1 && sch2){
+
+    parts.push(
+      `${sch1} × ${sch2}`
+    );
+
+  }
+
+  else if(sch1){
+
+    parts.push(sch1);
+
+  }
+
+  else if(sch2){
+
+    parts.push(sch2);
+
+  }
+
+
+  return parts.length
+    ? parts.join(" · ")
+    : "—";
+
+}
+
+
+/* ========================================
+   GRADE / UNS DISPLAY
+======================================== */
+
+function gradeUnsDisplay(item){
+
+  const grade =
+    clean(item.grade);
+
+  const uns =
+    clean(item.uns);
+
+
+  if(!grade && !uns){
+
+    return "—";
+
+  }
+
+
+  if(
+    grade &&
+    uns &&
+    same(grade,uns)
+  ){
+
+    return grade;
+
+  }
+
+
+  if(grade && uns){
+
+    return `${grade} / ${uns}`;
+
+  }
+
+
+  return grade || uns;
+
+}
+
+
+/* ========================================
+   ITEM DISPLAY
+======================================== */
+
+function itemDisplay(item){
+
+  const itemType =
+    clean(item.itemType);
+
+  const construction =
+    clean(item.construction);
+
+
+  if(itemType){
+
+    return itemType;
+
+  }
+
+
+  if(construction){
+
+    return construction;
+
+  }
+
+
+  return "—";
 
 }
 
@@ -433,24 +1019,35 @@ function hasSearchCondition() {
    HIDE RESULTS
 ======================================== */
 
-function hideResults() {
+function hideResults(){
 
-  stockResults.hidden = true;
+  stockResults.hidden =
+    true;
 
-  stockMobile.hidden = true;
 
-  stockCount.hidden = true;
+  stockMobile.hidden =
+    true;
 
-  stockTableBody.innerHTML = "";
 
-  stockMobile.innerHTML = "";
+  stockCount.hidden =
+    true;
+
+
+  stockTableBody.innerHTML =
+    "";
+
+
+  stockMobile.innerHTML =
+    "";
 
 
   noResultTitle.textContent =
-    "SEARCH AVAILABLE STOCK";
+    "SELECT STOCK FILTERS";
+
 
   noResultText.textContent =
-    "Select a filter or enter a search term to check our current availability.";
+    "Select one or more specifications to check our current availability.";
+
 
   noResults.style.display =
     "block";
@@ -459,12 +1056,13 @@ function hideResults() {
 
 
 /* ========================================
-   DESKTOP RENDER
+   DESKTOP RESULTS
 ======================================== */
 
-function renderDesktop(data) {
+function renderDesktop(data){
 
-  stockTableBody.innerHTML = "";
+  stockTableBody.innerHTML =
+    "";
 
 
   data.forEach(item => {
@@ -484,6 +1082,10 @@ function renderDesktop(data) {
       </td>
 
       <td>
+        ${itemDisplay(item)}
+      </td>
+
+      <td>
         ${displayValue(item.material)}
       </td>
 
@@ -496,23 +1098,21 @@ function renderDesktop(data) {
       </td>
 
       <td>
-        ${displayValue(item.size)}
+        ${sizeDisplay(item)}
       </td>
 
       <td>
-        ${scheduleDisplay(item.schedule)}
+        ${specificationDisplay(item)}
       </td>
 
       <td>
-        ${wtDisplay(item.wt)}
-      </td>
 
-      <td>
         <span class="status">
           ${displayValue(
             item.status || "AVAILABLE"
           )}
         </span>
+
       </td>
 
     `;
@@ -526,18 +1126,20 @@ function renderDesktop(data) {
 
 
 /* ========================================
-   MOBILE RENDER
+   MOBILE RESULTS
 ======================================== */
 
-function renderMobile(data) {
+function renderMobile(data){
 
-  stockMobile.innerHTML = "";
+  stockMobile.innerHTML =
+    "";
 
 
   data.forEach(item => {
 
     const card =
       document.createElement("article");
+
 
     card.className =
       "stock-card";
@@ -552,6 +1154,7 @@ function renderMobile(data) {
           <p class="stock-card-product">
             ${displayValue(item.product)}
           </p>
+
 
           <p class="stock-card-type">
             ${displayValue(item.type)}
@@ -574,7 +1177,9 @@ function renderMobile(data) {
 
         <div class="stock-card-item">
 
-          <span>MATERIAL</span>
+          <span>
+            MATERIAL
+          </span>
 
           <strong>
             ${displayValue(item.material)}
@@ -585,10 +1190,12 @@ function renderMobile(data) {
 
         <div class="stock-card-item">
 
-          <span>SIZE</span>
+          <span>
+            ITEM
+          </span>
 
           <strong>
-            ${displayValue(item.size)}
+            ${itemDisplay(item)}
           </strong>
 
         </div>
@@ -596,7 +1203,9 @@ function renderMobile(data) {
 
         <div class="stock-card-item">
 
-          <span>ASTM</span>
+          <span>
+            ASTM
+          </span>
 
           <strong>
             ${displayValue(item.astm)}
@@ -607,18 +1216,9 @@ function renderMobile(data) {
 
         <div class="stock-card-item">
 
-          <span>SCHEDULE</span>
-
-          <strong>
-            ${scheduleDisplay(item.schedule)}
-          </strong>
-
-        </div>
-
-
-        <div class="stock-card-item">
-
-          <span>GRADE / UNS</span>
+          <span>
+            GRADE / UNS
+          </span>
 
           <strong>
             ${gradeUnsDisplay(item)}
@@ -629,10 +1229,25 @@ function renderMobile(data) {
 
         <div class="stock-card-item">
 
-          <span>WT</span>
+          <span>
+            SIZE
+          </span>
 
           <strong>
-            ${wtDisplay(item.wt)}
+            ${sizeDisplay(item)}
+          </strong>
+
+        </div>
+
+
+        <div class="stock-card-item">
+
+          <span>
+            SPECIFICATION
+          </span>
+
+          <strong>
+            ${specificationDisplay(item)}
           </strong>
 
         </div>
@@ -654,31 +1269,45 @@ function renderMobile(data) {
    SHOW RESULTS
 ======================================== */
 
-function showResults(data) {
+function showResults(data){
 
   itemCount.textContent =
     data.length;
+
 
   stockCount.hidden =
     false;
 
 
-  if (data.length === 0) {
+  if(data.length === 0){
 
     stockResults.hidden =
       true;
 
+
     stockMobile.hidden =
       true;
+
+
+    stockTableBody.innerHTML =
+      "";
+
+
+    stockMobile.innerHTML =
+      "";
+
 
     noResultTitle.textContent =
       "NO STOCK FOUND";
 
+
     noResultText.textContent =
-      "Try changing the search term or filters.";
+      "Try changing the selected specifications.";
+
 
     noResults.style.display =
       "block";
+
 
     return;
 
@@ -694,18 +1323,20 @@ function showResults(data) {
   renderMobile(data);
 
 
-  if (window.innerWidth <= 850) {
+  if(window.innerWidth <= 850){
 
     stockResults.hidden =
       true;
 
+
     stockMobile.hidden =
       false;
 
-  } else {
+  }else{
 
     stockResults.hidden =
       false;
+
 
     stockMobile.hidden =
       true;
@@ -716,12 +1347,12 @@ function showResults(data) {
 
 
 /* ========================================
-   FILTER STOCK
+   APPLY FILTER
 ======================================== */
 
-function filterStock() {
+function applyFilters(){
 
-  if (!hasSearchCondition()) {
+  if(!hasSearchCondition()){
 
     hideResults();
 
@@ -730,90 +1361,8 @@ function filterStock() {
   }
 
 
-  const search =
-    normalize(stockSearch.value);
-
-
   const filtered =
-    stockData.filter(item => {
-
-
-      const searchable =
-        normalize(`
-
-          ${item.product}
-          ${item.type}
-          ${item.construction}
-          ${item.itemType}
-          ${item.material}
-          ${item.astm}
-          ${item.grade}
-          ${item.uns}
-          ${item.size}
-          ${item.schedule}
-          ${item.wt}
-
-        `);
-
-
-      return (
-
-        (
-          !search ||
-          searchable.includes(search)
-        )
-
-        &&
-
-        (
-          !productFilter.value ||
-          item.product ===
-            productFilter.value
-        )
-
-        &&
-
-        (
-          !typeFilter.value ||
-          item.type ===
-            typeFilter.value
-        )
-
-        &&
-
-        (
-          !materialFilter.value ||
-          item.material ===
-            materialFilter.value
-        )
-
-        &&
-
-        (
-          !sizeFilter.value ||
-          item.size ===
-            sizeFilter.value
-        )
-
-        &&
-
-        (
-          !astmFilter.value ||
-          item.astm ===
-            astmFilter.value
-        )
-
-        &&
-
-        (
-          !scheduleFilter.value ||
-          item.schedule ===
-            scheduleFilter.value
-        )
-
-      );
-
-    });
+    getFilteredStock();
 
 
   showResults(filtered);
@@ -822,48 +1371,79 @@ function filterStock() {
 
 
 /* ========================================
+   FILTER CHANGE
+======================================== */
+
+function filterChanged(){
+
+  updateDropdowns();
+
+  applyFilters();
+
+}
+
+
+/* ========================================
    EVENTS
 ======================================== */
 
-stockSearch.addEventListener(
-  "input",
-  filterStock
-);
-
-
 productFilter.addEventListener(
   "change",
-  filterStock
-);
-
-
-typeFilter.addEventListener(
-  "change",
-  filterStock
+  filterChanged
 );
 
 
 materialFilter.addEventListener(
   "change",
-  filterStock
+  filterChanged
 );
 
 
-sizeFilter.addEventListener(
+typeFilter.addEventListener(
   "change",
-  filterStock
+  filterChanged
+);
+
+
+itemTypeFilter.addEventListener(
+  "change",
+  filterChanged
+);
+
+
+size1Filter.addEventListener(
+  "change",
+  filterChanged
+);
+
+
+size2Filter.addEventListener(
+  "change",
+  filterChanged
 );
 
 
 astmFilter.addEventListener(
   "change",
-  filterStock
+  filterChanged
 );
 
 
-scheduleFilter.addEventListener(
+sch1Filter.addEventListener(
   "change",
-  filterStock
+  filterChanged
+);
+
+
+sch2Filter.addEventListener(
+  "change",
+  filterChanged
+);
+
+
+ratingFilter.addEventListener(
+  "change",
+  filterChanged
 );
 
 
@@ -875,19 +1455,28 @@ resetFilters.addEventListener(
   "click",
   () => {
 
-    stockSearch.value = "";
-
     productFilter.value = "";
-
-    typeFilter.value = "";
 
     materialFilter.value = "";
 
-    sizeFilter.value = "";
+    typeFilter.value = "";
+
+    itemTypeFilter.value = "";
+
+    size1Filter.value = "";
+
+    size2Filter.value = "";
 
     astmFilter.value = "";
 
-    scheduleFilter.value = "";
+    sch1Filter.value = "";
+
+    sch2Filter.value = "";
+
+    ratingFilter.value = "";
+
+
+    updateDropdowns();
 
     hideResults();
 
@@ -903,8 +1492,10 @@ window.addEventListener(
   "resize",
   () => {
 
-    if (hasSearchCondition()) {
-      filterStock();
+    if(hasSearchCondition()){
+
+      applyFilters();
+
     }
 
   }
@@ -915,13 +1506,15 @@ window.addEventListener(
    LOAD INVENTORY
 ======================================== */
 
-async function loadStock() {
+async function loadStock(){
 
   stockResults.hidden =
     true;
 
+
   stockMobile.hidden =
     true;
+
 
   stockCount.hidden =
     true;
@@ -930,25 +1523,27 @@ async function loadStock() {
   noResultTitle.textContent =
     "LOADING INVENTORY";
 
+
   noResultText.textContent =
     "Retrieving current stock availability.";
+
 
   noResults.style.display =
     "block";
 
 
-  try {
+  try{
 
     const response =
       await fetch(
         API_URL,
         {
-          cache: "no-store"
+          cache:"no-store"
         }
       );
 
 
-    if (!response.ok) {
+    if(!response.ok){
 
       throw new Error(
         `API error ${response.status}`
@@ -961,10 +1556,10 @@ async function loadStock() {
       await response.json();
 
 
-    if (
+    if(
       result.success !== true ||
       !Array.isArray(result.stock)
-    ) {
+    ){
 
       throw new Error(
         "Invalid inventory response"
@@ -974,28 +1569,64 @@ async function loadStock() {
 
 
     stockData =
-      result.stock;
+      result.stock.map(item => ({
+
+        ...item,
+
+        product:
+          clean(item.product),
+
+        type:
+          clean(item.type),
+
+        construction:
+          clean(item.construction),
+
+        itemType:
+          clean(item.itemType),
+
+        material:
+          clean(item.material),
+
+        astm:
+          clean(item.astm),
+
+        grade:
+          clean(item.grade),
+
+        uns:
+          clean(item.uns),
+
+        size1:
+          clean(item.size1),
+
+        size2:
+          clean(item.size2),
+
+        sch1:
+          clean(item.sch1),
+
+        sch2:
+          clean(item.sch2),
+
+        rating:
+          clean(item.rating),
+
+        wt:
+          clean(item.wt),
+
+        status:
+          clean(item.status) || "AVAILABLE"
+
+      }));
 
 
-    console.log(
-      "SIERRA stock loaded:",
-      stockData
-    );
-
-
-    /*
-       IMPORTANT
-
-       Build dropdowns
-       but DO NOT show stock.
-    */
-
-    buildFilters();
+    updateDropdowns();
 
     hideResults();
 
 
-  } catch (error) {
+  }catch(error){
 
     console.error(
       "SIERRA inventory error:",
@@ -1006,11 +1637,25 @@ async function loadStock() {
     stockData = [];
 
 
+    stockResults.hidden =
+      true;
+
+
+    stockMobile.hidden =
+      true;
+
+
+    stockCount.hidden =
+      true;
+
+
     noResultTitle.textContent =
       "INVENTORY TEMPORARILY UNAVAILABLE";
 
+
     noResultText.textContent =
       "Please contact SIERRA ALLOYS for current availability.";
+
 
     noResults.style.display =
       "block";
