@@ -1,530 +1,892 @@
-<!doctype html>
-<html lang="en">
+/* ========================================
+   SIERRA ALLOYS STOCK
+   AIRTABLE LIVE INVENTORY
+======================================== */
 
-<head>
-  <meta charset="utf-8">
+const API_URL =
+  "https://sierra-inventory.mgsong23.workers.dev/";
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
-
-  <meta
-    name="description"
-    content="SIERRA ALLOYS — Available stock search."
-  >
-
-  <meta
-    name="theme-color"
-    content="#090909"
-  >
-
-  <title>Stock | SIERRA ALLOYS</title>
-
-  <!-- STOCK CSS ONLY -->
-  <link
-    rel="stylesheet"
-    href="./stock.css"
-  >
-</head>
+let stockData = [];
 
 
-<body>
+/* ========================================
+   ELEMENTS
+======================================== */
+
+const stockSearch =
+  document.getElementById("stockSearch");
+
+const materialFilter =
+  document.getElementById("materialFilter");
+
+const productFilter =
+  document.getElementById("productFilter");
+
+const typeFilter =
+  document.getElementById("typeFilter");
+
+const sizeFilter =
+  document.getElementById("sizeFilter");
+
+const astmFilter =
+  document.getElementById("astmFilter");
+
+const scheduleFilter =
+  document.getElementById("scheduleFilter");
+
+const resetFilters =
+  document.getElementById("resetFilters");
+
+const stockTableBody =
+  document.getElementById("stockTableBody");
+
+const stockMobile =
+  document.getElementById("stockMobile");
+
+const itemCount =
+  document.getElementById("itemCount");
+
+const noResults =
+  document.getElementById("noResults");
+
+const noResultTitle =
+  document.getElementById("noResultTitle");
+
+const noResultText =
+  document.getElementById("noResultText");
 
 
-<!-- ========================================
-     HEADER
-======================================== -->
+/* ========================================
+   HELPERS
+======================================== */
 
-<header class="stock-header">
+function normalize(value){
 
-  <a
-    class="stock-brand"
-    href="./index.html"
-    aria-label="SIERRA ALLOYS Home"
-  >
+  return String(value || "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
 
-    <img
-      src="./assets/sierra%20logo%20web2.png"
-      alt="SIERRA ALLOYS"
-    >
-
-  </a>
+}
 
 
-  <a
-    class="back-link"
-    href="./index.html"
-  >
-    BACK TO HOME
-  </a>
+function displayValue(value){
 
-</header>
+  if(
+    value === "" ||
+    value === null ||
+    value === undefined
+  ){
+    return "—";
+  }
 
+  return value;
 
-
-<main>
-
-
-<!-- ========================================
-     HERO
-======================================== -->
-
-<section class="stock-hero">
-
-  <div class="stock-hero-inner">
-
-    <p class="hero-eyebrow">
-      SIERRA ALLOYS / INVENTORY
-    </p>
+}
 
 
-    <h1>
-      AVAILABLE<br>
-      STOCK.
-    </h1>
+function scheduleDisplay(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const text =
+    String(value).trim().toUpperCase();
+
+  if(text.startsWith("SCH")){
+    return text.replace(/^SCH\s*/, "SCH ");
+  }
+
+  if(
+    text === "STD" ||
+    text === "XS" ||
+    text === "XXS"
+  ){
+    return text;
+  }
+
+  return `SCH ${text}`;
+
+}
 
 
-    <p class="hero-intro">
-      Search our available piping materials by
-      material grade, product type and specification.
-    </p>
+function wtDisplay(value){
 
-  </div>
+  if(
+    value === "" ||
+    value === null ||
+    value === undefined
+  ){
+    return "—";
+  }
 
-</section>
+  return `${value} mm`;
 
-
-
-<!-- ========================================
-     STOCK SEARCH
-======================================== -->
-
-<section class="stock-section">
-
-  <div class="stock-container">
+}
 
 
-    <!-- SEARCH HEADER -->
+function materialDisplay(item){
 
-    <div class="search-head">
+  const material =
+    String(item.material || "").trim();
 
-      <div>
+  const grade =
+    String(item.grade || "").trim();
 
-        <p class="section-label">
-          STOCK SEARCH
-        </p>
+  if(!material){
+    return grade || "—";
+  }
 
-        <h2>
-          Find materials.
-        </h2>
+  if(!grade){
+    return material;
+  }
 
-      </div>
+  /*
+     For Duplex / Super Duplex etc.
+     show grade together with material.
+  */
+
+  if(
+    normalize(material).includes("duplex") ||
+    normalize(material).includes("nickel") ||
+    normalize(material).includes("titanium") ||
+    normalize(material).includes("smo")
+  ){
+    return `${material} ${grade}`;
+  }
+
+  return material;
+
+}
 
 
-      <div class="stock-count">
+function gradeUnsDisplay(item){
 
-        <span id="itemCount">
-          0
+  const grade =
+    String(item.grade || "").trim();
+
+  const uns =
+    String(item.uns || "").trim();
+
+  if(!grade && !uns){
+    return "—";
+  }
+
+  if(
+    normalize(grade) === normalize(uns)
+  ){
+    return grade;
+  }
+
+  if(grade && uns){
+    return `${grade} / ${uns}`;
+  }
+
+  return grade || uns;
+
+}
+
+
+/* ========================================
+   SORT HELPERS
+======================================== */
+
+function sizeToNumber(value){
+
+  const text =
+    String(value || "")
+      .replace(/"/g, "")
+      .trim();
+
+  if(!text){
+    return 999999;
+  }
+
+  if(text.includes("-")){
+
+    const parts = text.split("-");
+
+    const whole =
+      parseFloat(parts[0]) || 0;
+
+    const fraction =
+      parts[1] || "";
+
+    if(fraction.includes("/")){
+
+      const f =
+        fraction.split("/");
+
+      return whole +
+        (parseFloat(f[0]) / parseFloat(f[1]));
+
+    }
+
+  }
+
+  if(text.includes("/")){
+
+    const f =
+      text.split("/");
+
+    return parseFloat(f[0]) /
+      parseFloat(f[1]);
+
+  }
+
+  return parseFloat(text) || 999999;
+
+}
+
+
+/* ========================================
+   FILTER OPTION GENERATOR
+======================================== */
+
+function setOptions(
+  element,
+  values,
+  allLabel,
+  sortFunction = null
+){
+
+  const previous =
+    element.value;
+
+  const unique =
+    [...new Set(
+      values
+        .filter(value =>
+          value !== null &&
+          value !== undefined &&
+          String(value).trim() !== ""
+        )
+        .map(value =>
+          String(value).trim()
+        )
+    )];
+
+  if(sortFunction){
+    unique.sort(sortFunction);
+  }else{
+    unique.sort((a,b) =>
+      a.localeCompare(b, undefined, {
+        numeric:true,
+        sensitivity:"base"
+      })
+    );
+  }
+
+  element.innerHTML =
+    `<option value="">${allLabel}</option>`;
+
+  unique.forEach(value => {
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      value;
+
+    option.textContent =
+      value;
+
+    element.appendChild(option);
+
+  });
+
+  if(unique.includes(previous)){
+    element.value = previous;
+  }
+
+}
+
+
+/* ========================================
+   DYNAMIC FILTERS
+======================================== */
+
+function updateFilters(){
+
+  /*
+    Product options always use all stock.
+  */
+
+  setOptions(
+    productFilter,
+    stockData.map(item => item.product),
+    "ALL PRODUCTS"
+  );
+
+
+  /*
+    Other dropdowns respond to
+    current selections.
+  */
+
+  const product =
+    productFilter.value;
+
+  const type =
+    typeFilter.value;
+
+  const material =
+    materialFilter.value;
+
+
+  const relevantForType =
+    stockData.filter(item =>
+      !product ||
+      item.product === product
+    );
+
+
+  setOptions(
+    typeFilter,
+    relevantForType.map(item => item.type),
+    "ALL TYPES"
+  );
+
+
+  const relevantForMaterial =
+    stockData.filter(item =>
+
+      (!product || item.product === product)
+
+      &&
+
+      (!typeFilter.value ||
+        item.type === typeFilter.value)
+
+    );
+
+
+  setOptions(
+    materialFilter,
+    relevantForMaterial.map(item => item.material),
+    "ALL MATERIALS"
+  );
+
+
+  const relevant =
+    stockData.filter(item =>
+
+      (!productFilter.value ||
+        item.product === productFilter.value)
+
+      &&
+
+      (!typeFilter.value ||
+        item.type === typeFilter.value)
+
+      &&
+
+      (!materialFilter.value ||
+        item.material === materialFilter.value)
+
+    );
+
+
+  setOptions(
+    sizeFilter,
+    relevant.map(item => item.size),
+    "ALL SIZES",
+    (a,b) =>
+      sizeToNumber(a) - sizeToNumber(b)
+  );
+
+
+  setOptions(
+    astmFilter,
+    relevant.map(item => item.astm),
+    "ALL ASTM"
+  );
+
+
+  setOptions(
+    scheduleFilter,
+    relevant.map(item => item.schedule),
+    "ALL SCHEDULES"
+  );
+
+}
+
+
+/* ========================================
+   DESKTOP TABLE
+======================================== */
+
+function renderDesktop(data){
+
+  stockTableBody.innerHTML = "";
+
+  data.forEach(item => {
+
+    const row =
+      document.createElement("tr");
+
+    row.innerHTML = `
+
+      <td>
+        ${displayValue(item.product)}
+      </td>
+
+      <td>
+        ${displayValue(item.type)}
+      </td>
+
+      <td>
+        ${materialDisplay(item)}
+      </td>
+
+      <td>
+        ${displayValue(item.astm)}
+      </td>
+
+      <td>
+        ${gradeUnsDisplay(item)}
+      </td>
+
+      <td>
+        ${displayValue(item.size)}
+      </td>
+
+      <td>
+        ${scheduleDisplay(item.schedule)}
+      </td>
+
+      <td>
+        ${wtDisplay(item.wt)}
+      </td>
+
+      <td>
+        <span class="status">
+          ${displayValue(item.status)}
+        </span>
+      </td>
+
+    `;
+
+    stockTableBody.appendChild(row);
+
+  });
+
+}
+
+
+/* ========================================
+   MOBILE CARDS
+======================================== */
+
+function renderMobile(data){
+
+  stockMobile.innerHTML = "";
+
+  data.forEach(item => {
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      "stock-card";
+
+    card.innerHTML = `
+
+      <div class="stock-card-top">
+
+        <div>
+
+          <p class="stock-card-product">
+            ${displayValue(item.product)}
+          </p>
+
+          <p class="stock-card-type">
+            ${displayValue(item.type)}
+          </p>
+
+        </div>
+
+        <span class="status">
+          ${displayValue(item.status)}
         </span>
 
-        <small>
-          ITEMS FOUND
-        </small>
-
-      </div>
-
-    </div>
-
-
-
-    <!-- SEARCH -->
-
-    <div class="search-box">
-
-      <span class="search-icon">
-        ⌕
-      </span>
-
-
-      <input
-        type="search"
-        id="stockSearch"
-        placeholder="Search material, type, size, rating, schedule..."
-        autocomplete="off"
-      >
-
-    </div>
-
-
-
-    <!-- ========================================
-         FILTERS
-    ========================================= -->
-
-    <div class="filters">
-
-
-      <!-- MATERIAL -->
-
-      <div class="filter-group">
-
-        <label for="materialFilter">
-          MATERIAL
-        </label>
-
-
-        <select id="materialFilter">
-
-          <option value="">
-            ALL MATERIALS
-          </option>
-
-          <option value="SS304">
-            SS304
-          </option>
-
-          <option value="SS316">
-            SS316
-          </option>
-
-          <option value="S31803">
-            DUPLEX S31803
-          </option>
-
-          <option value="S32205">
-            DUPLEX S32205
-          </option>
-
-          <option value="S32750">
-            SUPER DUPLEX S32750
-          </option>
-
-          <option value="S32760">
-            SUPER DUPLEX S32760
-          </option>
-
-          <option value="TITANIUM">
-            TITANIUM
-          </option>
-
-          <option value="NICKEL ALLOY">
-            NICKEL ALLOY
-          </option>
-
-        </select>
-
       </div>
 
 
+      <div class="stock-card-grid">
 
-      <!-- PRODUCT -->
+        <div class="stock-card-item">
 
-      <div class="filter-group">
+          <span>MATERIAL</span>
 
-        <label for="productFilter">
-          PRODUCT
-        </label>
+          <strong>
+            ${materialDisplay(item)}
+          </strong>
 
-
-        <select id="productFilter">
-
-          <option value="">
-            ALL PRODUCTS
-          </option>
-
-          <option value="PIPE">
-            PIPE
-          </option>
-
-          <option value="FITTING">
-            FITTING
-          </option>
-
-          <option value="FLANGE">
-            FLANGE
-          </option>
-
-        </select>
-
-      </div>
+        </div>
 
 
+        <div class="stock-card-item">
 
-      <!-- TYPE -->
+          <span>SIZE</span>
 
-      <div class="filter-group">
+          <strong>
+            ${displayValue(item.size)}
+          </strong>
 
-        <label for="typeFilter">
-          TYPE
-        </label>
-
-
-        <select id="typeFilter">
-
-          <option value="">
-            ALL TYPES
-          </option>
-
-        </select>
-
-      </div>
+        </div>
 
 
+        <div class="stock-card-item">
 
-      <!-- SIZE -->
+          <span>ASTM</span>
 
-      <div class="filter-group">
+          <strong>
+            ${displayValue(item.astm)}
+          </strong>
 
-        <label for="sizeFilter">
-          SIZE
-        </label>
+        </div>
 
 
-        <select id="sizeFilter">
+        <div class="stock-card-item">
 
-          <option value="">
-            ALL SIZES
-          </option>
+          <span>SCHEDULE</span>
 
-          <option value='1/2"'>1/2"</option>
-          <option value='3/4"'>3/4"</option>
-          <option value='1"'>1"</option>
-          <option value='1-1/2"'>1-1/2"</option>
-          <option value='2"'>2"</option>
-          <option value='2-1/2"'>2-1/2"</option>
-          <option value='3"'>3"</option>
-          <option value='4"'>4"</option>
-          <option value='6"'>6"</option>
-          <option value='8"'>8"</option>
-          <option value='10"'>10"</option>
-          <option value='12"'>12"</option>
-          <option value='14"'>14"</option>
-          <option value='16"'>16"</option>
-          <option value='18"'>18"</option>
-          <option value='20"'>20"</option>
-          <option value='24"'>24"</option>
+          <strong>
+            ${scheduleDisplay(item.schedule)}
+          </strong>
 
-        </select>
+        </div>
+
+
+        <div class="stock-card-item">
+
+          <span>GRADE / UNS</span>
+
+          <strong>
+            ${gradeUnsDisplay(item)}
+          </strong>
+
+        </div>
+
+
+        <div class="stock-card-item">
+
+          <span>WT</span>
+
+          <strong>
+            ${wtDisplay(item.wt)}
+          </strong>
+
+        </div>
 
       </div>
 
+    `;
 
+    stockMobile.appendChild(card);
 
-      <!-- RATING -->
+  });
 
-      <div class="filter-group">
+}
 
-        <label for="ratingFilter">
-          RATING
-        </label>
 
+/* ========================================
+   RENDER
+======================================== */
 
-        <select id="ratingFilter">
+function renderStock(data){
 
-          <option value="">
-            ALL RATINGS
-          </option>
+  itemCount.textContent =
+    data.length;
 
-          <option value="CL150">CL150</option>
-          <option value="CL300">CL300</option>
-          <option value="CL600">CL600</option>
-          <option value="CL900">CL900</option>
-          <option value="CL1500">CL1500</option>
-          <option value="CL2500">CL2500</option>
+  renderDesktop(data);
 
-        </select>
+  renderMobile(data);
 
-      </div>
+  noResults.style.display =
+    data.length === 0
+      ? "block"
+      : "none";
 
+}
 
 
-      <!-- SCHEDULE -->
+/* ========================================
+   FILTER
+======================================== */
 
-      <div class="filter-group">
+function filterStock(){
 
-        <label for="scheduleFilter">
-          SCHEDULE
-        </label>
+  const search =
+    normalize(stockSearch.value);
 
+  const filtered =
+    stockData.filter(item => {
 
-        <select id="scheduleFilter">
+      const searchable =
+        normalize(`
 
-          <option value="">
-            ALL SCHEDULES
-          </option>
+          ${item.product}
+          ${item.type}
+          ${item.construction}
+          ${item.itemType}
+          ${item.material}
+          ${item.astm}
+          ${item.grade}
+          ${item.uns}
+          ${item.size}
+          ${item.schedule}
+          ${item.wt}
 
-          <option value="SCH 5S">SCH 5S</option>
-          <option value="SCH 10S">SCH 10S</option>
-          <option value="SCH 10">SCH 10</option>
-          <option value="SCH 20">SCH 20</option>
-          <option value="SCH 40">SCH 40</option>
-          <option value="SCH 40S">SCH 40S</option>
-          <option value="SCH 80">SCH 80</option>
-          <option value="SCH 80S">SCH 80S</option>
-          <option value="SCH 120">SCH 120</option>
-          <option value="SCH 160">SCH 160</option>
-          <option value="XXS">XXS</option>
+        `);
 
-        </select>
+      return(
 
-      </div>
+        (
+          !search ||
+          searchable.includes(search)
+        )
 
+        &&
 
+        (
+          !materialFilter.value ||
+          item.material ===
+            materialFilter.value
+        )
 
-      <!-- RESET -->
+        &&
 
-      <button
-        class="reset-button"
-        id="resetFilters"
-        type="button"
-      >
-        RESET
-      </button>
+        (
+          !productFilter.value ||
+          item.product ===
+            productFilter.value
+        )
 
-    </div>
+        &&
 
+        (
+          !typeFilter.value ||
+          item.type ===
+            typeFilter.value
+        )
 
+        &&
 
-    <!-- ========================================
-         DESKTOP TABLE
-    ========================================= -->
+        (
+          !sizeFilter.value ||
+          item.size ===
+            sizeFilter.value
+        )
 
-    <div class="table-wrap">
+        &&
 
-      <table class="stock-table">
+        (
+          !astmFilter.value ||
+          item.astm ===
+            astmFilter.value
+        )
 
-        <thead>
+        &&
 
-          <tr>
-            <th>PRODUCT</th>
-            <th>TYPE</th>
-            <th>MATERIAL</th>
-            <th>DESCRIPTION</th>
-            <th>SIZE</th>
-            <th>RATING</th>
-            <th>SCHEDULE</th>
-            <th>QTY</th>
-            <th>STATUS</th>
-          </tr>
+        (
+          !scheduleFilter.value ||
+          item.schedule ===
+            scheduleFilter.value
+        )
 
-        </thead>
+      );
 
+    });
 
-        <tbody id="stockTableBody">
-        </tbody>
+  renderStock(filtered);
 
-      </table>
+}
 
-    </div>
 
+/* ========================================
+   FILTER CHANGE
+======================================== */
 
+function filterChanged(){
 
-    <!-- ========================================
-         MOBILE CARDS
-    ========================================= -->
+  updateFilters();
 
-    <div
-      class="stock-mobile"
-      id="stockMobile"
-    >
-    </div>
+  filterStock();
 
+}
 
 
-    <!-- ========================================
-         NO RESULTS
-    ========================================= -->
+/* ========================================
+   EVENTS
+======================================== */
 
-    <div
-      class="no-result"
-      id="noResults"
-    >
+stockSearch.addEventListener(
+  "input",
+  filterStock
+);
 
-      <strong>
-        NO STOCK FOUND
-      </strong>
 
-      <p>
-        Try changing the search term or filters.
-      </p>
+productFilter.addEventListener(
+  "change",
+  filterChanged
+);
 
-    </div>
 
+typeFilter.addEventListener(
+  "change",
+  filterChanged
+);
 
 
-    <!-- ========================================
-         INQUIRY
-    ========================================= -->
+materialFilter.addEventListener(
+  "change",
+  filterChanged
+);
 
-    <section class="stock-contact">
 
-      <div>
+sizeFilter.addEventListener(
+  "change",
+  filterStock
+);
 
-        <p class="section-label">
-          MATERIAL INQUIRY
-        </p>
 
+astmFilter.addEventListener(
+  "change",
+  filterStock
+);
 
-        <h2>
-          Need more<br>
-          information?
-        </h2>
 
-      </div>
+scheduleFilter.addEventListener(
+  "change",
+  filterStock
+);
 
 
-      <div class="contact-right">
+/* ========================================
+   RESET
+======================================== */
 
-        <p>
-          Stock availability is subject to prior sale.
-          Please contact SIERRA ALLOYS for current availability,
-          documentation and commercial terms.
-        </p>
+resetFilters.addEventListener(
+  "click",
+  () => {
 
+    stockSearch.value = "";
 
-        <a
-          href="mailto:info@sierra-alloys.com"
-          class="inquiry-button"
-        >
-          SEND INQUIRY
-          <span>↗</span>
-        </a>
+    productFilter.value = "";
+    typeFilter.value = "";
+    materialFilter.value = "";
+    sizeFilter.value = "";
+    astmFilter.value = "";
+    scheduleFilter.value = "";
 
-      </div>
+    updateFilters();
 
-    </section>
+    renderStock(stockData);
 
+  }
+);
 
-  </div>
 
-</section>
+/* ========================================
+   LOAD AIRTABLE STOCK
+======================================== */
 
+async function loadStock(){
 
-</main>
+  noResultTitle.textContent =
+    "LOADING STOCK";
 
+  noResultText.textContent =
+    "Retrieving current inventory.";
 
+  noResults.style.display =
+    "block";
 
-<!-- ========================================
-     FOOTER
-======================================== -->
 
-<footer>
+  try{
 
-  <span>
-    © 2026 SIERRA INC.
-  </span>
+    const response =
+      await fetch(API_URL, {
+        cache:"no-store"
+      });
 
-  <span>
-    STEEL &amp; ALLOY MATERIALS SOLUTIONS
-  </span>
 
-</footer>
+    if(!response.ok){
 
+      throw new Error(
+        `API error ${response.status}`
+      );
 
+    }
 
-<script src="./stock.js"></script>
 
+    const result =
+      await response.json();
 
-</body>
-</html>
+
+    if(
+      !result.success ||
+      !Array.isArray(result.stock)
+    ){
+
+      throw new Error(
+        "Invalid inventory response"
+      );
+
+    }
+
+
+    stockData =
+      result.stock;
+
+
+    updateFilters();
+
+    renderStock(stockData);
+
+
+    noResultTitle.textContent =
+      "NO STOCK FOUND";
+
+    noResultText.textContent =
+      "Try changing the search term or filters.";
+
+
+  }catch(error){
+
+    console.error(
+      "SIERRA inventory error:",
+      error
+    );
+
+
+    stockData = [];
+
+    itemCount.textContent = "0";
+
+    stockTableBody.innerHTML = "";
+    stockMobile.innerHTML = "";
+
+
+    noResultTitle.textContent =
+      "INVENTORY TEMPORARILY UNAVAILABLE";
+
+    noResultText.textContent =
+      "Please contact SIERRA ALLOYS for current availability.";
+
+    noResults.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* ========================================
+   INITIAL
+======================================== */
+
+loadStock();
