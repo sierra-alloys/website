@@ -1495,9 +1495,9 @@ footer{
     z-index:9999 !important;
 
     /* BOX SIZE */
-    width:300px !important;
-    min-width:300px !important;
-    max-width:300px !important;
+    width:250px !important;
+    min-width:250px !important;
+    max-width:250px !important;
 
     height:150px !important;
     min-height:150px !important;
@@ -1540,7 +1540,7 @@ footer{
 
 
   .floating-stock-top > span:first-child{
-    font-size:10px !important;
+    font-size:15px !important;
     font-weight:600 !important;
 
     line-height:1 !important;
