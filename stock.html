@@ -21,8 +21,12 @@
 
   <title>Stock | SIERRA ALLOYS</title>
 
-  <link rel="stylesheet" href="./stock.css">
+  <link
+    rel="stylesheet"
+    href="./stock.css?v=20260919-3"
+  >
 </head>
+
 
 <body>
 
@@ -57,6 +61,7 @@
 </header>
 
 
+
 <main>
 
 
@@ -81,7 +86,7 @@
 
     <p class="hero-intro">
       Search our available piping materials by
-      material grade, product type and specification.
+      product, material and specification.
     </p>
 
   </div>
@@ -109,6 +114,7 @@
           STOCK SEARCH
         </p>
 
+
         <h2>
           Find materials.
         </h2>
@@ -126,6 +132,7 @@
           0
         </span>
 
+
         <small>
           ITEMS FOUND
         </small>
@@ -136,40 +143,27 @@
 
 
 
-    <!-- SEARCH BOX -->
-
-    <div class="search-box">
-
-      <span class="search-icon">
-        ⌕
-      </span>
-
-
-      <input
-        type="search"
-        id="stockSearch"
-        placeholder="Search material, type, size, ASTM, grade, schedule..."
-        autocomplete="off"
-      >
-
-    </div>
-
-
-
     <!-- ========================================
          FILTERS
     ========================================= -->
 
-    <div class="filters">
+    <div
+      class="filters"
+      id="stockFilters"
+    >
 
 
       <!-- MATERIAL -->
 
-      <div class="filter-group">
+      <div
+        class="filter-group"
+        id="materialGroup"
+      >
 
         <label for="materialFilter">
           MATERIAL
         </label>
+
 
         <select id="materialFilter">
 
@@ -185,11 +179,15 @@
 
       <!-- PRODUCT -->
 
-      <div class="filter-group">
+      <div
+        class="filter-group"
+        id="productGroup"
+      >
 
         <label for="productFilter">
           PRODUCT
         </label>
+
 
         <select id="productFilter">
 
@@ -205,11 +203,15 @@
 
       <!-- TYPE -->
 
-      <div class="filter-group">
+      <div
+        class="filter-group"
+        id="typeGroup"
+      >
 
         <label for="typeFilter">
           TYPE
         </label>
+
 
         <select id="typeFilter">
 
@@ -223,15 +225,47 @@
 
 
 
-      <!-- SIZE -->
+      <!-- ITEM TYPE -->
 
-      <div class="filter-group">
+      <div
+        class="filter-group optional-filter"
+        id="itemTypeGroup"
+        hidden
+      >
 
-        <label for="sizeFilter">
+        <label for="itemTypeFilter">
+          ITEM TYPE
+        </label>
+
+
+        <select id="itemTypeFilter">
+
+          <option value="">
+            ALL ITEM TYPES
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- SIZE 1 -->
+
+      <div
+        class="filter-group"
+        id="size1Group"
+      >
+
+        <label
+          for="size1Filter"
+          id="size1Label"
+        >
           SIZE
         </label>
 
-        <select id="sizeFilter">
+
+        <select id="size1Filter">
 
           <option value="">
             ALL SIZES
@@ -243,13 +277,42 @@
 
 
 
+      <!-- SIZE 2 -->
+
+      <div
+        class="filter-group optional-filter"
+        id="size2Group"
+        hidden
+      >
+
+        <label for="size2Filter">
+          SIZE 2
+        </label>
+
+
+        <select id="size2Filter">
+
+          <option value="">
+            ALL SIZE 2
+          </option>
+
+        </select>
+
+      </div>
+
+
+
       <!-- ASTM -->
 
-      <div class="filter-group">
+      <div
+        class="filter-group"
+        id="astmGroup"
+      >
 
         <label for="astmFilter">
           ASTM
         </label>
+
 
         <select id="astmFilter">
 
@@ -263,18 +326,75 @@
 
 
 
-      <!-- SCHEDULE -->
+      <!-- SCH 1 -->
 
-      <div class="filter-group">
+      <div
+        class="filter-group"
+        id="sch1Group"
+      >
 
-        <label for="scheduleFilter">
+        <label
+          for="sch1Filter"
+          id="sch1Label"
+        >
           SCHEDULE
         </label>
 
-        <select id="scheduleFilter">
+
+        <select id="sch1Filter">
 
           <option value="">
             ALL SCHEDULES
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- SCH 2 -->
+
+      <div
+        class="filter-group optional-filter"
+        id="sch2Group"
+        hidden
+      >
+
+        <label for="sch2Filter">
+          SCH 2
+        </label>
+
+
+        <select id="sch2Filter">
+
+          <option value="">
+            ALL SCH 2
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- RATING -->
+
+      <div
+        class="filter-group optional-filter"
+        id="ratingGroup"
+        hidden
+      >
+
+        <label for="ratingFilter">
+          RATING
+        </label>
+
+
+        <select id="ratingFilter">
+
+          <option value="">
+            ALL RATINGS
           </option>
 
         </select>
@@ -293,12 +413,13 @@
         RESET
       </button>
 
+
     </div>
 
 
 
     <!-- ========================================
-         INITIAL MESSAGE / NO RESULT
+         MESSAGE
     ========================================= -->
 
     <div
@@ -309,6 +430,7 @@
       <strong id="noResultTitle">
         LOADING INVENTORY
       </strong>
+
 
       <p id="noResultText">
         Retrieving current stock availability.
@@ -338,6 +460,8 @@
 
             <th>TYPE</th>
 
+            <th>ITEM</th>
+
             <th>MATERIAL</th>
 
             <th>ASTM</th>
@@ -346,9 +470,7 @@
 
             <th>SIZE</th>
 
-            <th>SCHEDULE</th>
-
-            <th>WT</th>
+            <th>SPECIFICATION</th>
 
             <th>STATUS</th>
 
@@ -380,7 +502,7 @@
 
 
     <!-- ========================================
-         INQUIRY
+         CONTACT
     ========================================= -->
 
     <section class="stock-contact">
@@ -446,6 +568,7 @@
     © 2026 SIERRA INC.
   </span>
 
+
   <span>
     STEEL &amp; ALLOY MATERIALS SOLUTIONS
   </span>
@@ -453,7 +576,7 @@
 </footer>
 
 
-<script src="./stock.js?v=20260919-1"></script>
+<script src="./stock.js?v=20260919-3"></script>
 
 
 </body>
