@@ -1471,3 +1471,143 @@ footer{
   }
 
 }
+
+/* ========================================
+   STOCK CARD - FINAL DESKTOP
+======================================== */
+
+@media(min-width:851px){
+
+  .floating-stock{
+    position:fixed !important;
+
+    /* 화면 세로 중앙 */
+    top:50% !important;
+
+    /* 오른쪽에서 약 1cm */
+    right:38px !important;
+
+    bottom:auto !important;
+    left:auto !important;
+
+    transform:translateY(-50%) !important;
+
+    z-index:9999 !important;
+
+    /* BOX SIZE */
+    width:300px !important;
+    min-width:300px !important;
+    max-width:300px !important;
+
+    height:150px !important;
+    min-height:150px !important;
+    max-height:150px !important;
+
+    padding:25px 26px !important;
+
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    justify-content:space-between !important;
+
+    background:rgba(9,9,9,.90) !important;
+
+    border:1px solid rgba(255,255,255,.20) !important;
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    color:#fff !important;
+
+    box-shadow:
+      0 12px 35px rgba(0,0,0,.22) !important;
+
+    text-decoration:none !important;
+
+    overflow:hidden !important;
+  }
+
+
+  /* STOCK + ARROW */
+
+  .floating-stock-top{
+    width:100% !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+  }
+
+
+  .floating-stock-top > span:first-child{
+    font-size:10px !important;
+    font-weight:600 !important;
+
+    line-height:1 !important;
+
+    letter-spacing:.20em !important;
+
+    white-space:nowrap !important;
+
+    color:#fff !important;
+  }
+
+
+  /* ARROW */
+
+  .floating-stock-arrow{
+    display:block !important;
+
+    margin:0 !important;
+
+    font-size:17px !important;
+    font-weight:300 !important;
+
+    line-height:1 !important;
+
+    letter-spacing:0 !important;
+
+    color:rgba(255,255,255,.8) !important;
+  }
+
+
+  /* DESCRIPTION */
+
+  .floating-stock-description{
+    display:block !important;
+
+    width:100% !important;
+    max-width:none !important;
+
+    margin:0 !important;
+
+    font-size:11px !important;
+    font-weight:400 !important;
+
+    line-height:1.55 !important;
+
+    letter-spacing:.01em !important;
+
+    color:rgba(255,255,255,.58) !important;
+
+    white-space:normal !important;
+    word-break:keep-all !important;
+  }
+
+
+  /* HOVER */
+
+  .floating-stock:hover{
+    transform:
+      translateY(-50%)
+      translateY(-4px) !important;
+
+    background:rgba(15,15,15,.97) !important;
+  }
+
+
+  .floating-stock:hover .floating-stock-arrow{
+    transform:translate(3px,-3px);
+  }
+
+}
