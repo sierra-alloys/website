@@ -26,6 +26,11 @@
 
 <body>
 
+
+<!-- ========================================
+     HEADER
+======================================== -->
+
 <header class="stock-header">
 
   <a
@@ -33,13 +38,19 @@
     href="./index.html"
     aria-label="SIERRA ALLOYS Home"
   >
+
     <img
       src="./assets/sierra%20logo%20web2.png"
       alt="SIERRA ALLOYS"
     >
+
   </a>
 
-  <a class="back-link" href="./index.html">
+
+  <a
+    class="back-link"
+    href="./index.html"
+  >
     BACK TO HOME
   </a>
 
@@ -47,6 +58,11 @@
 
 
 <main>
+
+
+<!-- ========================================
+     HERO
+======================================== -->
 
 <section class="stock-hero">
 
@@ -56,10 +72,12 @@
       SIERRA ALLOYS / INVENTORY
     </p>
 
+
     <h1>
       AVAILABLE<br>
       STOCK.
     </h1>
+
 
     <p class="hero-intro">
       Search our available piping materials by
@@ -71,9 +89,17 @@
 </section>
 
 
+
+<!-- ========================================
+     STOCK SEARCH
+======================================== -->
+
 <section class="stock-section">
 
   <div class="stock-container">
+
+
+    <!-- SEARCH HEADER -->
 
     <div class="search-head">
 
@@ -89,9 +115,16 @@
 
       </div>
 
-      <div class="stock-count">
 
-        <span id="itemCount">0</span>
+      <div
+        class="stock-count"
+        id="stockCount"
+        hidden
+      >
+
+        <span id="itemCount">
+          0
+        </span>
 
         <small>
           ITEMS FOUND
@@ -102,9 +135,15 @@
     </div>
 
 
+
+    <!-- SEARCH BOX -->
+
     <div class="search-box">
 
-      <span class="search-icon">⌕</span>
+      <span class="search-icon">
+        ⌕
+      </span>
+
 
       <input
         type="search"
@@ -116,7 +155,15 @@
     </div>
 
 
+
+    <!-- ========================================
+         FILTERS
+    ========================================= -->
+
     <div class="filters">
+
+
+      <!-- MATERIAL -->
 
       <div class="filter-group">
 
@@ -125,11 +172,18 @@
         </label>
 
         <select id="materialFilter">
-          <option value="">ALL MATERIALS</option>
+
+          <option value="">
+            ALL MATERIALS
+          </option>
+
         </select>
 
       </div>
 
+
+
+      <!-- PRODUCT -->
 
       <div class="filter-group">
 
@@ -138,11 +192,18 @@
         </label>
 
         <select id="productFilter">
-          <option value="">ALL PRODUCTS</option>
+
+          <option value="">
+            ALL PRODUCTS
+          </option>
+
         </select>
 
       </div>
 
+
+
+      <!-- TYPE -->
 
       <div class="filter-group">
 
@@ -151,11 +212,18 @@
         </label>
 
         <select id="typeFilter">
-          <option value="">ALL TYPES</option>
+
+          <option value="">
+            ALL TYPES
+          </option>
+
         </select>
 
       </div>
 
+
+
+      <!-- SIZE -->
 
       <div class="filter-group">
 
@@ -164,11 +232,18 @@
         </label>
 
         <select id="sizeFilter">
-          <option value="">ALL SIZES</option>
+
+          <option value="">
+            ALL SIZES
+          </option>
+
         </select>
 
       </div>
 
+
+
+      <!-- ASTM -->
 
       <div class="filter-group">
 
@@ -177,11 +252,18 @@
         </label>
 
         <select id="astmFilter">
-          <option value="">ALL ASTM</option>
+
+          <option value="">
+            ALL ASTM
+          </option>
+
         </select>
 
       </div>
 
+
+
+      <!-- SCHEDULE -->
 
       <div class="filter-group">
 
@@ -190,11 +272,18 @@
         </label>
 
         <select id="scheduleFilter">
-          <option value="">ALL SCHEDULES</option>
+
+          <option value="">
+            ALL SCHEDULES
+          </option>
+
         </select>
 
       </div>
 
+
+
+      <!-- RESET -->
 
       <button
         class="reset-button"
@@ -207,25 +296,66 @@
     </div>
 
 
-    <div class="table-wrap">
+
+    <!-- ========================================
+         INITIAL MESSAGE / NO RESULT
+    ========================================= -->
+
+    <div
+      class="no-result"
+      id="noResults"
+    >
+
+      <strong id="noResultTitle">
+        LOADING INVENTORY
+      </strong>
+
+      <p id="noResultText">
+        Retrieving current stock availability.
+      </p>
+
+    </div>
+
+
+
+    <!-- ========================================
+         DESKTOP RESULTS
+    ========================================= -->
+
+    <div
+      class="table-wrap"
+      id="stockResults"
+      hidden
+    >
 
       <table class="stock-table">
 
         <thead>
 
           <tr>
+
             <th>PRODUCT</th>
+
             <th>TYPE</th>
+
             <th>MATERIAL</th>
+
             <th>ASTM</th>
+
             <th>GRADE / UNS</th>
+
             <th>SIZE</th>
+
             <th>SCHEDULE</th>
+
             <th>WT</th>
+
             <th>STATUS</th>
+
           </tr>
 
         </thead>
+
 
         <tbody id="stockTableBody">
         </tbody>
@@ -235,28 +365,23 @@
     </div>
 
 
+
+    <!-- ========================================
+         MOBILE RESULTS
+    ========================================= -->
+
     <div
       class="stock-mobile"
       id="stockMobile"
+      hidden
     >
     </div>
 
 
-    <div
-      class="no-result"
-      id="noResults"
-    >
 
-      <strong id="noResultTitle">
-        NO STOCK FOUND
-      </strong>
-
-      <p id="noResultText">
-        Try changing the search term or filters.
-      </p>
-
-    </div>
-
+    <!-- ========================================
+         INQUIRY
+    ========================================= -->
 
     <section class="stock-contact">
 
@@ -265,6 +390,7 @@
         <p class="section-label">
           MATERIAL INQUIRY
         </p>
+
 
         <h2>
           Need more<br>
@@ -282,24 +408,37 @@
           documentation and commercial terms.
         </p>
 
+
         <a
           href="mailto:info@sierra-alloys.com"
           class="inquiry-button"
         >
+
           SEND INQUIRY
-          <span>↗</span>
+
+          <span>
+            ↗
+          </span>
+
         </a>
 
       </div>
 
     </section>
 
+
   </div>
 
 </section>
 
+
 </main>
 
+
+
+<!-- ========================================
+     FOOTER
+======================================== -->
 
 <footer>
 
@@ -314,7 +453,8 @@
 </footer>
 
 
-<script src="./stock.js"></script>
+<script src="./stock.js?v=20260919-1"></script>
+
 
 </body>
 </html>
