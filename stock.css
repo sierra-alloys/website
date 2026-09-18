@@ -44,13 +44,9 @@ a{
 }
 
 button,
-input,
 select{
   font-family:inherit;
 }
-
-
-/* IMPORTANT */
 
 [hidden]{
   display:none !important;
@@ -58,7 +54,7 @@ select{
 
 
 /* ========================================
-   STOCK HEADER
+   HEADER
 ======================================== */
 
 .stock-header{
@@ -127,7 +123,7 @@ select{
 
 
 /* ========================================
-   BACK HOME
+   BACK
 ======================================== */
 
 .back-link{
@@ -171,13 +167,11 @@ select{
   align-items:flex-end;
 
   background:
-
     radial-gradient(
       circle at 78% 32%,
       rgba(255,255,255,.07),
       transparent 25%
     ),
-
     linear-gradient(
       115deg,
       #090909,
@@ -343,86 +337,13 @@ select{
 
 
 /* ========================================
-   SEARCH
-======================================== */
-
-.search-box{
-  position:relative;
-
-  width:100%;
-
-  margin-bottom:14px;
-}
-
-.search-box input{
-  display:block;
-
-  width:100%;
-
-  height:76px;
-
-  padding:
-    0
-    25px
-    0
-    58px;
-
-  border:
-    1px solid
-    #d4d3cf;
-
-  border-radius:0;
-
-  outline:none;
-
-  background:#fff;
-
-  color:#111;
-
-  font-size:17px;
-}
-
-.search-box input::placeholder{
-  color:#999;
-}
-
-.search-box input:focus{
-  border-color:#888;
-}
-
-.search-icon{
-  position:absolute;
-
-  top:50%;
-
-  left:22px;
-
-  z-index:2;
-
-  transform:
-    translateY(-50%);
-
-  font-size:26px;
-
-  color:#777;
-
-  pointer-events:none;
-}
-
-
-/* ========================================
    FILTERS
 ======================================== */
 
 .filters{
-  display:grid;
+  display:flex;
 
-  grid-template-columns:
-    repeat(
-      6,
-      minmax(0,1fr)
-    )
-    90px;
+  flex-wrap:wrap;
 
   gap:10px;
 
@@ -432,7 +353,12 @@ select{
 .filter-group{
   position:relative;
 
-  min-width:0;
+  flex:
+    1
+    1
+    175px;
+
+  min-width:150px;
 }
 
 .filter-group label{
@@ -487,6 +413,10 @@ select{
   cursor:pointer;
 }
 
+.filter-group select:focus{
+  border-color:#888;
+}
+
 .filter-group::after{
   content:"↓";
 
@@ -509,6 +439,11 @@ select{
 ======================================== */
 
 .reset-button{
+  flex:
+    0
+    0
+    90px;
+
   width:90px;
 
   height:68px;
@@ -539,6 +474,50 @@ select{
 
 
 /* ========================================
+   MESSAGE
+======================================== */
+
+.no-result{
+  display:none;
+
+  padding:
+    70px
+    20px;
+
+  text-align:center;
+
+  border-top:
+    1px solid
+    #cccac5;
+
+  border-bottom:
+    1px solid
+    #cccac5;
+}
+
+.no-result strong{
+  display:block;
+
+  font-size:12px;
+
+  letter-spacing:.14em;
+}
+
+.no-result p{
+  margin:
+    14px
+    0
+    0;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+  color:#888;
+}
+
+
+/* ========================================
    TABLE
 ======================================== */
 
@@ -563,7 +542,7 @@ select{
 .stock-table th{
   padding:
     19px
-    14px;
+    12px;
 
   border-bottom:
     1px solid
@@ -585,7 +564,7 @@ select{
 .stock-table td{
   padding:
     24px
-    14px;
+    12px;
 
   border-bottom:
     1px solid
@@ -611,7 +590,7 @@ select{
 .stock-table td:first-child{
   font-weight:700;
 
-  letter-spacing:.08em;
+  letter-spacing:.06em;
 }
 
 .stock-table td:nth-child(2){
@@ -652,50 +631,6 @@ select{
   border-radius:50%;
 
   background:#111;
-}
-
-
-/* ========================================
-   INITIAL / NO RESULTS
-======================================== */
-
-.no-result{
-  display:none;
-
-  padding:
-    70px
-    20px;
-
-  text-align:center;
-
-  border-top:
-    1px solid
-    #cccac5;
-
-  border-bottom:
-    1px solid
-    #cccac5;
-}
-
-.no-result strong{
-  display:block;
-
-  font-size:12px;
-
-  letter-spacing:.14em;
-}
-
-.no-result p{
-  margin:
-    14px
-    0
-    0;
-
-  font-size:12px;
-
-  line-height:1.6;
-
-  color:#888;
 }
 
 
@@ -826,13 +761,20 @@ footer{
 
 @media(max-width:1200px){
 
-  .filters{
-    grid-template-columns:
-      repeat(3,1fr);
+  .filter-group{
+    flex:
+      1
+      1
+      calc(33.333% - 10px);
   }
 
   .reset-button{
-    width:100%;
+    flex:
+      1
+      1
+      calc(33.333% - 10px);
+
+    width:auto;
   }
 
 }
@@ -921,7 +863,7 @@ footer{
   }
 
 
-  /* HEADER */
+  /* SEARCH HEADER */
 
   .search-head{
     gap:20px;
@@ -972,43 +914,23 @@ footer{
   }
 
 
-  /* SEARCH */
-
-  .search-box{
-    margin-bottom:10px;
-  }
-
-
-  .search-box input{
-    height:62px;
-
-    padding:
-      0
-      15px
-      0
-      48px;
-
-    font-size:13px;
-  }
-
-
-  .search-icon{
-    left:17px;
-
-    font-size:21px;
-  }
-
-
   /* FILTERS */
 
   .filters{
-    grid-template-columns:
-      1fr
-      1fr;
-
     gap:8px;
 
     margin-bottom:35px;
+  }
+
+
+  .filter-group{
+    flex:
+      1
+      1
+      calc(50% - 4px);
+
+    min-width:
+      calc(50% - 4px);
   }
 
 
@@ -1042,8 +964,10 @@ footer{
 
 
   .reset-button{
-    grid-column:
-      1 / -1;
+    flex:
+      1
+      1
+      100%;
 
     width:100%;
 
@@ -1058,7 +982,7 @@ footer{
   }
 
 
-  /* MOBILE RESULTS */
+  /* MOBILE */
 
   .stock-mobile{
     display:block;
