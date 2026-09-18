@@ -866,31 +866,34 @@ h2{
 
 
 /* ========================================
+
    FLOATING STOCK
+
 ======================================== */
 
 .floating-stock{
+
   position:fixed;
 
-  right:28px;
+  right:38px;
 
-  bottom:28px;
+  bottom:38px;
 
   z-index:100;
 
-  width:118px;
+  width:240px;
 
-  height:50px;
+  height:140px;
+
+  padding:24px 24px 22px;
 
   display:flex;
 
-  align-items:center;
+  flex-direction:column;
 
   justify-content:space-between;
 
-  padding:0 18px;
-
-  background:rgba(9,9,9,.84);
+  background:rgba(9,9,9,.88);
 
   border:1px solid rgba(255,255,255,.18);
 
@@ -900,37 +903,137 @@ h2{
 
   color:#fff;
 
-  font-size:10px;
-
-  letter-spacing:.17em;
-
-  box-shadow:0 10px 30px rgba(0,0,0,.18);
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
 
   transition:
+
     transform .25s ease,
+
     background .25s ease,
-    color .25s ease;
+
+    border-color .25s ease;
+
 }
 
+/* TOP */
 
-.floating-stock:hover{
-  transform:translateY(-3px);
+.floating-stock-top{
 
-  background:#fff;
+  width:100%;
 
-  color:#090909;
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  font-size:10px;
+
+  font-weight:500;
+
+  line-height:1;
+
+  letter-spacing:.18em;
+
 }
 
+/* ARROW */
 
-.floating-stock strong{
-  font-size:15px;
+.floating-stock-arrow{
+
+  font-size:16px;
+
+  font-weight:300;
+
+  line-height:1;
+
+  letter-spacing:0;
+
+  color:rgba(255,255,255,.75);
+
+  transition:transform .25s ease;
+
+}
+
+/* DESCRIPTION */
+
+.floating-stock-description{
+
+  display:block;
+
+  font-size:10px;
 
   font-weight:400;
 
-  letter-spacing:0;
+  line-height:1.55;
+
+  letter-spacing:.02em;
+
+  color:rgba(255,255,255,.55);
+
 }
 
+/* HOVER */
 
+.floating-stock:hover{
+
+  transform:translateY(-4px);
+
+  background:rgba(15,15,15,.96);
+
+  border-color:rgba(255,255,255,.30);
+
+}
+
+.floating-stock:hover .floating-stock-arrow{
+
+  transform:translate(3px,-3px);
+
+}
+
+/* ========================================
+
+   FLOATING STOCK - MOBILE
+
+======================================== */
+
+@media(max-width:850px){
+
+  .floating-stock{
+
+    right:18px;
+
+    bottom:18px;
+
+    width:150px;
+
+    height:76px;
+
+    padding:16px 17px;
+
+  }
+
+  .floating-stock-top{
+
+    font-size:9px;
+
+  }
+
+  .floating-stock-description{
+
+    font-size:8px;
+
+    line-height:1.4;
+
+  }
+
+  .floating-stock-arrow{
+
+    font-size:14px;
+
+  }
+
+}
 
 /* ========================================
    FOOTER
