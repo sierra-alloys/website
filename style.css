@@ -1495,13 +1495,13 @@ footer{
     z-index:9999 !important;
 
     /* BOX SIZE */
-    width:250px !important;
-    min-width:250px !important;
-    max-width:250px !important;
+    width:200px !important;
+    min-width:200px !important;
+    max-width:200px !important;
 
-    height:150px !important;
-    min-height:150px !important;
-    max-height:150px !important;
+    height:120px !important;
+    min-height:120px !important;
+    max-height:120px !important;
 
     padding:25px 26px !important;
 
