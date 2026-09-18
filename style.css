@@ -1495,9 +1495,9 @@ footer{
     z-index:9999 !important;
 
     /* BOX SIZE */
-    width:230px !important;
-    min-width:230px !important;
-    max-width:230px !important;
+    width:250px !important;
+    min-width:250px !important;
+    max-width:250px !important;
 
     height:120px !important;
     min-height:120px !important;
